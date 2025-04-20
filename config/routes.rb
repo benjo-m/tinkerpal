@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tasks
   root "users#index"
   resource :session
   resources :passwords, param: :token

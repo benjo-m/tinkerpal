@@ -1,0 +1,10 @@
+<div id="<%= dom_id task %>">
+  <p>
+    <strong>Title:</strong>
+    <%= task.title %>
+  </p>
+  <p>
+    <strong>Posted at:</strong>
+    <%= task.created_at.to_fs(:long) %>
+  </p>
+</div>

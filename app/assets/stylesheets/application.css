@@ -8,3 +8,13 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar-items {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
