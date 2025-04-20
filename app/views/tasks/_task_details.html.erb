@@ -11,4 +11,8 @@
     <strong>Posted at:</strong>
     <%= task.created_at.to_fs(:long) %>
   </p>
+  <p>
+    <strong>Posted by:</strong>
+    <%= link_to task.user.username, task.user %>
+  </p>
 </div>
