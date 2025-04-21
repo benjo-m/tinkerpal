@@ -51,11 +51,17 @@ class TasksController < ApplicationController
 
   # DELETE /tasks/1 or /tasks/1.json
   def destroy
-    @task.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to tasks_path, status: :see_other }
-      format.json { head :no_content }
+    if @task.user == Current.user
+      @task.destroy!
+      respond_to do |format|
+        format.html { redirect_to tasks_path, status: :see_other }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to tasks_path, status: :unauthorized }
+        format.json { head :unauthorized }
+      end
     end
   end
 
