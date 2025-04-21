@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params.expect(:id))
+    @tasks = Task.where(user: @user)
   end
 
   def new

@@ -1,2 +1,10 @@
-<h1><%= @user.username %></h1>
-<%= link_to "Back", :back %>
+<p class="mb-2">
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+<p class="mb-2">
+  <strong>My tasks:</strong>
+  <% @tasks.each do |task| %>
+    <%= render task %>
+  </p>
+<% end %>
