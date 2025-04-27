@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
-  resources :tasks
   root "users#index"
+  resources :tasks
   resource :session
   resources :passwords, param: :token
-  resources :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+  resources :users do
+    get "tasks/:id", to: "tasks#user_task", as: "task"
+  end
+
+  # get "profile", to: "users#profile", as: "profile"
+  get "profile", to: "users#profile"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

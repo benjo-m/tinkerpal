@@ -1,8 +1,12 @@
-<% content_for :title, "Tasks" %>
+<% content_for :title, "Tasqy - Tasks" %>
 <div class="flex mt-2 justify-between">
   <div id="tasks" class="mb-8 ">
     <% @tasks.each do |task| %>
-      <%= render task %>
+      <div class="bg-amber-100 mb-4 p-3 rounded-md">
+        <p><strong>Title:</strong> <%= task.title %> </p>
+        <p><strong>Posted at:</strong> <%= task.created_at.to_fs(:long) %> </p>
+        <%= link_to "View details", task, class: "bg-gray-300 p-1 mt-1 inline-block rounded-md" %>
+      </div>
     <% end %>
   </div>
   <%= link_to "Create task", new_task_path, class: "bg-green-300 h-fit p-1 pl-2 pr-2 rounded-md" %>

@@ -1,4 +1,10 @@
+<% content_for :title, "Tasqy - Task Details" %>
 <p style="color: green"><%= notice %></p>
-<%= render "task_details", task: @task%>
-<%# <%= button_to "Destroy this task", @task, method: :delete %>
+<div>
+  <p><strong>Title:</strong> <%= @task.title %> </p>
+  <p><strong>Desription:</strong> <%= @task.description %> </p>
+  <p><strong>Posted at:</strong> <%= @task.created_at.to_fs(:long) %> </p>
+  <p><strong>Posted by:</strong> <%= link_to @task.user.username, @task.user, class: "underline" %> </p>
+  <%= link_to "Back", tasks_path, class: "bg-gray-300 p-1 mt-1 inline-block rounded-md" %>
+</div>
 <br>

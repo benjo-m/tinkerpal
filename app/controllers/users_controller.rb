@@ -6,7 +6,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params.expect(:id))
-    @tasks = Task.where(user: @user)
   end
 
   def new
@@ -25,6 +24,10 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def profile
+    @user = Current.user
   end
 
   private

@@ -1,0 +1,8 @@
+<h1>My Profile</h1>
+<p><%= @user.username %></p>
+<br>
+<br>
+<h1>My Tasks</h1>
+<% @user.tasks.each do |task|%>
+  <%= render "tasks/task_card", task: task %>
+<% end %>
