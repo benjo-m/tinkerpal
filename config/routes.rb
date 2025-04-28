@@ -1,27 +1,17 @@
 Rails.application.routes.draw do
-  root "users#index"
+  root "tasks#index"
+
   resources :tasks
   resource :session
   resources :passwords, param: :token
+  resources :users
 
-  resources :users do
-    get "tasks/:id", to: "tasks#user_task", as: "task"
-  end
-
-  # get "profile", to: "users#profile", as: "profile"
+  get "users/:user_id/tasks/:task_id", to: "tasks#user_task", as: "user_task"
   get "profile", to: "users#profile"
   get "profile/tasks/:id", to: "tasks#my_task", as: "my_task"
   get "profile/tasks/:id/edit", to: "tasks#edit", as: "edit"
 
-
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end

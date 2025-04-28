@@ -4,6 +4,7 @@ class TasksController < ApplicationController
   # GET /tasks or /tasks.json
   def index
     @tasks = Task.all
+    @cities = City.all
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -54,7 +55,7 @@ class TasksController < ApplicationController
   end
 
   def user_task
-    set_task
+    @task = Task.find(params.expect(:task_id))
   end
 
   def my_task

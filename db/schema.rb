@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_20_174710) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_28_180513) do
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "ip_address"
