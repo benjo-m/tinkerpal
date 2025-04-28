@@ -5,9 +5,12 @@
 </p>
 <p class="mb-2">
   <strong>Active tasks:</strong>
-  <% @user.tasks.each do |task| %>
-    <p>
-      <%= task.title %>
-    </p>
-  </p>
-<% end %>
+  <div class="inline-block">
+    <% @user.tasks.each do |task| %>
+      <div class="bg-amber-100 mb-4 p-3 rounded-md">
+        <p><strong>Title:</strong> <%= task.title %> </p>
+        <p><strong>Posted at:</strong> <%= task.created_at.to_fs(:long) %> </p>
+        <%= link_to "View details", user_task_path(@user, task), class: "bg-gray-300 p-1 mt-1 inline-block rounded-md" %>
+      </div>
+    <% end %>
+  </div>

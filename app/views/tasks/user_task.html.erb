@@ -1,0 +1,7 @@
+<% content_for :title, "Tasqy - Task Details" %>
+<div>
+  <p><strong>Title:</strong> <%= @task.title %> </p>
+  <p><strong>Desription:</strong> <%= @task.description %> </p>
+  <p><strong>Posted at:</strong> <%= @task.created_at.to_fs(:long) %> </p>
+  <%= link_to "Back", @task.user, class: "bg-gray-300 p-1 mt-1 inline-block rounded-md" %>
+</div>

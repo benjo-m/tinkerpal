@@ -17,6 +17,9 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    if @task.user != Current.user
+      redirect_to tasks_path
+    end
   end
 
   # POST /tasks or /tasks.json
@@ -24,48 +27,38 @@ class TasksController < ApplicationController
     # @task = Task.new(task_params)
     # @task.user = Current.user
     @task = Current.user.tasks.build(task_params) # kraca verzija ovog iznad
-
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to @task }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+    if @task.save
+      redirect_to @task
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
-    respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task }
-        format.json { render :show, status: :ok, location: @task }
+        redirect_to my_task_path(@task)
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        render :edit, status: :unprocessable_entity
       end
-    end
   end
 
   # DELETE /tasks/1 or /tasks/1.json
   def destroy
     if @task.user == Current.user
       @task.destroy!
-      respond_to do |format|
-        format.html { redirect_to tasks_path, status: :see_other }
-        format.json { head :no_content }
-      end
+        redirect_to profile_path
     else
-      respond_to do |format|
-        format.html { redirect_to tasks_path, status: :unauthorized }
-        format.json { head :unauthorized }
-      end
+        redirect_to profile_path, status: :unauthorized
     end
   end
 
   def user_task
+    set_task
+  end
+
+  def my_task
+    set_task
   end
 
   private
