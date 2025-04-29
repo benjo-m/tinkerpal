@@ -1,12 +1,12 @@
 <% content_for :title, "Tasqy - Tasks" %>
 <div class="flex mt-4 justify-between gap-30">
   <%# ----------Filters--------- %>
-  <div class="flex flex-1 min-w-fit bg-gray-100">
+  <div class="flex flex-1 min-w-fit">
     <div>
       <h1 class="text-xl font-medium mb-4">Filter tasks</h1>
-      <label for="city">City</label>
+      <label for="city">Location</label>
       <br>
-      <select name="city" id="city" class="bg-white p-1 rounded-md h-fit">
+      <select name="city" id="city" class="bg-gray-100 p-1 rounded-md h-fit mt-1">
         <% @cities.each do |city| %>
           <option value="<%= city.id %>">
             <%= city.name %>
@@ -15,12 +15,13 @@
       </select>
     </div>
   </div>
-  <%# ----------Tasks--------- %>
+  <%# ----------Task Cards--------- %>
   <div id="tasks" class="mb-8 flex-2 min-w-fit">
     <% @tasks.each do |task| %>
       <div class="bg-amber-100 mb-4 p-3 rounded-md">
         <p><strong>Title:</strong> <%= task.title %> </p>
         <p><strong>Posted at:</strong> <%= task.created_at.to_fs(:long) %> </p>
+        <p><strong>Location:</strong> <%= task.city ? task.city.name : "N/A" %> </p>
         <div class="flex justify-end">
           <%= link_to "View details", task, class: "bg-gray-300 p-1 mt-1 inline-block rounded-md" %>
         </div>
