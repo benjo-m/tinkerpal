@@ -9,6 +9,7 @@
     <%= form.text_field :description, class: "bg-gray-100 rounded-md p-1" %>
     <p class="text-red-500"><%= task.errors.full_messages_for(:description).first %></p>
   </div>
+  <%= form.hidden_field :city_id, value: Current.user.city_id %>
   <div class="mt-6 bg-green-300 inline-block p-1 rounded-md cursor-pointer">
     <%= form.submit %>
   </div>
