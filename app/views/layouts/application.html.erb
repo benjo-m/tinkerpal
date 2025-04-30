@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Tasqy" %></title>
+    <title><%= content_for(:title) || "TinkerPal" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -21,7 +21,7 @@
     <% if authenticated? %>
       <nav class="flex justify-between items-center border-b-2 p-1">
         <div>
-          <h1 class="font-bold text-3xl">Tasqy</h1>
+          <h1 class="font-bold text-3xl">TinkerPal</h1>
         </div>
         <div class="flex gap-10">
           <%= link_to "Tinkers", users_path %>
