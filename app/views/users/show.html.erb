@@ -1,16 +1,20 @@
-<% content_for :title, "Tasqy - Me" %>
-<p class="mb-2">
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
-<p class="mb-2">
-  <strong>Active tasks:</strong>
-  <div class="inline-block">
-    <% @user.tasks.each do |task| %>
-      <div class="bg-amber-100 mb-4 p-3 rounded-md">
-        <p><strong>Title:</strong> <%= task.title %> </p>
-        <p><strong>Posted at:</strong> <%= task.created_at.to_fs(:long) %> </p>
-        <%= link_to "View details", user_task_path(@user, task), class: "bg-gray-300 p-1 mt-1 inline-block rounded-md" %>
-      </div>
+<% content_for :title, "Tasqy - #{@user.username}'s profile" %>
+<%# ----------Profile Info--------- %>
+<div class="flex mt-4 justify-between gap-30">
+  <div class="flex flex-col flex-1 gap-4 min-w-fit">
+    <p><strong>Username</strong></p>
+    <p><%= @user.username %></p>
+  </div>
+  <%# ----------Task Cards--------- %>
+  <div class="flex flex-col flex-2 min-w-fit">
+    <% @user.tasks.order(created_at: :desc).each do |task|%>
+      <%= render "tasks/task_card", task: task %>
     <% end %>
   </div>
+  <%# ----------Treci Div--------- %>
+  <div class="flex flex-1 justify-end min-w-fit">
+    <div class="flex flex-1 justify-end min-w-fit">
+      <h1>Treci div placeholder</h1>
+    </div>
+  </div>
+</div>

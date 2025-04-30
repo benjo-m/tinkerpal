@@ -3,5 +3,5 @@
 <%= render "form", task: @task %>
 <br>
 <div class="bg-gray-300 p-1 mt-1 inline-block rounded-md">
-  <%= link_to "Back", tasks_path %>
+  <%= link_to "Back", request.referer || root_path %>
 </div>

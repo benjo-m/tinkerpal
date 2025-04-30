@@ -24,11 +24,14 @@
           <h1 class="font-bold text-3xl">Tasqy</h1>
         </div>
         <div class="flex gap-10">
-          <%= link_to "Users", users_path %>
+          <%= link_to "Tinkers", users_path %>
           <%= link_to "Tasks", tasks_path%>
           <%= link_to "Profile", profile_path %>
         </div>
-        <%= button_to "Log out", session_path, method: :delete, class: "bg-gray-300 p-1 pr-2 pl-2 rounded-md cursor-pointer" %>
+        <div class="flex gap-4 items-center">
+          <p class="text-sm">Logged in as <strong><%= Current.user.username %></strong></p>
+          <%= button_to "Log out", session_path, method: :delete, class: "bg-gray-300 p-1 pr-2 pl-2 rounded-md cursor-pointer" %>
+        </div>
       </div>
     </nav>
   <% end %>
