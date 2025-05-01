@@ -17,9 +17,6 @@
       <label for="city">Sort by</label>
       <br>
       <select name="sort" id="sort" class="bg-gray-100 p-1 rounded-md h-fit mt-1">
-        <option value="0">
-          Location
-        </option>
         <option value="1">
           Newest
         </option>
@@ -34,6 +31,7 @@
     <% @tasks.each do |task| %>
       <%= render "task_card", task: task %>
     <% end %>
+    <%== pagy_nav(@pagy) %>
   </div>
   <%# ----------New Task Button--------- %>
   <div class="flex flex-1 justify-end min-w-fit">
