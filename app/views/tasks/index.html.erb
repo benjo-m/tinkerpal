@@ -2,29 +2,22 @@
 <div class="flex mt-4 justify-between gap-30">
   <%# ----------Filters--------- %>
   <div class="flex flex-col flex-1 gap-4 min-w-fit">
-    <div>
-      <label for="city">Location</label>
-      <br>
-      <select name="city" id="city" class="bg-gray-100 p-1 rounded-md h-fit mt-1">
-        <% @cities.each do |city| %>
-          <option value="<%= city.id %>">
-            <%= city.name %>
-          </option>
-        <% end %>
-      </select>
-    </div>
-    <div>
-      <label for="city">Sort by</label>
-      <br>
-      <select name="sort" id="sort" class="bg-gray-100 p-1 rounded-md h-fit mt-1">
-        <option value="1">
-          Newest
-        </option>
-        <option value="2">
-          Oldest
-        </option>
-      </select>
-    </div>
+    <%# Select elementi su wrappani u div-ove jer ih ne mogu drukcije stajlati %>
+    <%= form_with url: tasks_path, method: :get do |form| %>
+      <div class="w-fit">
+        <%= form.label :city, "Location:" %>
+        <div class="bg-gray-100 p-1 rounded-md mt-1">
+          <%= form.select :city, [["Any", "any"]] + @cities.map { |c| [c.name, c.id] }, selected: params[:city] %>
+        </div>
+      </div>
+      <div class="w-fit mt-4">
+        <%= form.label :sort_by, "Sort by:" %><br>
+        <div class="bg-gray-100 p-1 rounded-md mt-1">
+          <%= form.select :sort_by, [["Newest", "newest"], ["Oldest", "oldest"]], selected: params[:sort_by] %>
+        </div>
+      </div>
+      <%= form.submit 'Filter', name: "", class: "bg-gray-200 p-1 rounded-md mt-4" %>
+    <% end %>
   </div>
   <%# ----------Task Cards--------- %>
   <div id="tasks" class="mb-8 flex-2 min-w-fit">

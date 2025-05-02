@@ -1,29 +1,31 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
-  # GET /tasks or /tasks.json
   def index
-    @pagy, @tasks = pagy(Task.order(created_at: :desc), limit: 10)
+    filters = params.permit(:sort_by, :city)
+
+    @tasks = Task
+      .order(sort_field(filters[:sort_by]))
+    @tasks = @tasks.where(city_id: filters[:city]) if City.exists?(filters[:city])
+
     @cities = City.all
+
+    @pagy, @tasks = pagy(@tasks, limit: 10)
   end
 
-  # GET /tasks/1
   def show
   end
 
-  # GET /tasks/new
   def new
     @task = Task.new
   end
 
-  # GET /tasks/1/edit
   def edit
     if @task.user != Current.user
       redirect_to root_path
     end
   end
 
-  # POST /tasks
   def create
     # @task = Task.new(task_params)
     # @task.user = Current.user
@@ -35,7 +37,6 @@ class TasksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tasks/1
   def update
       if @task.update(task_params)
         redirect_to profile_path
@@ -44,7 +45,6 @@ class TasksController < ApplicationController
       end
   end
 
-  # DELETE /tasks/1
   def destroy
     if @task.user == Current.user
       @task.destroy!
@@ -63,5 +63,16 @@ class TasksController < ApplicationController
 
     def task_params
       params.expect(task: [ :title, :description, :city_id ])
+    end
+
+    def sort_field(sort_by)
+      case sort_by
+      when "newest"
+        { created_at: :desc }
+      when "oldest"
+        { created_at: :asc }
+      else
+        { created_at: :desc }
+      end
     end
 end
