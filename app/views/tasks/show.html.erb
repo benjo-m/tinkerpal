@@ -1,12 +1,17 @@
-<div>
-  <div>
-    <h2 class="font-bold mb-2 text-xl">Task details</h2>
-    <p><strong>Title:</strong> <%= @task.title %> </p>
-    <p><strong>Desription:</strong> <%= @task.description %> </p>
-    <p><strong>Posted at:</strong> <%= @task.created_at.to_fs(:long) %> </p>
-    <p><strong>Location:</strong> <%= @task.user.city.name %> </p>
-    <p><strong>Posted by:</strong> <%= link_to @task.user.username, @task.user == Current.user ? profile_path : @task.user, class: "underline" %> </p>
+<div class="mt-4">
+  <%# ----------------Task Details----------------- %>
+  <div class="flex justify-between gap-8">
+    <div class="border-2 border-gray-400 rounded-md flex-1 ">Slike</div>
+    <div class="flex-1">
+      <h1 class="text-3xl"><%= @task.title %></h1>
+      <h2 class="font-bold text-xl mb-2 mt-6">Description</h2>
+      <p><%= @task.description %></p>
+      <p class="mt-6">
+        Posted on <strong><%= @task.created_at.to_fs(:long_ordinal) %></strong> in <strong><%= @task.city.name %></strong>
+      </p>
+    </div>
   </div>
+  <%# ----------------Comments----------------- %>
   <div class="mt-8">
     <h2 class="font-bold text-xl mb-2">Comments</h2>
     <div class="mb-4">
@@ -27,4 +32,3 @@
     </div>
   </div>
 </div>
-<br>

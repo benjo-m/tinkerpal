@@ -6,7 +6,7 @@
   </div>
   <div class="mt-2" >
     <%= form.label :description, class: "block" %>
-    <%= form.text_field :description, class: "bg-gray-100 rounded-md p-1" %>
+    <%= form.textarea :description, class: "bg-gray-100 rounded-md p-1" %>
     <p class="text-red-500"><%= task.errors.full_messages_for(:description).first %></p>
   </div>
   <%= form.hidden_field :city_id, value: Current.user.city_id %>
