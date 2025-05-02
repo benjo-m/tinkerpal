@@ -1,7 +1,12 @@
 <div class="mb-4 p-3 rounded-md border-2 border-gray-300">
-  <p><strong>Title:</strong> <%= task.title %> </p>
+  <div class="flex justify-between">
+    <p><strong>Title:</strong> <%= task.title %> </p>
+    <div class="flex gap-1">
+      <%= image_tag("location.png", size: "24x2") %>
+      <%= task.city.name %>
+    </div>
+  </div>
   <p><strong>Posted:</strong> <%= time_ago_in_words(task.created_at) %> ago</p>
-  <p><strong>Location:</strong> <%= task.city ? task.city.name : "N/A" %> </p>
   <div class="flex justify-end">
     <%= link_to "View details", task, class: "bg-gray-200 p-1 mt-1 inline-block rounded-md" %>
   </div>

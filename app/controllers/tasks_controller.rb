@@ -14,6 +14,8 @@ class TasksController < ApplicationController
   end
 
   def show
+    @comments = Comment.where(task_id: @task.id).order(created_at: :desc)
+    @comment = Comment.new
   end
 
   def new
@@ -55,7 +57,6 @@ class TasksController < ApplicationController
   end
 
   private
-
     def set_task
       @task = Task.find_by(id: params.expect(:id))
       redirect_to root_path if @task.nil?

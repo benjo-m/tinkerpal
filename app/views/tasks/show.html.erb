@@ -1,9 +1,30 @@
 <div>
-  <p><strong>Title:</strong> <%= @task.title %> </p>
-  <p><strong>Desription:</strong> <%= @task.description %> </p>
-  <p><strong>Posted at:</strong> <%= @task.created_at.to_fs(:long) %> </p>
-  <p><strong>Location:</strong> <%= @task.user.city.name %> </p>
-  <p><strong>Posted by:</strong> <%= link_to @task.user.username, @task.user == Current.user ? profile_path : @task.user, class: "underline" %> </p>
-  <%= link_to "Back", request.referer || tasks_path, class: "bg-gray-200 p-1 mt-1 inline-block rounded-md" %>
+  <div>
+    <h2 class="font-bold mb-2 text-xl">Task details</h2>
+    <p><strong>Title:</strong> <%= @task.title %> </p>
+    <p><strong>Desription:</strong> <%= @task.description %> </p>
+    <p><strong>Posted at:</strong> <%= @task.created_at.to_fs(:long) %> </p>
+    <p><strong>Location:</strong> <%= @task.user.city.name %> </p>
+    <p><strong>Posted by:</strong> <%= link_to @task.user.username, @task.user == Current.user ? profile_path : @task.user, class: "underline" %> </p>
+  </div>
+  <div class="mt-8">
+    <h2 class="font-bold text-xl mb-2">Comments</h2>
+    <div class="mb-4">
+      <%= form_with model: @comment do |form| %>
+        <%= form.textarea :text, placeholder: "Ask the poster for more details, or leave a helpful comment here.", class: "bg-gray-100 rounded-md w-full min-h-30 p-2 resize-none overflow-y-auto" %>
+        <%= form.hidden_field :task_id, value: @task.id %>
+        <%= form.hidden_field :user_id, value: Current.user.id %>
+        <div class="flex justify-end mt-2">
+          <%= form.submit "Post comment", class: "bg-green-300 p-1 pl-2 pr-2 rounded-md h-fit justify-end" %>
+        </div>
+      <% end %>
+    </div>
+    <div>
+      <p class="mb-2"><strong><%= @comments.count %></strong> <%= "comment".pluralize(@comments.count) %></p>
+      <% @comments.each do |comment| %>
+        <%= render "comments/comment_card", comment: comment %>
+      <% end %>
+    </div>
+  </div>
 </div>
 <br>

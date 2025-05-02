@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_29_185557) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_02_125720) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "task_id", null: false
+    t.integer "user_id"
+    t.index ["task_id"], name: "index_comments_on_task_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -46,6 +56,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_29_185557) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "comments", "tasks"
+  add_foreign_key "comments", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "tasks", "cities"
   add_foreign_key "tasks", "users"
