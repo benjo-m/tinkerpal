@@ -1,14 +1,21 @@
 <div class="mt-4">
   <div class="flex justify-between gap-8">
     <%# ----------------Images----------------- %>
-    <div class="flex-3">
+    <div data-controller="carousel" data-carousel-current-index-value="0" data-carousel-total-images-value="<%= @task.images.count %>" class="flex-3">
       <% if @task.images.attached? %>
-        <%= image_tag(@task.images[0], class: "border-1 border-gray-200 rounded-md h-150 w-full") %>
+        <% @task.images.each do |image| %>
+          <%= image_tag(image, class: "border-1 border-gray-200 rounded-md h-150 w-full", data: { carousel_target: "image" }) %>
+        <% end %>
       <% else %>
         <div class="flex border-2 border-gray-200 rounded-md justify-center items-center text-gray-400 h-150 w-full">
           The user hasn't attached any images for this task.
         </div>
       <% end %>
+      <div class="flex justify-around mt-2 bg-red-100">
+        <button data-action="carousel#previous" class="bg-red-100">prev</button>
+        <button data-action="carousel#next" class="bg-red-100">Next</button>
+        <i class="fa-regular fa-image"></i>
+      </div>
     </div>
     <%# ----------------Task Details----------------- %>
     <div class="flex-2">

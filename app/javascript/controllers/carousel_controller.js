@@ -1,11 +1,30 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-    connect() {
-        this.element.textContent = "Hello World!"
+    static targets = ["image"]
+    static values = { currentIndex: Number, totalImages: Number }
+
+    initialize() {
+        this.showCurrentSlide()
     }
 
-    next() { }
+    next() {
+        if (this.currentIndexValue < this.totalImagesValue - 1) {
+            this.currentIndexValue++
+            this.showCurrentSlide()
+        }
+    }
 
-    previous() { }
+    previous() {
+        if (this.currentIndexValue > 0) {
+            this.currentIndexValue--
+            this.showCurrentSlide()
+        }
+    }
+
+    showCurrentSlide() {
+        this.imageTargets.forEach((image, index) => {
+            image.hidden = index !== this.currentIndexValue
+        });
+    }
 }
