@@ -63,7 +63,7 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.expect(task: [ :title, :description, :city_id ])
+      params.expect(task: [ :title, :description, :city_id, images: [] ])
     end
 
     def sort_field(sort_by)

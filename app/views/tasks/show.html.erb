@@ -1,8 +1,17 @@
 <div class="mt-4">
-  <%# ----------------Task Details----------------- %>
   <div class="flex justify-between gap-8">
-    <div class="border-2 border-gray-400 rounded-md flex-1 ">Slike</div>
-    <div class="flex-1">
+    <%# ----------------Images----------------- %>
+    <div class="flex-3">
+      <% if @task.images.attached? %>
+        <%= image_tag(@task.images[0], class: "border-1 border-gray-200 rounded-md h-150 w-full") %>
+      <% else %>
+        <div class="flex border-2 border-gray-200 rounded-md justify-center items-center text-gray-400 h-150 w-full">
+          The user hasn't attached any images for this task.
+        </div>
+      <% end %>
+    </div>
+    <%# ----------------Task Details----------------- %>
+    <div class="flex-2">
       <h1 class="text-3xl"><%= @task.title %></h1>
       <h2 class="font-bold text-xl mb-2 mt-6">Description</h2>
       <p><%= @task.description %></p>
@@ -24,7 +33,7 @@
         </div>
       <% end %>
     </div>
-    <div>
+    <div class="mb-50">
       <p class="mb-2"><strong><%= @comments.count %></strong> <%= "comment".pluralize(@comments.count) %></p>
       <% @comments.each do |comment| %>
         <%= render "comments/comment_card", comment: comment %>
