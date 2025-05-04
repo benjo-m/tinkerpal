@@ -7,7 +7,7 @@
       <div class="w-fit">
         <%= form.label :city, "Location:" %>
         <div class="bg-gray-100 p-1 rounded-md mt-1">
-          <%= form.select :city, [["Any", "any"]] + @cities.map { |c| [c.name, c.id] }, selected: params[:city] %>
+          <%= form.select :city, [["Any", "any"]] + @cities.map { |c| [c.name, c.name.downcase] }, selected: params[:city] %>
         </div>
       </div>
       <div class="w-fit mt-4">

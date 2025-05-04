@@ -4,9 +4,12 @@ class TasksController < ApplicationController
   def index
     filters = params.permit(:sort_by, :city)
 
-    @tasks = Task
-      .order(sort_field(filters[:sort_by]))
-    @tasks = @tasks.where(city_id: filters[:city]) if City.exists?(filters[:city])
+    @tasks = Task.order(sort_field(filters[:sort_by]))
+
+    if filters[:city]
+      city = City.select(:id).find_by(name: filters[:city].capitalize)
+      @tasks = @tasks.where(city_id: city.id) if city
+    end
 
     @cities = City.all
 
@@ -29,9 +32,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    # @task = Task.new(task_params)
-    # @task.user = Current.user
-    @task = Current.user.tasks.build(task_params) # kraca verzija ovog iznad
+    @task = Current.user.tasks.build(task_params)
     if @task.save
       redirect_to params[:return_to].presence || root_path
     else

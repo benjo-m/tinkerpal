@@ -2,7 +2,7 @@
   <div class="flex justify-between">
     <p><strong>Title:</strong> <%= truncate(task.title, length: 40) %></p>
     <div class="flex gap-1">
-      <%= image_tag("location.png", size: "24x2") %>
+      <i class="bi bi-geo-alt-fill"></i>
       <%= task.city.name %>
     </div>
   </div>
