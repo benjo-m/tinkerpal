@@ -11,11 +11,19 @@
           The user hasn't attached any images for this task.
         </div>
       <% end %>
-      <div class="flex justify-around mt-2 bg-red-100">
-        <button data-action="carousel#previous" class="bg-red-100">prev</button>
-        <button data-action="carousel#next" class="bg-red-100">Next</button>
-        <i class="fa-regular fa-image"></i>
-      </div>
+      <%# ----------------Navigation Buttons----------------- %>
+      <% if @task.images.any? %>
+        <div class="flex justify-center items-center mt-2 gap-8">
+          <button data-carousel-target="previousButton" data-action="carousel#previous" class="cursor-pointer bg-blue-200 px-1 rounded-md">
+            <i class="bi bi-arrow-left-short text-2xl"></i>
+          </button>
+          <p data-carousel-target="currentImageParagraph" class="w-20 text-center text-sm">
+          </p>
+          <button data-carousel-target="nextButton" data-action="carousel#next" class="cursor-pointer bg-blue-200 px-1 rounded-md">
+            <i class="bi bi-arrow-right-short text-2xl"></i>
+          </button>
+        </div>
+      <% end %>
     </div>
     <%# ----------------Task Details----------------- %>
     <div class="flex-2">
@@ -31,14 +39,7 @@
   <div class="mt-8">
     <h2 class="font-bold text-xl mb-2">Comments</h2>
     <div class="mb-4">
-      <%= form_with model: @comment do |form| %>
-        <%= form.textarea :text, placeholder: "Ask the poster for more details, or leave a helpful comment here.", class: "bg-gray-100 rounded-md w-full min-h-30 p-2 resize-none overflow-y-auto" %>
-        <%= form.hidden_field :task_id, value: @task.id %>
-        <%= form.hidden_field :user_id, value: Current.user.id %>
-        <div class="flex justify-end mt-2">
-          <%= form.submit "Post comment", class: "bg-green-300 p-1 pl-2 pr-2 rounded-md h-fit justify-end" %>
-        </div>
-      <% end %>
+      <%= render "comment_form", comment: @comment %>
     </div>
     <div class="mb-50">
       <p class="mb-2"><strong><%= @comments.count %></strong> <%= "comment".pluralize(@comments.count) %></p>
