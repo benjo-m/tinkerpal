@@ -18,11 +18,11 @@
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body class="mr-64 ml-64">
+  <body class="mr-64 ml-64 bg-blue-300">
     <% if authenticated? %>
-      <nav class="flex justify-between items-center border-b-2 p-1">
+      <nav class="flex justify-between items-center border-b-3 px-6 py-1 bg-slate-100 rounded-b-sm sticky top-0 z-50 box-content">
         <div>
-          <h1 class="font-bold text-3xl">TinkerPal</h1>
+          <h1 class="font-bold text-3xl text-red-500">TinkerPal</h1>
         </div>
         <div class="flex gap-10">
           <%= link_to "Tinkers", users_path %>
@@ -36,7 +36,7 @@
       </div>
     </nav>
   <% end %>
-  <main class="p-1">
+  <main class="px-6 py-8 min-h-screen bg-white -mt-2">
     <%= yield %>
   </main>
 </body>

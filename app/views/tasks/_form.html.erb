@@ -1,23 +1,31 @@
-<%= form_with(model: task, multipart: true) do |form| %>
-  <div class="mt-6">
-    <%= form.label :title, class: "block" %>
-    <%= form.text_field :title, class: "bg-gray-100 rounded-md p-1" %>
-    <p class="text-red-500"><%= task.errors.full_messages_for(:title).first %></p>
-  </div>
-  <div class="mt-2" >
-    <%= form.label :description, class: "block" %>
-    <%= form.textarea :description, class: "bg-gray-100 rounded-md p-1" %>
-    <p class="text-red-500"><%= task.errors.full_messages_for(:description).first %></p>
-  </div>
-  <div class="mt-2">
-    <%= form.label :images, class: "block" %>
-    <%= form.file_field :images, multiple: true, direct_upload: true, accept: "image/png,image/gif,image/jpeg", class: "bg-gray-200 p-1 rounded-md cursor-pointer" %>
-  </div>
-  <%= form.hidden_field :city_id, value: Current.user.city_id %>
-  <%= hidden_field_tag :return_to, request.referer %>
-  <small class="text-gray-500">Hold Command (Mac) or Ctrl (Windows) to select multiple images</small>
-  <br>
-  <div class="mt-6 bg-green-300 inline-block p-1 rounded-md cursor-pointer">
-    <%= form.submit %>
-  </div>
-<% end %>
+<div data-controller="preview">
+  <%# ----------------Form----------------- %>
+  <%= form_with(model: task, multipart: true) do |form| %>
+    <div class="mt-6">
+      <%= form.label :title, class: "block font-bold mb-2" %>
+      <%= form.text_field :title, placeholder: "The title of your task", class: "bg-gray-100 rounded-md p-2 w-128" %>
+      <p class="text-red-500"><%= task.errors.full_messages_for(:title).first %></p>
+    </div>
+    <div class="mt-4" >
+      <%= form.label :description, class: "block font-bold mb-2" %>
+      <%= form.textarea :description, placeholder: "Write a detailed description of your task here...", class: "bg-gray-100 rounded-md w-full min-h-64 p-2 resize-none overflow-y-auto" %>
+      <p class="text-red-500"><%= task.errors.full_messages_for(:description).first %></p>
+    </div>
+    <div class="mt-4">
+      <%= form.label :images, class: "block w-fit font-bold mb-2" %>
+      <%= form.file_field :images, multiple: true, direct_upload: true, accept: "image/png,image/gif,image/jpeg", class: "bg-gray-100 p-1 rounded-md cursor-pointer", data: { preview_target: "input", action: "change->preview#handleFiles" } %>
+      <br>
+      <small class="text-gray-500">Hold Command (Mac) or Ctrl (Windows) to select multiple images</small>
+    </div>
+    <%# ----------------Image Previews----------------- %>
+    <div data-preview-target="previewContainer" class="bg-gray-100 p-2 flex-wrap gap-4 mt-4 rounded-md items-center hidden">
+    </div>
+    <%= form.hidden_field :city_id, value: Current.user.city_id %>
+    <%= hidden_field_tag :return_to, request.referer %>
+    <br>
+    <div class="flex gap-4">
+      <%= link_to "Cancel", task.id == nil ? root_path : profile_path, class: "bg-gray-300 p-1 inline-block rounded-md" %>
+      <%= form.submit class: "bg-green-300 inline-block p-1 rounded-md cursor-pointer" %>
+    </div>
+  <% end %>
+</div>

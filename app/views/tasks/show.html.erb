@@ -1,4 +1,4 @@
-<div class="mt-4">
+<div>
   <div class="flex justify-between gap-8">
     <%# ----------------Images----------------- %>
     <div data-controller="carousel" data-carousel-current-index-value="0" data-carousel-total-images-value="<%= @task.images.count %>" class="flex-3">
@@ -7,8 +7,8 @@
           <%= image_tag(image, class: "border-1 border-gray-200 rounded-md h-150 w-full", data: { carousel_target: "image" }) %>
         <% end %>
       <% else %>
-        <div class="flex border-2 border-gray-200 rounded-md justify-center items-center text-gray-400 h-150 w-full">
-          The user hasn't attached any images for this task.
+        <div class="flex border-2 border-gray-200 rounded-md justify-center items-center text-gray-400 h-150 text-xl">
+          <p><i class="bi bi-images"></i> The user hasn't attached any images for this task.</p>
         </div>
       <% end %>
       <%# ----------------Navigation Buttons----------------- %>
