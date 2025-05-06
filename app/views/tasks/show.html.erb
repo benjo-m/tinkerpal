@@ -42,9 +42,13 @@
       <%= render "comment_form", comment: @comment %>
     </div>
     <div class="mb-50">
-      <p class="mb-2"><strong><%= @comments.count %></strong> <%= "comment".pluralize(@comments.count) %></p>
-      <% @comments.each do |comment| %>
-        <%= render "comments/comment_card", comment: comment %>
+      <% if @task.comments.any? %>
+        <p class="mb-2"><strong><%= @comments.count %></strong> <%= "comment".pluralize(@comments.count) %></p>
+        <% @comments.each do |comment| %>
+          <%= render "comments/comment_card", comment: comment %>
+        <% end %>
+      <% else %>
+        <p class="text-xl text-gray-400 text-center mt-40"><i class="bi bi-chat-fill"></i> This task has no comments at the moment.</p>
       <% end %>
     </div>
   </div>

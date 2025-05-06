@@ -26,6 +26,8 @@ class UsersController < ApplicationController
 
   def profile
     @user = Current.user
+    @tasks = Current.user.tasks
+    @pagy, @tasks = pagy(@tasks, limit: 20)
   end
 
   private

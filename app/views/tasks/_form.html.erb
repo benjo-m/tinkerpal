@@ -21,7 +21,6 @@
     <div data-preview-target="previewContainer" class="bg-gray-100 p-2 flex-wrap gap-4 mt-4 rounded-md items-center hidden">
     </div>
     <%= form.hidden_field :city_id, value: Current.user.city_id %>
-    <%= hidden_field_tag :return_to, request.referer %>
     <br>
     <div class="flex gap-4">
       <%= link_to "Cancel", task.id == nil ? root_path : profile_path, class: "bg-gray-300 p-1 inline-block rounded-md" %>
