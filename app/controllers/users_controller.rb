@@ -26,7 +26,15 @@ class UsersController < ApplicationController
 
   def profile
     @user = Current.user
-    @tasks = Current.user.tasks
+
+    if params[:tasks] == "completed"
+      @tasks = Current.user.tasks.where(completed: true)
+    elsif params[:tasks] == "active"
+      @tasks = Current.user.tasks.where(completed: false)
+    else
+      @tasks = Current.user.tasks
+    end
+
     @pagy, @tasks = pagy(@tasks, limit: 20)
   end
 
