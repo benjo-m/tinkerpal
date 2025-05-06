@@ -13,7 +13,7 @@ class TasksController < ApplicationController
 
     @cities = City.all
 
-    @pagy, @tasks = pagy(@tasks, limit: 10)
+    @pagy, @tasks = pagy(@tasks, limit: 20)
   end
 
   def show
