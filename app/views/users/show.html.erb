@@ -2,13 +2,24 @@
 <%# ----------Profile Info--------- %>
 <div class="flex justify-between gap-30">
   <div class="flex flex-col flex-1 gap-4 min-w-fit">
-    <p><strong>Username</strong></p>
-    <p><%= @user.username %></p>
+    <div>
+      <p><strong>Username</strong></p>
+      <%= @user.username %>
+    </div>
   </div>
   <%# ----------Task Cards--------- %>
   <div class="flex flex-col flex-2 min-w-fit">
-    <% @user.tasks.order(created_at: :desc).each do |task|%>
-      <%= render "tasks/task_card", task: task %>
+    <div class="flex justify-around mb-4">
+      <%= link_to "Active tasks", user_path(@user, tasks: "active"), class: "#{params[:tasks] != 'completed' ? 'bg-gray-200 rounded-md font-bold text-red-500' : 'font-bold'} px-2 py-1" %>
+      <%= link_to "Completed tasks", user_path(@user, tasks: "completed"), class: "#{params[:tasks] == 'completed' ? 'bg-gray-200 rounded-md font-bold text-red-500' : 'font-bold'} px-2 py-1" %>
+    </div>
+    <% if @tasks.any? %>
+      <% @tasks.order(created_at: :desc).each do |task|%>
+        <%= render "tasks/task_card", task: task %>
+      <% end %>
+      <%== pagy_nav(@pagy) %>
+    <% else %>
+      <p class="text-xl text-gray-400 text-center mt-4"><strong><%= @user.username %></strong> does not have any <%= params[:tasks] == "completed" ? "completed" : "active" %> tasks</p>
     <% end %>
   </div>
   <%# ----------Treci Div--------- %>

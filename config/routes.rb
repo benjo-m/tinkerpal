@@ -4,9 +4,10 @@ Rails.application.routes.draw do
   resources :tasks
   resource :session
   resources :passwords, param: :token
-  resources :users
+  resources :users, except: [ :edit, :update, :destroy ]
 
   get "profile", to: "users#profile"
+  patch "profile/update", to: "users#update", as: "update_profile"
 
   post "comments", to: "comments#create"
 

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./components.css";
 
 .pagy {
     @apply flex space-x-1 font-semibold text-sm text-gray-500 justify-center;

@@ -1,11 +1,14 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access only: [ :new, :create ]
+
   def index
     @users = User.all
   end
 
   def show
     @user = User.find(params.expect(:id))
+    @tasks = tasks(@user)
+    @pagy, @tasks = pagy(@tasks, limit: 20)
   end
 
   def new
@@ -26,21 +29,32 @@ class UsersController < ApplicationController
 
   def profile
     @user = Current.user
-
-    if params[:tasks] == "completed"
-      @tasks = Current.user.tasks.where(completed: true)
-    elsif params[:tasks] == "active"
-      @tasks = Current.user.tasks.where(completed: false)
-    else
-      @tasks = Current.user.tasks
-    end
-
+    @tasks = tasks(@user)
+    @cities = City.all
     @pagy, @tasks = pagy(@tasks, limit: 20)
   end
 
+  def update
+    @user = Current.user
+    city = City.find_by(name: user_params[:city].capitalize)
+
+    if @user.update(user_params.except(:city).merge(city: city))
+      redirect_to profile_path
+    end
+  end
+
   private
+  def tasks(user)
+    if params[:tasks] == "completed"
+      @tasks = user.tasks.where(completed: true)
+    elsif params[:tasks] == "active"
+      @tasks = user.tasks.where(completed: false)
+    else
+      @tasks = user.tasks
+    end
+  end
 
   def user_params
-    params.expect(user: [ :username, :email_address, :password ])
+    params.expect(user: [ :username, :email_address, :password, :city ])
   end
 end

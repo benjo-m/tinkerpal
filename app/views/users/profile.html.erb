@@ -1,21 +1,42 @@
 <% content_for :title, "TinkerPal - Profile" %>
 <%# ----------Profile Info--------- %>
-<div class="flex justify-between gap-30">
-  <div class="flex flex-col flex-1 gap-4 min-w-fit">
-    <div>
+<div data-controller="edit-profile" class="flex justify-between gap-30">
+  <%# ----------Profile Details Div---------- %>
+  <div data-edit-profile-target="details" class="flex-1 gap-4">
+    <h1 class="font-bold text-xl">Profile details</h1>
+    <div class="mt-4">
       <p><strong>Username</strong></p>
-      <%= @user.username %>
+      <div class="bg-gray-100 p-1 rounded-md mt-1">
+        <%= @user.username %>
+      </div>
     </div>
-    <div>
-      <p><strong>Email</strong></p>
-      <%= @user.email_address %>
+    <div class="mt-4">
+      <p><strong>Location</strong></p>
+      <div class="bg-gray-100 p-1 rounded-md mt-1">
+        <%= @user.city.name %>
+      </div>
     </div>
+    <div class="mt-4">
+      <p><strong>Email address</strong></p>
+      <div class="bg-gray-100 p-1 rounded-md mt-1">
+        <%= @user.email_address %>
+      </div>
+    </div>
+    <div class="mt-4">
+      <p><strong>Member since</strong></p>
+      <div class="bg-gray-100 p-1 rounded-md mt-1">
+        <%= @user.created_at.strftime("%B %d, %Y") %>
+      </div>
+    </div>
+    <button data-action="edit-profile#showEditForm" class="px-2 py-1 bg-blue-200 rounded-md block mt-8 w-fit">Edit profile</button>
   </div>
+  <%# ----------Edit Profile Form---------- %>
+  <%= render "edit_form", user: @user, cities: @cities %>
   <%# ----------Task Cards--------- %>
   <div class="flex flex-col flex-2 min-w-fit">
     <div class="flex justify-around mb-4">
-      <%= link_to "Active tasks", profile_path(tasks: "active"), class: "#{params[:tasks] != 'completed' ? 'bg-gray-200 rounded-md font-bold text-red-500' : 'font-bold'} px-2 py-1" %>
-      <%= link_to "Completed tasks", profile_path(tasks: "completed"), class: "#{params[:tasks] == 'completed' ? 'bg-gray-200 rounded-md font-bold text-red-500' : 'font-bold'} px-2 py-1" %>
+      <%= link_to "Active tasks", profile_path(tasks: "active"), class: "#{params[:tasks] != 'completed' ? 'bg-gray-200 rounded-md font-bold text-red-500' : 'font-bold'} px-2 py-1 hover:bg-gray-200 hover:text-red-600 rounded-md transition duration-200" %>
+      <%= link_to "Completed tasks", profile_path(tasks: "completed"), class: "#{params[:tasks] == 'completed' ? 'bg-gray-200 rounded-md font-bold text-red-500' : 'font-bold'} px-2 py-1 hover:bg-gray-200 hover:text-red-600 rounded-md transition duration-200" %>
     </div>
     <% if @tasks.any? %>
       <% @tasks.order(created_at: :desc).each do |task|%>
