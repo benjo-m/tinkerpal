@@ -1,33 +1,29 @@
 <% content_for :title, "TinkerPal - Tasks" %>
 <div class="flex justify-between gap-30">
   <%# ----------Filters--------- %>
-  <div class="flex flex-col flex-1 gap-4 min-w-fit">
+  <div class="flex flex-col flex-2 gap-4 min-w-fit">
     <%# Select elementi su wrappani u div-ove jer ih ne mogu drukcije stajlati %>
     <%= form_with url: tasks_path, method: :get do |form| %>
       <div class="w-fit">
-        <%= form.label :city, "Location:" %>
-        <div class="bg-gray-100 p-1 rounded-md mt-1">
-          <%= form.select :city, [["Any", "any"]] + @cities.map { |c| [c.name, c.name.downcase] }, selected: params[:city] %>
-        </div>
+        <%= form.label :city, "Location:" %><br>
+        <%= form.select :city, [["Any", "any"]] + @cities.map { |c| [c.name, c.name.downcase] }, { selected: params[:city] }, class: "bg-gray-100 px-1 py-2 rounded-md mt-1" %>
       </div>
       <div class="w-fit mt-4">
         <%= form.label :sort_by, "Sort by:" %><br>
-        <div class="bg-gray-100 p-1 rounded-md mt-1">
-          <%= form.select :sort_by, [["Newest", "newest"], ["Oldest", "oldest"]], selected: params[:sort_by] %>
-        </div>
+        <%= form.select :sort_by, [["Newest", "newest"], ["Oldest", "oldest"]], { selected: params[:sort_by] }, class: "bg-gray-100 px-1 py-2 rounded-md mt-1" %>
       </div>
       <%= form.submit 'Filter', name: "", class: "bg-gray-200 px-2 py-1 rounded-md mt-4" %>
     <% end %>
   </div>
   <%# ----------Task Cards--------- %>
-  <div id="tasks" class="mb-8 flex-2 min-w-fit">
+  <div id="tasks" class="mb-8 flex-3 min-w-fit">
     <% @tasks.each do |task| %>
       <%= render "task_card", task: task %>
     <% end %>
     <%== pagy_nav(@pagy) %>
   </div>
   <%# ----------New Task Button--------- %>
-  <div class="flex flex-1 justify-end min-w-fit">
-    <%= link_to "Create task", new_task_path, class: "bg-green-300 h-fit p-1 pl-2 pr-2 rounded-md" %>
+  <div class="flex-2">
+    <p>treci div placeholder</p>
   </div>
 </div>
