@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root "tasks#index"
 
-  resources :tasks
+  resources :tasks do
+    resources :offers, only: [ :new, :create ]
+  end
+
   resource :session
   resources :passwords, param: :token
   resources :users, except: [ :edit, :update, :destroy ]

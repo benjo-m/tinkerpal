@@ -35,4 +35,11 @@
       </p>
     </div>
   </div>
+  <%# ----------------Offers----------------- %>
+  <%= link_to "Send Offer", new_task_offer_path(@task) %>
+  <div>
+    <% @task.offers.each do |offer| %>
+      <p><%= offer.price %></p>
+    </div>
+  <% end %>
 </div>
