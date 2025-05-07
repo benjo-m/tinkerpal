@@ -23,8 +23,8 @@
     <%= form.hidden_field :city_id, value: Current.user.city_id %>
     <br>
     <div class="flex gap-4">
-      <%= link_to "Cancel", task.id == nil ? root_path : profile_path, class: "bg-gray-300 p-1 inline-block rounded-md" %>
-      <%= form.submit class: "bg-green-300 inline-block p-1 rounded-md cursor-pointer" %>
+      <%= link_to "Cancel", task.id == nil ? root_path : profile_path, class: "bg-gray-300 px-2 py-1 inline-block rounded-md" %>
+      <%= form.submit class: "bg-green-300 inline-block px-2 py-1 rounded-md cursor-pointer" %>
     </div>
   <% end %>
 </div>

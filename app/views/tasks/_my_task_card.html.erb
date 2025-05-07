@@ -7,9 +7,9 @@
     </div>
   </div>
   <p><strong>Posted:</strong> <%= time_ago_in_words(task.created_at) %> ago</p>
-  <div class="flex gap-2 align-middle justify-end">
-    <%= link_to "View details", task, class: "bg-gray-200 p-1 mt-1 inline-block rounded-md" %>
-    <%= link_to "Edit", edit_task_path(task), class: "bg-blue-200 p-1 mt-1 inline-block rounded-md" %>
-    <%= button_to "Delete", task, method: :delete, data: { turbo_confirm: "Are you sure you want to delete this task?" }, class: "bg-red-300 p-1 mt-1 rounded-md" %>
+  <div class="flex gap-2 align-middle justify-end mt-2">
+    <%= link_to "View details", task, class: "bg-gray-200 px-2 py-1 inline-block rounded-md" %>
+    <%= link_to "Edit", edit_task_path(task), class: "bg-blue-200 px-2 py-1 inline-block rounded-md" %>
+    <%= button_to "Delete", task, method: :delete, data: { turbo_confirm: "Are you sure you want to delete this task?" }, class: "bg-red-300 px-2 py-1 rounded-md" %>
   </div>
 </div>

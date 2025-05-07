@@ -31,7 +31,7 @@
         </div>
         <div class="flex gap-4 items-center">
           <p class="text-sm">Logged in as <%= link_to Current.user.username, profile_path, class: "font-bold" %></p>
-          <%= button_to "Log out", session_path, method: :delete, class: "bg-gray-300 p-1 pr-2 pl-2 rounded-md cursor-pointer", data: { turbo_confirm: "Are you sure you want to log out?"} %>
+          <%= button_to "Log out", session_path, method: :delete, class: "bg-gray-300 px-2 py-1 rounded-md cursor-pointer", data: { turbo_confirm: "Are you sure you want to log out?"} %>
         </div>
       </div>
     </nav>
