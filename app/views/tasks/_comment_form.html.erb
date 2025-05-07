@@ -1,8 +1,0 @@
-<%= form_with model: comment do |form| %>
-  <%= form.textarea :text, placeholder: "Ask the poster for more details, or leave a helpful comment here.", class: "bg-gray-100 rounded-md w-full min-h-30 p-2 resize-none overflow-y-auto" %>
-  <%= form.hidden_field :task_id, value: @task.id %>
-  <%= form.hidden_field :user_id, value: Current.user.id %>
-  <div class="flex justify-end mt-2">
-    <%= form.submit "Post comment", class: "bg-green-300 p-1 pl-2 pr-2 rounded-md h-fit justify-end" %>
-  </div>
-<% end %>
