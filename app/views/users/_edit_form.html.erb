@@ -1,5 +1,5 @@
 <div data-edit-profile-target="form" class="flex-1 gap-4 hidden">
-  <h1 class="font-bold text-xl">Profile details</h1>
+  <h1 class="font-bold text-2xl">Profile details</h1>
   <%= form_with(model: user, url: update_profile_path, method: "patch") do |form| %>
     <div class="mt-4">
       <%= form.label :username, class: "block font-bold mb-1" %>
@@ -20,6 +20,10 @@
       <div class="bg-gray-100 p-1 rounded-md mt-1 text-gray-400">
         <%= user.created_at.strftime("%B %d, %Y") %>
       </div>
+    </div>
+    <div class="mt-4">
+      <%= form.label :about_me, class: "block font-bold mb-1" %>
+      <%= form.text_area :about_me, class: "bg-gray-100 rounded-md p-1 min-h-50 w-full" %>
     </div>
     <div class="flex gap-4 mt-8">
       <button type="button" data-action="edit-profile#hideEditForm" class="bg-gray-300 px-2 py-1 inline-block rounded-md">Cancel</button>

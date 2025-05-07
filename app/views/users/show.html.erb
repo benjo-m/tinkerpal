@@ -1,17 +1,45 @@
 <% content_for :title, "TinkerPal - #{@user.username}'s profile" %>
-<%# ----------Profile Info--------- %>
-<div class="flex justify-between gap-30">
-  <div class="flex flex-col flex-1 gap-4 min-w-fit">
-    <div>
+<div class="flex justify-between gap-20">
+  <%# ----------Profile Details Div---------- %>
+  <div data-edit-profile-target="details" class="flex-1 gap-4">
+    <h1 class="font-bold text-2xl">Profile details</h1>
+    <div class="mt-4">
       <p><strong>Username</strong></p>
-      <%= @user.username %>
+      <div class="bg-gray-100 p-1 rounded-md mt-1">
+        <%= @user.username %>
+      </div>
+    </div>
+    <div class="mt-4">
+      <p><strong>Location</strong></p>
+      <div class="bg-gray-100 p-1 rounded-md mt-1">
+        <%= @user.city.name %>
+      </div>
+    </div>
+    <div class="mt-4">
+      <p><strong>Member since</strong></p>
+      <div class="bg-gray-100 p-1 rounded-md mt-1">
+        <%= @user.created_at.strftime("%B %d, %Y") %>
+      </div>
+    </div>
+    <div class="mt-4">
+      <p><strong>About me</strong></p>
+      <div class="bg-gray-100 p-1 rounded-md mt-1">
+        <% if @user.about_me.blank? %>
+          <p class="text-gray-400"><%= @user.username %> hasn't written a bio yet.</p>
+        <% else %>
+          <p><%= @user.about_me %></p>
+        <% end %>
+      </div>
     </div>
   </div>
   <%# ----------Task Cards--------- %>
-  <div class="flex flex-col flex-2 min-w-fit">
-    <div class="flex justify-around mb-4">
-      <%= link_to "Active tasks", user_path(@user, tasks: "active"), class: "#{params[:tasks] != 'completed' ? 'bg-gray-200 rounded-md font-bold text-red-500' : 'font-bold'} px-2 py-1" %>
-      <%= link_to "Completed tasks", user_path(@user, tasks: "completed"), class: "#{params[:tasks] == 'completed' ? 'bg-gray-200 rounded-md font-bold text-red-500' : 'font-bold'} px-2 py-1" %>
+  <div class="flex-2">
+    <h1 class="font-bold text-2xl mb-4  border-slate-600"><%= @user.username %>'s tasks</h1>
+    <div class="flex mb-4 justify-between items-center">
+      <div class="flex gap-2">
+        <%= link_to "Active", user_path(@user, tasks: "active"), class: "#{params[:tasks] != 'completed' ? 'bg-gray-200 rounded-md font-bold text-red-500' : 'font-bold'} px-2 py-1 hover:bg-gray-200 hover:text-red-600 rounded-md transition duration-200" %>
+        <%= link_to "Completed", user_path(@user, tasks: "completed"), class: "#{params[:tasks] == 'completed' ? 'bg-gray-200 rounded-md font-bold text-red-500' : 'font-bold'} px-2 py-1 hover:bg-gray-200 hover:text-red-600 rounded-md transition duration-200" %>
+      </div>
     </div>
     <% if @tasks.any? %>
       <% @tasks.order(created_at: :desc).each do |task|%>
@@ -19,13 +47,38 @@
       <% end %>
       <%== pagy_nav(@pagy) %>
     <% else %>
-      <p class="text-xl text-gray-400 text-center mt-4"><strong><%= @user.username %></strong> does not have any <%= params[:tasks] == "completed" ? "completed" : "active" %> tasks</p>
+      <p class="text-xl px-2 font-bold text-slate-300"><strong><%= @user.username %></strong> does not have any <%= params[:tasks] == "completed" ? "completed" : "active" %> tasks</p>
     <% end %>
   </div>
-  <%# ----------Treci Div--------- %>
-  <div class="flex flex-1 justify-end min-w-fit">
-    <div class="flex flex-1 justify-end min-w-fit">
-      <h1>Treci div placeholder</h1>
+  <%# ----------Users Work--------- %>
+  <div class="flex-1 ">
+    <h1 class="font-bold text-2xl border-slate-600 mb-4"><%= @user.username %>'s work</h1>
+    <div class="bg-gray-100 p-2 rounded-md">
+      <p class="font-bold mb-2">Task title</p>
+      <p class="mb-2">Review comment about commenting sombrae jos duze da vidimo kako ce izgledati</p>
+      Rating
+      <% 5.times do %>
+        <i class="bi bi-star-fill text-yellow-500"></i>
+      <% end %>
+    </div>
+    <div class="bg-gray-100 p-2 rounded-md mt-4">
+      <p class="font-bold mb-2">Basic plumbing task</p>
+      <p class="mb-2">Dvije linije test test adakosadko kdoaskdos</p>
+      Rating
+      <% 3.times do %>
+        <i class="bi bi-star-fill text-yellow-500"></i>
+      <% end %>
+      <i class="bi bi-star text-yellow-500"></i>
+      <i class="bi bi-star text-yellow-500"></i>
+    </div>
+    <div class="bg-gray-100 p-2 rounded-md mt-4">
+      <p class="font-bold mb-2">Get me groceries</p>
+      <p class="mb-2">Review comment</p>
+      Rating
+      <% 4.times do %>
+        <i class="bi bi-star-fill text-yellow-500"></i>
+      <% end %>
+      <i class="bi bi-star text-yellow-500"></i>
     </div>
   </div>
 </div>
