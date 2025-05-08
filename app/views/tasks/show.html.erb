@@ -1,45 +1,52 @@
 <div>
-  <div class="flex justify-between gap-8">
-    <%# ----------------Images----------------- %>
-    <div data-controller="carousel" data-carousel-current-index-value="0" data-carousel-total-images-value="<%= @task.images.count %>" class="flex-3">
-      <% if @task.images.attached? %>
-        <% @task.images.each do |image| %>
-          <%= image_tag(image, class: "border-1 border-gray-200 rounded-md h-150 w-full", data: { carousel_target: "image" }) %>
-        <% end %>
-      <% else %>
-        <div class="flex border-2 border-gray-200 rounded-md justify-center items-center text-gray-400 h-150 text-xl">
-          <p><i class="bi bi-images"></i> The user hasn't attached any images for this task.</p>
-        </div>
-      <% end %>
-      <%# ----------------Navigation Buttons----------------- %>
-      <% if @task.images.any? %>
-        <div class="flex justify-center items-center mt-2 gap-8">
-          <button data-carousel-target="previousButton" data-action="carousel#previous" class="cursor-pointer bg-blue-200 px-1 rounded-md">
-            <i class="bi bi-arrow-left-short text-2xl"></i>
-          </button>
-          <p data-carousel-target="currentImageParagraph" class="w-20 text-center text-sm">
-          </p>
-          <button data-carousel-target="nextButton" data-action="carousel#next" class="cursor-pointer bg-blue-200 px-1 rounded-md">
-            <i class="bi bi-arrow-right-short text-2xl"></i>
-          </button>
-        </div>
-      <% end %>
-    </div>
+  <div class="flex justify-between gap-20">
     <%# ----------------Task Details----------------- %>
     <div class="flex-2">
-      <h1 class="text-3xl"><%= @task.title %></h1>
-      <h2 class="font-bold text-xl mb-2 mt-6">Description</h2>
-      <p><%= @task.description %></p>
-      <p class="mt-6">
-        Posted on <strong><%= @task.created_at.to_fs(:long_ordinal) %></strong> in <strong><%= @task.city.name %></strong>
-      </p>
+      <div class="flex justify-between">
+        <h1 class="font-bold text-2xl">Task details</h1>
+        <%= link_to "Make an offer", new_task_offer_path(@task), class: "bg-blue-200 px-2 py-1 rounded-md" %>
+      </div>
+      <div class="mt-4">
+        <p><strong>Title</strong></p>
+        <div class="bg-gray-100 px-1 py-2 rounded-md mt-1">
+          <%= @task.title %>
+        </div>
+      </div>
+      <div class="mt-4">
+        <p><strong>Description</strong></p>
+        <div class="bg-gray-100 px-1 py-2 rounded-md mt-1">
+          <%= @task.description %>
+        </div>
+      </div>
+      <div class="mt-4">
+        <p><strong>Posted on</strong></p>
+        <div class="bg-gray-100 px-1 py-2 rounded-md mt-1">
+          <%= @task.created_at.to_fs(:long_ordinal) %>
+        </div>
+      </div>
+      <div class="mt-4">
+        <p><strong>Location</strong></p>
+        <div class="bg-gray-100 px-1 py-2 rounded-md mt-1">
+          <%= @task.city.name %>
+        </div>
+      </div>
+      <div class="mt-4">
+        <p><strong>Posted by</strong></p>
+        <div class="bg-gray-100 px-1 py-2 rounded-md mt-1">
+          <%= @task.user.username %>
+        </div>
+      </div>
+      <div class="mt-4">
+        <p><strong>Category</strong></p>
+        <div class="bg-gray-100 px-1 py-2 rounded-md mt-1">
+          Plumbing
+        </div>
+      </div>
+    </div>
+    <%# ----------------Images----------------- %>
+    <div class="flex-3">
+      <h1 class="font-bold text-2xl">Images</h1>
+      <%= render "task_images", task: @task %>
     </div>
   </div>
-  <%# ----------------Offers----------------- %>
-  <%= link_to "Send Offer", new_task_offer_path(@task) %>
-  <div>
-    <% @task.offers.each do |offer| %>
-      <p><%= offer.price %></p>
-    </div>
-  <% end %>
 </div>
