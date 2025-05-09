@@ -4,7 +4,7 @@
     <div class="flex-2">
       <div class="flex justify-between">
         <h1 class="font-bold text-2xl">Task details</h1>
-        <%= link_to "Make an offer", new_task_offer_path(@task), class: "bg-blue-400 text-white px-2 py-1 rounded-md" %>
+        <%= link_to "Make an offer", new_task_offer_path(@task), class: "bg-blue-400 text-white px-2 py-1 rounded-md" if @task.user != Current.user %>
       </div>
       <div class="mt-4">
         <p><strong>Title</strong></p>
@@ -42,6 +42,12 @@
           Plumbing
         </div>
       </div>
+      <div class="mt-4">
+        <p><strong>Offers</strong></p>
+        <div class="bg-gray-100 px-1 py-2 rounded-md mt-1">
+          <%= @task.offers.count %>
+        </div>
+      </div>
     </div>
     <%# ----------------Images----------------- %>
     <div class="flex-3">
@@ -50,9 +56,16 @@
     </div>
   </div>
   <br>
-  <hr>
-  <div class="mt-8 mb-50">
-    <%= render "task_offers_table", offers: @task.offers %>
-  </div>
+  <%# ----------------Offers----------------- %>
+  <% if @task.user == Current.user %>
+    <div class="mt-8 mb-50">
+      <h1 class="font-bold text-2xl">Offers</h1>
+      <% if @task.offers.any? %>
+        <%= render "task_offers_table", offers: @task.offers %>
+      <% else %>
+        <p class="mt-4 text-slate-300 font-bold text-xl">There are currently no offers for this task. Please check back later.</p>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 </div>

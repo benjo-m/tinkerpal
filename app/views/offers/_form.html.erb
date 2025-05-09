@@ -25,7 +25,7 @@
 <%= form.hidden_field :user_id, value: Current.user.id %>
 <%= form.hidden_field :task_id, value: task.id %>
 <div class="flex gap-4 mt-4">
-  <%= link_to "Cancel", task, class: "bg-gray-300 px-2 py-1 inline-block rounded-md" %>
-  <%= form.submit class: "bg-green-400 inline-block px-2 py-1 rounded-md cursor-pointer" %>
+  <%= link_to "Cancel", task, class: "bg-gray-300 text-white px-2 py-1 inline-block rounded-md" %>
+  <%= form.submit class: "bg-green-400 text-white inline-block px-2 py-1 rounded-md cursor-pointer" %>
 </div>
 <% end %>
