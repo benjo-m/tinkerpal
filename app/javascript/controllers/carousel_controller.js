@@ -30,21 +30,21 @@ export default class extends Controller {
 
     toggleButtonsStyles() {
         if (this.currentIndexValue == 0) {
-            this.previousButtonTarget.classList.add("bg-gray-200", "text-gray-400")
+            this.previousButtonTarget.classList.add("text-gray-300")
             this.previousButtonTarget.classList.remove("cursor-pointer")
         }
         else {
             this.previousButtonTarget.classList.add("cursor-pointer")
-            this.previousButtonTarget.classList.remove("bg-gray-200", "text-gray-400")
+            this.previousButtonTarget.classList.remove("text-gray-300")
         }
 
         if (this.currentIndexValue == this.totalImagesValue - 1) {
-            this.nextButtonTarget.classList.add("bg-gray-200", "text-gray-400")
+            this.nextButtonTarget.classList.add("text-gray-300")
             this.nextButtonTarget.classList.remove("cursor-pointer")
         }
         else {
             this.nextButtonTarget.classList.add("cursor-pointer")
-            this.nextButtonTarget.classList.remove("bg-gray-200", "text-gray-400")
+            this.nextButtonTarget.classList.remove("text-gray-300")
         }
     }
 }
