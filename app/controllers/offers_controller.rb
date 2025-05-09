@@ -17,6 +17,6 @@ class OffersController < ApplicationController
 
   private
   def offer_params
-    params.expect(offer: [ :price, :note, :task_id, :user_id ])
+    params.expect(offer: [ :price, :note, :task_id, :user_id, :date, :time ])
   end
 end

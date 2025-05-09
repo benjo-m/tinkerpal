@@ -1,16 +1,31 @@
 <%= form_with model: [task, offer] do |form| %>
   <div class="mt-6">
     <%= form.label :price, class: "block font-bold mb-2" %>
-    <%= form.number_field :price, placeholder: "Price", class: "bg-gray-100 rounded-md p-2 w-fit" %>
+    <%= form.number_field :price, step: :any, placeholder: "Price", class: "bg-gray-100 rounded-md p-2 w-fit" %>
   </div>
-  <div class="mt-4" >
-    <%= form.label :note, class: "block font-bold mb-2" %>
-    <%= form.textarea :note, placeholder: "Write a note here...", class: "bg-gray-100 rounded-md w-full min-h-64 p-2 resize-none overflow-y-auto" %>
-  </div>
-  <%= form.hidden_field :user_id, value: Current.user.id %>
-  <%= form.hidden_field :task_id, value: task.id %>
   <div class="flex gap-4 mt-4">
-    <%= link_to "Cancel", task, class: "bg-gray-300 px-2 py-1 inline-block rounded-md" %>
-    <%= form.submit class: "bg-green-300 inline-block px-2 py-1 rounded-md cursor-pointer" %>
+    <div>
+      <%= form.label :date, class: "block font-bold mb-2" %>
+      <div class="bg-gray-100 rounded-md p-2 w-fit">
+        <%= form.date_select :date, order: [:day, :month, :year], use_two_digit_numbers: true, start_year: Date.today.year %>
+      </div>
+    </div>
+    <div>
+      <%= form.label :time, class: "block font-bold mb-2" %>
+      <div class="bg-gray-100 rounded-md p-2 w-fit">
+        <%= form.time_select :time %>
+      </div>
+    </div>
   </div>
+</div>
+<div class="mt-4" >
+  <%= form.label :note, class: "block font-bold mb-2" %>
+  <%= form.textarea :note, placeholder: "Write a note here...", class: "bg-gray-100 rounded-md w-full min-h-64 p-2 resize-none overflow-y-auto" %>
+</div>
+<%= form.hidden_field :user_id, value: Current.user.id %>
+<%= form.hidden_field :task_id, value: task.id %>
+<div class="flex gap-4 mt-4">
+  <%= link_to "Cancel", task, class: "bg-gray-300 px-2 py-1 inline-block rounded-md" %>
+  <%= form.submit class: "bg-green-400 inline-block px-2 py-1 rounded-md cursor-pointer" %>
+</div>
 <% end %>

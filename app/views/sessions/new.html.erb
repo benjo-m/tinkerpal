@@ -9,14 +9,14 @@
       <%= form.label :password, class: "block" %>
       <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", class: "bg-gray-100 rounded-md p-1" %><br>
     </div>
-    <div class="mt-6 bg-green-300 inline-block p-1 rounded-md cursor-pointer">
+    <div class="mt-6 bg-green-400 inline-block p-1 rounded-md cursor-pointer">
       <%= form.submit "Sign in" %>
     </div>
   <% end %>
   <%# <br>
   <%= link_to "Forgot password?", new_password_path %>
   <br>
-  <div class="bg-blue-200 p-1 mt-1 inline-block rounded-md">
+  <div class="bg-blue-400 p-1 mt-1 inline-block rounded-md">
     <%= link_to "Create an account", new_user_path %>
   </div>
 </div>
