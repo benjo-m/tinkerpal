@@ -6,6 +6,7 @@
         <th class="px-4 py-2">Price</th>
         <th class="px-4 py-2">Date</th>
         <th class="px-4 py-2">Time</th>
+        <th class="px-4 py-2">Status</th>
         <th class="px-4 py-2">Actions</th>
       </tr>
     </thead>
@@ -16,10 +17,17 @@
           <td class="px-4 py-2"><%= offer.price %> BAM</td>
           <td class="px-4 py-2"><%= offer.date.to_fs(:long) %></td>
           <td class="px-4 py-2"><%= offer.time.to_formatted_s(:time) %></td>
-          <td class="px-4 py-2">
-            <button class="bg-green-400 text-white px-2 py-1 rounded">Accept</button>
-            <button class="bg-red-400 text-white px-2 py-1 rounded">Decline</button>
-            <button class="bg-blue-400 text-white px-2 py-1 rounded">Counter</button>
+          <td class="px-4 py-2"><%= offer.status.capitalize %></td>
+          <td class="px-4 py-2 flex gap-2 justify-center">
+            <% if offer.task.assignee == nil && offer.status != 'declined' %>
+              <%= button_to "Accept", task_accept_path(offer.task_id, offer), method: :patch, class: "bg-green-400 text-white px-2 py-1 rounded cursor-pointer" %>
+              <%= button_to "Decline", task_decline_path(offer.task_id, offer), method: :patch, class: "bg-red-400 text-white px-2 py-1 rounded cursor-pointer" %>
+            <% elsif offer.task.assignee == offer.user %>
+              <%= button_to "Cancel", task_cancel_path(offer.task_id, offer), method: :patch, class: "bg-red-400 text-white px-2 py-1 rounded cursor-pointer" %>
+            <% else %>
+              <button class="bg-green-200 text-white px-2 py-1 rounded">Accept</button>
+              <button class="bg-red-200 text-white px-2 py-1 rounded">Decline</button>
+            <% end %>
           </td>
         </tr>
       <% end %>

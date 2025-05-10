@@ -17,6 +17,27 @@ class OffersController < ApplicationController
     end
   end
 
+  def accept
+    @offer = Offer.find(params[:id])
+    if @offer.update(status: "accepted") && @offer.task.update(assignee: @offer.user)
+      redirect_to @offer.task
+    end
+  end
+
+  def decline
+    @offer = Offer.find(params[:id])
+    if @offer.update(status: "declined")
+      redirect_to @offer.task
+    end
+  end
+
+  def cancel
+    @offer = Offer.find(params[:id])
+    if @offer.update(status: "pending") && @offer.task.update(assignee: nil)
+      redirect_to @offer.task
+    end
+  end
+
   private
   def offer_params
     params.expect(offer: [ :price, :note, :task_id, :user_id, :date, :time ])
