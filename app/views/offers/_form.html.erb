@@ -2,6 +2,7 @@
   <div class="mt-6">
     <%= form.label :price, class: "block font-bold mb-2" %>
     <%= form.number_field :price, step: :any, placeholder: "Price", class: "bg-gray-100 rounded-md p-2 w-fit" %>
+    <p class="text-red-500"><%= offer.errors.full_messages_for(:price).first %></p>
   </div>
   <div class="flex gap-4 mt-4">
     <div>
@@ -17,6 +18,7 @@
       </div>
     </div>
   </div>
+  <p class="text-red-500"><%= offer.errors.full_messages_for(:date_and_time).first %></p>
 </div>
 <div class="mt-4" >
   <%= form.label :note, class: "block font-bold mb-2" %>
