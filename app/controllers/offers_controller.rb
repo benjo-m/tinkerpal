@@ -19,21 +19,21 @@ class OffersController < ApplicationController
 
   def accept
     @offer = Offer.find(params[:id])
-    if @offer.update(status: "accepted") && @offer.task.update(assignee: @offer.user)
+    if @offer.update_attribute(:status, "accepted") && @offer.task.update(assignee: @offer.user)
       redirect_to @offer.task
     end
   end
 
   def decline
     @offer = Offer.find(params[:id])
-    if @offer.update(status: "declined")
+    if @offer.update_attribute(:status, "declined")
       redirect_to @offer.task
     end
   end
 
   def cancel
     @offer = Offer.find(params[:id])
-    if @offer.update(status: "pending") && @offer.task.update(assignee: nil)
+    if @offer.update_attribute(:status, "pending") && @offer.task.update(assignee: nil)
       redirect_to @offer.task
     end
   end
