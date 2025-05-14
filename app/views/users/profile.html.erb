@@ -46,8 +46,8 @@
     <h1 class="font-bold text-2xl mb-4  border-slate-600">My tasks</h1>
     <div class="flex mb-4 justify-between items-center">
       <div class="flex gap-2">
-        <%= link_to "Active", profile_path(tasks: "active"), class: "#{params[:tasks] != 'completed' ? 'bg-gray-200 rounded-md font-bold text-red-500' : 'font-bold'} px-2 py-1 hover:bg-gray-200 hover:text-red-600 rounded-md transition duration-200" %>
-        <%= link_to "Completed", profile_path(tasks: "completed"), class: "#{params[:tasks] == 'completed' ? 'bg-gray-200 rounded-md font-bold text-red-500' : 'font-bold'} px-2 py-1 hover:bg-gray-200 hover:text-red-600 rounded-md transition duration-200" %>
+        <%= link_to "Active", url_for(params.permit!.to_h.merge(tasks: "active")), class: "#{params[:tasks] != 'completed' ? 'bg-gray-200 rounded-md font-bold text-red-500' : 'font-bold'} px-2 py-1 hover:bg-gray-200 hover:text-red-600 rounded-md transition duration-200" %>
+        <%= link_to "Completed", url_for(params.permit!.to_h.merge(tasks: "completed")), class: "#{params[:tasks] == 'completed' ? 'bg-gray-200 rounded-md font-bold text-red-500' : 'font-bold'} px-2 py-1 hover:bg-gray-200 hover:text-red-600 rounded-md transition duration-200" %>
       </div>
       <%= link_to "Create task", new_task_path, class: "bg-green-400 h-fit px-2 py-1 rounded-md text-white" %>
     </div>
@@ -63,32 +63,50 @@
   <%# ------------------------------My Work----------------------------- %>
   <div class="flex-2">
     <h1 class="font-bold text-2xl border-slate-600 mb-4">My work</h1>
-    <div class="bg-gray-100 p-2 rounded-md">
-      <p class="font-bold mb-2">Task title</p>
-      <p class="mb-2">Review comment about commenting sombrae jos duze da vidimo kako ce izgledati</p>
-      Rating
-      <% 5.times do %>
-        <i class="bi bi-star-fill text-yellow-500"></i>
-      <% end %>
+    <div class="flex gap-2 mb-4">
+      <%= link_to "Reviews", url_for(params.permit!.to_h.merge(work: "reviews")), class: "#{params[:work] != 'offers' ? 'bg-gray-200 rounded-md font-bold text-red-500' : 'font-bold'} px-2 py-1 hover:bg-gray-200 hover:text-red-600 rounded-md transition duration-200" %>
+      <%= link_to "Offers", url_for(params.permit!.to_h.merge(work: "offers")), class: "#{params[:work] == 'offers' ? 'bg-gray-200 rounded-md font-bold text-red-500' : 'font-bold'} px-2 py-1 hover:bg-gray-200 hover:text-red-600 rounded-md transition duration-200" %>
     </div>
-    <div class="bg-gray-100 p-2 rounded-md mt-4">
-      <p class="font-bold mb-2">Basic plumbing task</p>
-      <p class="mb-2">Dvije linije test test adakosadko kdoaskdos</p>
-      Rating
-      <% 3.times do %>
-        <i class="bi bi-star-fill text-yellow-500"></i>
+    <% if params[:work] == 'offers' %>
+      <% @offers.each do |offer| %>
+        <div class="bg-gray-100 p-2 mt-4 rounded-md">
+          Task: <%= link_to offer.task.title, offer.task, class: "underline " %>
+          <p class="mb-2">Status: <%= offer.status.capitalize %></p>
+          <div class="flex gap-2 align-middle mt-2">
+            <%= link_to "View", task_offer_path(offer.task, offer), class: "px-2 py-1 inline-block rounded-md text-white", style: "background-color: #b3b8c9;" %>
+            <%= link_to "Edit", edit_task_offer_path(offer.task, offer), class: "bg-blue-400 px-2 py-1 inline-block rounded-md text-white" %>
+            <%= button_to "Remove", [offer.task, offer], method: :delete, data: { turbo_confirm: "Are you sure you want to cancel this offer?" }, class: "bg-red-400 px-2 py-1 rounded-md text-white" %>
+          </div>
+        </div>
       <% end %>
-      <i class="bi bi-star text-yellow-500"></i>
-      <i class="bi bi-star text-yellow-500"></i>
-    </div>
-    <div class="bg-gray-100 p-2 rounded-md mt-4">
-      <p class="font-bold mb-2">Get me groceries</p>
-      <p class="mb-2">Review comment</p>
-      Rating
-      <% 4.times do %>
-        <i class="bi bi-star-fill text-yellow-500"></i>
-      <% end %>
-      <i class="bi bi-star text-yellow-500"></i>
-    </div>
+    <% else %>
+      <div class="bg-gray-100 p-2 rounded-md">
+        <p class="font-bold mb-2">Task title</p>
+        <p class="mb-2">Review comment about commenting sombrae jos duze da vidimo kako ce izgledati</p>
+        Rating
+        <% 5.times do %>
+          <i class="bi bi-star-fill text-yellow-500"></i>
+        <% end %>
+      </div>
+      <div class="bg-gray-100 p-2 rounded-md mt-4">
+        <p class="font-bold mb-2">Basic plumbing task</p>
+        <p class="mb-2">Dvije linije test test adakosadko kdoaskdos</p>
+        Rating
+        <% 3.times do %>
+          <i class="bi bi-star-fill text-yellow-500"></i>
+        <% end %>
+        <i class="bi bi-star text-yellow-500"></i>
+        <i class="bi bi-star text-yellow-500"></i>
+      </div>
+      <div class="bg-gray-100 p-2 rounded-md mt-4">
+        <p class="font-bold mb-2">Get me groceries</p>
+        <p class="mb-2">Review comment</p>
+        Rating
+        <% 4.times do %>
+          <i class="bi bi-star-fill text-yellow-500"></i>
+        <% end %>
+        <i class="bi bi-star text-yellow-500"></i>
+      </div>
+    <% end %>
   </div>
 </div>

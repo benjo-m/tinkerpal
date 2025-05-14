@@ -31,6 +31,7 @@ class UsersController < ApplicationController
     @user = Current.user
     @tasks = tasks(@user)
     @cities = City.all
+    @offers = @user.offers
     @pagy, @tasks = pagy(@tasks, limit: 20)
   end
 
