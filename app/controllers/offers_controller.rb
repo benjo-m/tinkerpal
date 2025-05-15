@@ -1,10 +1,6 @@
 class OffersController < ApplicationController
   before_action :prevent_self_offer, only: %i[new create]
 
-  def show
-    @offer = Offer.find(params.expect(:id))
-  end
-
   def new
     @task = Task.find(params[:task_id])
     @offer = Offer.new
@@ -22,9 +18,17 @@ class OffersController < ApplicationController
   end
 
   def edit
+    @offer = Offer.find(params.expect(:id))
+    redirect_to root_path if @offer.user != Current.user
   end
 
   def update
+    @offer = Offer.find(params.expect(:id))
+    if @offer.update(offer_params)
+      redirect_to profile_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy

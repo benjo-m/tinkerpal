@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     @user = Current.user
     @tasks = tasks(@user)
     @cities = City.all
-    @offers = @user.offers
+    @offers = @user.offers.order(created_at: :desc)
     @pagy, @tasks = pagy(@tasks, limit: 20)
   end
 
