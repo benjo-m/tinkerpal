@@ -23,12 +23,6 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
-  def edit
-    if @task.user != Current.user
-      redirect_to root_path
-    end
-  end
-
   def create
     @task = Current.user.tasks.build(task_params)
     if @task.save
@@ -38,8 +32,14 @@ class TasksController < ApplicationController
     end
   end
 
+  def edit
+    if @task.user != Current.user
+      redirect_to root_path
+    end
+  end
+
   def update
-      if @task.update(task_params)
+      if @task.user == Current.user && @task.update(task_params)
         redirect_to profile_path
       else
         render :edit, status: :unprocessable_entity
