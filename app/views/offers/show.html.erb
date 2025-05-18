@@ -1,0 +1,7 @@
+<div>
+  <h1>Offer details</h1>
+  <p>Price: <%= @offer.price %></p>
+  <p>Status: <%= @offer.status %></p>
+  <p>Date and time: <%= @offer.date.strftime("%d/%m/%Y") %> at <%= @offer.time.strftime("%H:%M") %></p>
+  <p>Task: <%= link_to @offer.task.title, @offer.task, class: "underline" %></p>
+</div>

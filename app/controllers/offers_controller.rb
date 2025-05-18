@@ -1,6 +1,10 @@
 class OffersController < ApplicationController
   before_action :prevent_self_offer, only: %i[new create]
 
+  def show
+    @offer = Offer.find(params.expect(:id))
+  end
+
   def new
     @task = Task.find(params[:task_id])
     @offer = Offer.new
