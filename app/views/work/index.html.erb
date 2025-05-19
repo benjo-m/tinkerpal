@@ -1,17 +1,25 @@
 <div class="flex justify-between gap-30">
-  <div class="bg-red-200 flex-1">
+  <div class="flex-1">
     <h1 class="font-bold text-2xl border-slate-600 mb-4">Offers</h1>
     <div>
       <% @offers.each do |offer| %>
-        <div class="bg-gray-100 rounded-md p-2 mb-4">
-          <p><strong>Task:</strong> <%= link_to offer.task.title, offer.task, class: "underline" %></p>
-          <p><strong>Status:</strong> <%= offer.status.capitalize %></p>
+        <div class="bg-gray-100 p-2 mt-4 rounded-md">
+          <strong>Task:</strong> <%= link_to offer.task.title, offer.task, class: "underline " %>
+          <p class="mb-2"><strong>Status:</strong> <span class="<%= offer.status == 'declined' ? 'text-red-500 font-bold' : offer.status == 'accepted' || offer.status == 'completed' ? 'text-green-500 font-bold' : 'text-amber-500 font-bold' %>">
+              <%= offer.status.capitalize %></span></p>
+          <div class="flex gap-2 align-middle mt-2">
+            <%= link_to "View", task_offer_path(offer.task, offer), class: "px-2 py-1 inline-block rounded-md text-white", style: "background-color: #b3b8c9;"%>
+            <%= link_to "Edit", edit_task_offer_path(offer.task, offer), class: "bg-blue-400 px-2 py-1 inline-block rounded-md text-white" if offer.status == "pending" %>
+            <%= button_to "Withdraw", [offer.task, offer], method: :delete, data: { turbo_confirm: "Are you sure you want to withdraw this offer?" }, class: "bg-red-400 px-2 py-1 rounded-md text-white cursor-pointer" if offer.status != 'declined' && offer.status != 'completed' %>
+          </div>
         </div>
       <% end %>
     </div>
   </div>
-  <div class="bg-blue-200 flex-1">
+  <div class="flex-1">
     <h1 class="font-bold text-2xl border-slate-600 mb-4">Schedule</h1>
   </div>
-  <div class="bg-amber-200 flex-1">div3</div>
+  <div class="flex-1">
+    <h1 class="font-bold text-2xl border-slate-600 mb-4">Nesto trece</h1>
+  </div>
 </div>

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     patch "offers/:id/accept", to: "offers#accept", as: "accept"
     patch "offers/:id/decline", to: "offers#decline", as: "decline"
     patch "offers/:id/cancel", to: "offers#cancel", as: "cancel"
+    patch "offers/:id/complete", to: "offers#complete", as: "complete"
   end
 
   resource :session

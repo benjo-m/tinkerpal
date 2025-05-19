@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   def index
     filters = params.permit(:sort_by, :city)
 
-    @tasks = Task.order(sort_field(filters[:sort_by]))
+    @tasks = Task.where(completed: false).order(sort_field(filters[:sort_by]))
 
     if filters[:city]
       city = City.select(:id).find_by(name: filters[:city].capitalize)

@@ -38,7 +38,7 @@ class OffersController < ApplicationController
   def destroy
     @offer = Offer.find_by(id: params.expect(:id))
       if @offer.destroy
-        redirect_to profile_path(work: "offers")
+        redirect_to work_path
       end
   end
 
@@ -59,6 +59,13 @@ class OffersController < ApplicationController
   def cancel
     @offer = Offer.find(params[:id])
     if @offer.update_attribute(:status, "pending") && @offer.task.update(assignee: nil)
+      redirect_to @offer.task
+    end
+  end
+
+  def complete
+    @offer = Offer.find(params[:id])
+    if @offer.update_attribute(:status, "completed") && @offer.task.update(completed: true)
       redirect_to @offer.task
     end
   end
