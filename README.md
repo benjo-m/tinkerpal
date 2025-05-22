@@ -1,3 +1,7 @@
+## Notice
+🚧 TinkerPal is still in development phase and not yet publicly available.
+
+
 # TinkerPal
 
 **TinkerPal** is a community-driven web app designed to connect everyday people with local, reliable helpers for manual tasks.
