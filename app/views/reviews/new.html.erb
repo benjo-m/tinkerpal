@@ -1,0 +1,21 @@
+<%= turbo_frame_tag "review-modal" do %>
+  <div class="fixed z-10 p-4 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-auto bg-white rounded-md border-2 border-gray-300">
+    <h1 class="font-bold text-2xl">Leave a review</h1>
+    <%= form_with model: @review do |form| %>
+      <div class="mt-6">
+        <%= form.label :rating, class: "block font-bold mb-2" %>
+        <%= form.number_field :rating, placeholder: "Rate from 1 to 5", class: "bg-gray-100 rounded-md p-2 w-fit" %>
+      </div>
+      <div class="mt-4" >
+        <%= form.label :comment, class: "block font-bold mb-2" %>
+        <%= form.textarea :comment, placeholder: "Write your review here...", class: "bg-gray-100 rounded-md w-full min-h-64 p-2 resize-none overflow-y-auto" %>
+      </div>
+      <%= form.hidden_field :task_id, value: @task.id %>
+      <%= form.hidden_field :user_id, value: @task.assigned_to %>
+      <div class="flex gap-4">
+        <%= link_to "Cancel", "", data: { controller: "review-modal", action: "review-modal#close" }, class: "bg-gray-300 px-2 py-1 inline-block rounded-md" %>
+        <%= form.submit "Done", class: "bg-green-400 inline-block px-2 py-1 rounded-md cursor-pointer" %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

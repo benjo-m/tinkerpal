@@ -1,0 +1,2 @@
+<%= turbo_stream.remove "review-modal" %>
+<%= turbo_stream.replace "offers", partial: "offers/offers_table", locals: { offers: @task.offers } %>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     patch "offers/:id/decline", to: "offers#decline", as: "decline"
     patch "offers/:id/cancel", to: "offers#cancel", as: "cancel"
     patch "offers/:id/complete", to: "offers#complete", as: "complete"
+    get "review", to: "reviews#new", as: "review"
   end
 
   resource :session
@@ -18,6 +19,8 @@ Rails.application.routes.draw do
   patch "profile/update", to: "users#update", as: "update_profile"
 
   get "work", to: "work#index"
+
+  resources :reviews, only: [ :create ]
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

@@ -52,7 +52,7 @@
       <%= link_to "Create task", new_task_path, class: "bg-green-400 h-fit px-2 py-1 rounded-md text-white" %>
     </div>
     <% if @tasks.any? %>
-      <% @tasks.order(created_at: :desc).each do |task|%>
+      <% @tasks.each do |task|%>
         <%= render "tasks/my_task_card", task: task %>
       <% end %>
       <%== pagy_nav(@pagy) %>

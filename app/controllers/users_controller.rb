@@ -47,11 +47,9 @@ class UsersController < ApplicationController
   private
   def tasks(user)
     if params[:tasks] == "completed"
-      @tasks = user.tasks.where(completed: true)
-    elsif params[:tasks] == "active"
-      @tasks = user.tasks.where(completed: false)
+      @tasks = user.tasks.where(completed: true).order(created_at: :desc)
     else
-      @tasks = user.tasks
+      @tasks = user.tasks.where(completed: false).order(created_at: :desc)
     end
   end
 

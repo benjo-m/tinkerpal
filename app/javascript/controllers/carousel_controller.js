@@ -23,9 +23,11 @@ export default class extends Controller {
     }
 
     showCurrentImage() {
-        this.imageTargets.forEach((image, index) => image.hidden = index !== this.currentIndexValue);
-        this.currentImageParagraphTarget.textContent = `${this.currentIndexValue + 1} of ${this.totalImagesValue}`
-        this.toggleButtonsStyles()
+        if (this.imageTargets.length != 0) {
+            this.imageTargets.forEach((image, index) => image.hidden = index !== this.currentIndexValue);
+            this.currentImageParagraphTarget.textContent = `${this.currentIndexValue + 1} of ${this.totalImagesValue}`
+            this.toggleButtonsStyles()
+        }
     }
 
     toggleButtonsStyles() {

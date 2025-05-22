@@ -59,13 +59,16 @@
   <%# ----------------Offers----------------- %>
   <% if @task.user == Current.user %>
     <div class="mt-8 mb-50">
-      <h1 class="font-bold text-2xl">Offers</h1>
+      <h1 class="font-bold text-2xl mb-4">Offers</h1>
       <% if @task.offers.any? %>
-        <%= render "task_offers_table", offers: @task.offers %>
-      <% else %>
-        <p class="mt-4 text-slate-300 font-bold text-xl">There are currently no offers for this task. Please check back later.</p>
-      <% end %>
-    </div>
-  <% end %>
+        <%= turbo_frame_tag "offers" do %>
+          <%= render "offers/offers_table", offers: @task.offers %>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="mt-4 text-slate-300 font-bold text-xl">There are currently no offers for this task. Please check back later.</p>
+    <% end %>
+  </div>
+<% end %>
 </div>
 </div>

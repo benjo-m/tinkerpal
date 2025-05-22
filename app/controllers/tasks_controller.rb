@@ -49,9 +49,14 @@ class TasksController < ApplicationController
   def destroy
     if @task.user == Current.user
       @task.destroy!
-        redirect_to profile_path
+      respond_to do |format|
+        format.html { redirect_to profile_path }
+        format.turbo_stream
+      end
     else
-        redirect_to profile_path, status: :unauthorized
+      respond_to do |format|
+        format.html { redirect_to profile_path, status: :unauthorized }
+      end
     end
   end
 

@@ -45,28 +45,40 @@ class OffersController < ApplicationController
   def accept
     @offer = Offer.find(params[:id])
     if @offer.update_attribute(:status, "accepted") && @offer.task.update(assignee: @offer.user)
-      redirect_to @offer.task
+      respond_to do |format|
+        format.html { redirect_to @offer.task }
+        format.turbo_stream
+      end
     end
   end
 
   def decline
     @offer = Offer.find(params[:id])
     if @offer.update_attribute(:status, "declined")
-      redirect_to @offer.task
+      respond_to do |format|
+        format.html { redirect_to @offer.task }
+        format.turbo_stream
+      end
     end
   end
 
   def cancel
     @offer = Offer.find(params[:id])
     if @offer.update_attribute(:status, "pending") && @offer.task.update(assignee: nil)
-      redirect_to @offer.task
+      respond_to do |format|
+        format.html { redirect_to @offer.task }
+        format.turbo_stream
+      end
     end
   end
 
   def complete
     @offer = Offer.find(params[:id])
     if @offer.update_attribute(:status, "completed") && @offer.task.update(completed: true)
-      redirect_to @offer.task
+      respond_to do |format|
+        format.html { redirect_to @offer.task }
+        format.turbo_stream
+      end
     end
   end
 
