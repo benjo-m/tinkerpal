@@ -2,9 +2,20 @@
   <div class="flex justify-between gap-20">
     <%# ----------------Task Details----------------- %>
     <div class="flex-2">
-      <div class="flex justify-between">
+      <div class="flex justify-between items-center">
         <h1 class="font-bold text-2xl">Task details</h1>
-        <%= link_to "Make an offer", new_task_offer_path(@task), class: "bg-blue-400 text-white px-2 py-1 rounded-md" if @task.user != Current.user %>
+        <% if @task.user != Current.user && !@task.completed %>
+          <% if @task.offers.current_user_offers.last == nil || @task.offers.current_user_offers.last.status == "declined" %>
+            <%= link_to "Make an offer", new_task_offer_path(@task), class: "bg-blue-400 text-white px-2 py-1 rounded-md" %>
+          <% else %>
+            <div>
+              <p class="inline-block">Offer sent,</p>
+              <%= link_to "View offer", task_offer_path(@task, @task.offers.current_user_offers.last), class: "inline-block bg-slate-300 text-white px-2 py-1 rounded-md" %>
+            </div>
+          <% end %>
+        <% elsif @task.completed %>
+          <p class="font-bold text-green-400">Completed</p>
+        <% end %>
       </div>
       <div class="mt-4">
         <p><strong>Title</strong></p>

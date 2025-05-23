@@ -13,7 +13,7 @@
       <% offers.each_with_index do |offer, index| %>
         <tr class="<%= offer.status == 'accepted' || offer.status == 'completed' ? 'bg-green-200' : index.even? ? 'bg-white' : 'bg-gray-50' %>">
           <td class="py-2 px-4 text-center underline">
-            <%= link_to offer.user.username, offer.user %>
+            <%= link_to offer.user.username, offer.user, data: { turbo_frame: "_top" } %>
           </td>
           <td class="py-2 px-4 text-center">
             <%= offer.price %> BAM
