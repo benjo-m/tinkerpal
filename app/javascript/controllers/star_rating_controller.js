@@ -23,7 +23,6 @@ export default class extends Controller {
 
   selectStar(event) {
     this.selectedRating = this.starTargets.indexOf(event.currentTarget) + 1
-    console.log(this.selectedRating)
     this.inputTarget.value = this.selectedRating
   }
 

@@ -14,6 +14,11 @@ class OffersController < ApplicationController
     @offer = Offer.new(offer_params)
     @task = Task.find(offer_params[:task_id])
 
+    if @task.offers.current_user_offers.last&.status == "pending"
+      redirect_to @task
+      return
+    end
+
     if @offer.save
       redirect_to @offer.task
     else

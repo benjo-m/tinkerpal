@@ -1,23 +1,26 @@
 <%= turbo_frame_tag "review-modal" do %>
-  <div class="fixed z-10 p-4 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-auto bg-white rounded-md border-2 border-gray-300">
+  <div class="fixed inset-0 z-50 bg-black opacity-40" data-controller="review-modal" data-action="click->review-modal#close"></div>
+  <div class="fixed z-1000 p-4 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-auto bg-white rounded-md w-128">
     <h1 class="font-bold text-2xl">Leave a review</h1>
     <%= form_with model: @review do |form| %>
       <div data-controller="star-rating" data-action="mouseleave->star-rating#resetStars" class="mt-4 cursor-default">
+        <p class="font-bold mb-1">Rating</p>
         <% 5.times do %>
           <i data-star-rating-target="star" data-action="mouseover->star-rating#hoverStar click->star-rating#selectStar" class="bi bi-star text-yellow-400 cursor-pointer text-2xl"></i>
         <% end %>
         <%= form.hidden_field :rating, data: { star_rating_target: "input" } %>
+        <p class="text-red-500"><%= @review.errors[:rating].first %></p>
       </div>
       <div class="mt-4" >
         <%= form.label :comment, class: "block font-bold mb-2" %>
-        <%= form.textarea :comment, placeholder: "Write your review here...", class: "bg-gray-100 rounded-md w-full min-h-64 p-2 resize-none overflow-y-auto" %>
+        <%= form.text_area :comment, placeholder: "Write your review here...", class: "bg-gray-100 rounded-md w-full min-h-64 p-2 resize-none overflow-y-auto" %>
       </div>
       <%= form.hidden_field :task_id, value: @task.id %>
       <%= form.hidden_field :user_id, value: @task.assigned_to %>
-      <div class="flex gap-4">
+      <div class="flex gap-2 mt-4">
         <%= link_to "Cancel", "", data: { controller: "review-modal", action: "review-modal#close" }, class: "bg-gray-300 px-2 py-1 inline-block rounded-md" %>
         <%= form.submit "Done", class: "bg-green-400 inline-block px-2 py-1 rounded-md cursor-pointer" %>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 <% end %>

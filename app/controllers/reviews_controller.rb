@@ -14,6 +14,8 @@ class ReviewsController < ApplicationController
         format.html { redirect_to @task }
         format.turbo_stream
       end
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
