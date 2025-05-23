@@ -1,5 +1,5 @@
 ## Notice
-🚧 TinkerPal is still in development phase and not yet publicly available.
+🚧 TinkerPal is still in development and not publicly available yet.
 
 
 # TinkerPal
