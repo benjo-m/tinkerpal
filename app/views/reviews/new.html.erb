@@ -2,9 +2,11 @@
   <div class="fixed z-10 p-4 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-auto bg-white rounded-md border-2 border-gray-300">
     <h1 class="font-bold text-2xl">Leave a review</h1>
     <%= form_with model: @review do |form| %>
-      <div class="mt-6">
-        <%= form.label :rating, class: "block font-bold mb-2" %>
-        <%= form.number_field :rating, placeholder: "Rate from 1 to 5", class: "bg-gray-100 rounded-md p-2 w-fit" %>
+      <div data-controller="star-rating" data-action="mouseleave->star-rating#resetStars" class="mt-4 cursor-default">
+        <% 5.times do %>
+          <i data-star-rating-target="star" data-action="mouseover->star-rating#hoverStar click->star-rating#selectStar" class="bi bi-star text-yellow-400 cursor-pointer text-2xl"></i>
+        <% end %>
+        <%= form.hidden_field :rating, data: { star_rating_target: "input" } %>
       </div>
       <div class="mt-4" >
         <%= form.label :comment, class: "block font-bold mb-2" %>
