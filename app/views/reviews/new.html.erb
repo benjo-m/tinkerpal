@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "review-modal" do %>
   <div class="fixed inset-0 z-50 bg-black opacity-40" data-controller="review-modal" data-action="click->review-modal#close"></div>
-  <div class="fixed z-1000 p-4 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-auto bg-white rounded-md w-128">
+  <div class="fixed z-1000 p-6 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-auto bg-white rounded-md w-128">
     <h1 class="font-bold text-2xl">Leave a review</h1>
     <%= form_with model: @review do |form| %>
       <div data-controller="star-rating" data-action="mouseleave->star-rating#resetStars" class="mt-4 cursor-default">

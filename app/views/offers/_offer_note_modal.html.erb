@@ -1,0 +1,6 @@
+<div data-offer-note-target="backgroundDiv" data-action="click->offer-note#close" class="fixed inset-0 z-50 bg-black opacity-40 hidden"></div>
+<div data-offer-note-target="note" class="fixed z-1000 p-6 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-auto bg-white rounded-md w-128 hidden">
+  <h1 class="font-bold text-2xl mb-6 text-left">Note</h1>
+  <p class="bg-gray-100 p-2 rounded-md mb-6 text-left"><%= offer.note %></p>
+  <button data-offer-target="closeBtn" data-action="offer-note#close" class="px-2 py-1 inline-block rounded-md text-white cursor-pointer" style="background-color: #b3b8c9;">Close</button>
+</div>
