@@ -10,6 +10,7 @@ class ReviewsController < ApplicationController
     @offer = Offer.find_by(task_id: @task.id, status: "accepted")
 
     if @review.save && @task.update(completed: true) && @offer.update_attribute(:status, "completed")
+      Offer.where.not(id: @offer.id).where(task_id: @task.id).update_all(status: "declined")
       respond_to do |format|
         format.html { redirect_to @task }
         format.turbo_stream

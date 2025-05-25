@@ -77,16 +77,6 @@ class OffersController < ApplicationController
     end
   end
 
-  def complete
-    @offer = Offer.find(params[:id])
-    if @offer.update_attribute(:status, "completed") && @offer.task.update(completed: true)
-      respond_to do |format|
-        format.html { redirect_to @offer.task }
-        format.turbo_stream
-      end
-    end
-  end
-
   private
   def offer_params
     params.expect(offer: [ :price, :note, :task_id, :user_id, :date, :time ])
