@@ -10,7 +10,7 @@
           <% else %>
             <div>
               <p class="inline-block">Offer sent,</p>
-              <%= link_to "View offer", task_offer_path(@task, @task.offers.current_user_offers.last), class: "inline-block bg-slate-300 text-white px-2 py-1 rounded-md" %>
+              <%= link_to "View offer", task_offer_path(@task, @task.offers.current_user_offers.last), class: "gray-button" %>
             </div>
           <% end %>
         <% elsif @task.completed %>

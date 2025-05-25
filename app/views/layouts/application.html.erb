@@ -31,7 +31,7 @@
           <%= link_to "Work", work_path, class: "#{request.path.start_with?('/work') ? 'active-nav-item' : 'nav-item'}" %>
         </div>
         <div class="flex flex-1 justify-end">
-          <%= button_to "Log out", session_path, method: :delete, class: "bg-gray-300 px-2 py-1 rounded-md cursor-pointer", data: { turbo_confirm: "Are you sure you want to log out?"} %>
+          <%= button_to "Log out", session_path, method: :delete, class: "gray-button", data: { turbo_confirm: "Are you sure you want to log out?"} %>
         </div>
       </div>
     </nav>

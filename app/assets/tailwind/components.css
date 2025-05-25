@@ -5,3 +5,20 @@
 .active-nav-item {
     @apply px-2 py-1 font-bold rounded-md bg-gray-200 text-red-500;
 }
+
+.gray-button {
+    @apply px-2 py-1 inline-block rounded-md text-white cursor-pointer;
+    background-color: #b3b8c9;
+}
+
+.blue-button {
+    @apply px-2 py-1 inline-block rounded-md text-white bg-blue-400 cursor-pointer;
+}
+
+.red-button {
+    @apply px-2 py-1 inline-block rounded-md text-white bg-red-400 cursor-pointer;
+}
+
+.green-button {
+    @apply px-2 py-1 inline-block rounded-md text-white bg-green-400 cursor-pointer;
+}

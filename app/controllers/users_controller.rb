@@ -8,6 +8,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params.expect(:id))
     @tasks = tasks(@user)
+    @tasks_completed = Task.where(assigned_to: @user, completed: true).count
+    @average_price = @user.offers.average("price")&.round(1)
+    @average_rating = @user.reviews.average("rating")&.round(1)
+    @reviews = @user.reviews
     @pagy, @tasks = pagy(@tasks, limit: 20)
   end
 
@@ -31,10 +35,9 @@ class UsersController < ApplicationController
     @user = Current.user
     @tasks = tasks(@user)
     @cities = City.all
-    @offers = @user.offers.order(created_at: :desc)
     @tasks_completed = Task.where(assigned_to: @user, completed: true).count
-    @average_price = @user.offers.average("price")
-    @average_rating = @user.reviews.average("rating")
+    @average_price = @user.offers.average("price")&.round(1)
+    @average_rating = @user.reviews.average("rating")&.round(1)
     @reviews = @user.reviews
     @pagy, @tasks = pagy(@tasks, limit: 20)
   end
