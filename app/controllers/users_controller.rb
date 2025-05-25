@@ -32,6 +32,10 @@ class UsersController < ApplicationController
     @tasks = tasks(@user)
     @cities = City.all
     @offers = @user.offers.order(created_at: :desc)
+    @tasks_completed = Task.where(assigned_to: @user, completed: true).count
+    @average_price = @user.offers.average("price")
+    @average_rating = @user.reviews.average("rating")
+    @reviews = @user.reviews
     @pagy, @tasks = pagy(@tasks, limit: 20)
   end
 

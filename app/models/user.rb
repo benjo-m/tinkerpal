@@ -6,4 +6,5 @@ class User < ApplicationRecord
   belongs_to :city
   normalizes :email_address, with: ->(e) { e.strip.downcase }
   has_many :offers, dependent: :destroy
+  has_many :reviews
 end
