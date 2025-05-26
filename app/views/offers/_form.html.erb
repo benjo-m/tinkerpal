@@ -28,7 +28,7 @@
 <%= form.hidden_field :task_id, value: task.id %>
 <div class="flex gap-4 mt-4">
   <%# Cancel links to /profile if editing and existing offer and to /tasks/:id if making a new offer %>
-  <%= link_to "Cancel", offer.id ? work_path : task, class: "gray-button" %>
+  <%= link_to "Cancel", offer.id ? profile_path : task, class: "gray-button" %>
   <%= form.submit class: "green-button" %>
 </div>
 <% end %>

@@ -43,7 +43,10 @@ class OffersController < ApplicationController
   def destroy
     @offer = Offer.find_by(id: params.expect(:id))
       if @offer.destroy
-        redirect_to work_path
+        respond_to do |format|
+          format.html { redirect_to profile_path }
+          format.turbo_stream
+        end
       end
   end
 
