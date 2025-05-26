@@ -36,9 +36,9 @@
   <div class="flex-3">
     <h1 class="font-bold text-2xl mb-4  border-slate-600"><%= @user.username %>'s tasks</h1>
     <div class="flex mb-4 justify-between items-center">
-      <div class="flex gap-2">
-        <%= link_to "Active", user_active_tasks_path(@user), data: {turbo_frame: "tasks"}, class: "font-bold px-2 py-1 hover:bg-gray-200 hover:text-red-500 rounded-md transition duration-200" %>
-        <%= link_to "Finished", user_finished_tasks_path(@user), data: {turbo_frame: "tasks"}, class: "font-bold px-2 py-1 hover:bg-gray-200 hover:text-red-500 rounded-md transition duration-200" %>
+      <div data-controller="tab" class="flex gap-2">
+        <%= link_to "Active", user_active_tasks_path(@user), data: {turbo_frame: "tasks", tab_target: "tab", action: "tab#select"}, class: "font-bold bg-gray-200 text-red-500 px-2 py-1 hover:bg-gray-200 hover:text-red-500 rounded-md transition duration-200" %>
+        <%= link_to "Finished", user_finished_tasks_path(@user), data: {turbo_frame: "tasks", tab_target: "tab", action: "tab#select"}, class: "font-bold px-2 py-1 hover:bg-gray-200 hover:text-red-500 rounded-md transition duration-200" %>
       </div>
     </div>
     <%= turbo_frame_tag "tasks" do %>
