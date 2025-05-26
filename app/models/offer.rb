@@ -1,4 +1,5 @@
 class Offer < ApplicationRecord
+  enum :status, pending: 0, declined: 1, accepted: 2, completed: 3
   validates :price, :time, :date, presence: true
   belongs_to :task
   belongs_to :user

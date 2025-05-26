@@ -7,10 +7,10 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @task = Task.find(params[:review][:task_id])
-    @offer = Offer.find_by(task_id: @task.id, status: "accepted")
+    @offer = Offer.accepted.find_by(task_id: @task.id)
 
-    if @review.save && @task.update(completed: true) && @offer.update_attribute(:status, "completed")
-      Offer.where.not(id: @offer.id).where(task_id: @task.id).update_all(status: "declined")
+    if @review.save && @task.update(completed: true) && @offer.update_attribute(:status, :completed)
+    Offer.where.not(id: @offer.id).where(task_id: @task.id).update_all(status: :declined)
       respond_to do |format|
         format.html { redirect_to @task }
         format.turbo_stream

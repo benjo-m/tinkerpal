@@ -5,7 +5,7 @@
       <div class="flex justify-between items-center">
         <h1 class="font-bold text-2xl">Task details</h1>
         <% if @task.user != Current.user && !@task.completed %>
-          <% if @task.offers.current_user_offers.last == nil || @task.offers.current_user_offers.last.status == "declined" %>
+          <% if @task.offers.current_user_offers.last == nil || @task.offers.current_user_offers.last.declined? %>
             <%= link_to "Make an offer", new_task_offer_path(@task), class: "bg-blue-400 text-white px-2 py-1 rounded-md" %>
           <% else %>
             <div>

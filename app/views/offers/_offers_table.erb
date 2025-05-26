@@ -12,7 +12,7 @@
     </thead>
     <tbody>
       <% offers.each_with_index do |offer, index| %>
-        <tr class="<%= offer.status == 'accepted' || offer.status == 'completed' ? 'bg-green-200' : index.even? ? 'bg-white' : 'bg-gray-50' %>">
+        <tr class="<%= offer.accepted? || offer.completed? ? 'bg-green-200' : index.even? ? 'bg-white' : 'bg-gray-50' %>">
           <td class="py-2 px-4 text-center underline">
             <%= link_to offer.user.username, offer.user, data: { turbo_frame: "_top" } %>
           </td>
@@ -33,13 +33,13 @@
           </td>
           <td class="py-2 px-4 text-center">
             <div class="flex justify-center flex-wrap gap-2">
-              <% if offer.status == 'pending' && offer.task.assignee.nil? %>
+              <% if offer.pending? && offer.task.assignee.nil? %>
                 <%= button_to "Accept", task_accept_path(offer.task_id, offer), method: :patch, class: "bg-green-400 text-white px-2 py-1 rounded cursor-pointer" %>
                 <%= button_to "Decline", task_decline_path(offer.task_id, offer), method: :patch, class: "bg-red-400 text-white px-2 py-1 rounded cursor-pointer" %>
-              <% elsif offer.status == 'accepted' %>
+              <% elsif offer.accepted? %>
                 <%= link_to "Mark as done", task_review_path(offer.task), data: { turbo_frame: "review-modal" }, class: "bg-green-400 text-white px-2 py-1 rounded" %>
                 <%= button_to "Cancel", task_cancel_path(offer.task_id, offer), method: :patch, class: "bg-red-400 text-white px-2 py-1 rounded" %>
-              <% elsif offer.status == 'declined' %>
+              <% elsif offer.declined? %>
                 <p class="text-red-500 font-bold">Offer declined</p>
               <% elsif offer.status == 'completed' %>
                 <p class="text-green-500 font-bold">Completed</p>

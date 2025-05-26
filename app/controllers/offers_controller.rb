@@ -14,7 +14,7 @@ class OffersController < ApplicationController
     @offer = Offer.new(offer_params)
     @task = Task.find(offer_params[:task_id])
 
-    if @task.offers.current_user_offers.last&.status == "pending"
+    if @task.offers.current_user_offers.last&.pending?
       redirect_to @task
       return
     end
@@ -49,7 +49,7 @@ class OffersController < ApplicationController
 
   def accept
     @offer = Offer.find(params[:id])
-    if @offer.update_attribute(:status, "accepted") && @offer.task.update(assignee: @offer.user)
+    if @offer.update_attribute(:status, :accepted) && @offer.task.update(assignee: @offer.user)
       respond_to do |format|
         format.html { redirect_to @offer.task }
         format.turbo_stream
@@ -59,7 +59,7 @@ class OffersController < ApplicationController
 
   def decline
     @offer = Offer.find(params[:id])
-    if @offer.update_attribute(:status, "declined")
+    if @offer.update_attribute(:status, :declined)
       respond_to do |format|
         format.html { redirect_to @offer.task }
         format.turbo_stream
@@ -69,7 +69,7 @@ class OffersController < ApplicationController
 
   def cancel
     @offer = Offer.find(params[:id])
-    if @offer.update_attribute(:status, "pending") && @offer.task.update(assignee: nil)
+    if @offer.update_attribute(:status, :pending) && @offer.task.update(assignee: nil)
       respond_to do |format|
         format.html { redirect_to @offer.task }
         format.turbo_stream
