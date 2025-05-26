@@ -1,0 +1,18 @@
+  <%= turbo_frame_tag "tasks" do %>
+  <% if @tasks.count > 0 %>
+    <% @tasks.each do |task| %>
+      <% if @user == Current.user %>
+        <%= render "tasks/my_task_card", task: task %>
+      <% else %>
+        <%= render "tasks/task_card", task: task %>
+      <% end %>
+    <% end %>
+    <%== pagy_nav(@pagy) %>
+  <% else %>
+    <% if @user == Current.user %>
+      <p class="text-xl px-2 font-bold text-slate-300">You do not have any finished tasks</p>
+    <% else %>
+      <p class="text-xl px-2 font-bold text-slate-300"><%= @user.username %> does not have any finished tasks</p>
+    <% end %>
+  <% end %>
+<% end %>

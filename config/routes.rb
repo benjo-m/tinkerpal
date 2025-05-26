@@ -12,12 +12,16 @@ Rails.application.routes.draw do
 
   resource :session
   resources :passwords, param: :token
-  resources :users, except: [ :edit, :update, :destroy ]
+  resources :users, except: [ :edit, :update, :destroy ] do
+    get "work-overview", to: "users#work_overview"
+    get "active-tasks", to: "users#user_active_tasks"
+    get "finished-tasks", to: "users#user_finished_tasks"
+  end
 
   get "profile", to: "users#profile"
   patch "profile/update", to: "users#update", as: "update_profile"
   get "my-offers", to: "users#my_offers"
-  get "my-work-overview", to: "users#my_work_overview"
+
   
   resources :reviews, only: [ :create ]
 

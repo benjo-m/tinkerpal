@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params.expect(:id))
-    @tasks = tasks(@user)
+    @tasks = @user.tasks.where(completed: false).order(created_at: :desc)
     @tasks_completed = Task.where(assigned_to: @user, completed: true).count
     @average_price = @user.offers.average("price")&.round(1)
     @average_rating = @user.reviews.average("rating")&.round(1)
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
   def profile
     @user = Current.user
-    @tasks = tasks(@user)
+    @tasks = @user.tasks.where(completed: false).order(created_at: :desc)
     @cities = City.all
     @tasks_completed = Task.where(assigned_to: @user, completed: true).count
     @average_price = @user.offers.average("price")&.round(1)
@@ -42,8 +42,20 @@ class UsersController < ApplicationController
     @pagy, @tasks = pagy(@tasks, limit: 20)
   end
 
-  def my_work_overview
-    @user = Current.user
+  def user_active_tasks
+    @user = User.find(params.expect(:user_id))
+    @tasks = @user.tasks.where(completed: false).order(created_at: :desc)
+    @pagy, @tasks = pagy(@tasks, limit: 20)
+  end
+
+  def user_finished_tasks
+    @user = User.find(params.expect(:user_id))
+    @tasks = @user.tasks.where(completed: true).order(created_at: :desc)
+    @pagy, @tasks = pagy(@tasks, limit: 20)
+  end
+
+  def work_overview
+    @user = User.find(params.expect(:user_id))
     @tasks_completed = Task.where(assigned_to: @user, completed: true).count
     @average_price = @user.offers.average("price")&.round(1)
     @average_rating = @user.reviews.average("rating")&.round(1)
@@ -64,14 +76,6 @@ class UsersController < ApplicationController
   end
 
   private
-  def tasks(user)
-    if params[:tasks] == "completed"
-      @tasks = user.tasks.where(completed: true).order(created_at: :desc)
-    else
-      @tasks = user.tasks.where(completed: false).order(created_at: :desc)
-    end
-  end
-
   def user_params
     params.expect(user: [ :username, :email_address, :password, :city, :about_me ])
   end
