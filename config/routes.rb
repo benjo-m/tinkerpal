@@ -16,9 +16,9 @@ Rails.application.routes.draw do
 
   get "profile", to: "users#profile"
   patch "profile/update", to: "users#update", as: "update_profile"
-
-  get "work", to: "work#index"
-
+  get "my-offers", to: "users#my_offers"
+  get "my-work-overview", to: "users#my_work_overview"
+  
   resources :reviews, only: [ :create ]
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

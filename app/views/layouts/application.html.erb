@@ -28,7 +28,6 @@
           <%= link_to "Tinkers", users_path, class: "#{request.path.start_with?('/users') ? 'active-nav-item' : 'nav-item'}" %>
           <%= link_to "Tasks", tasks_path, class: "#{request.path.start_with?('/tasks') || request.path == '/' ? 'active-nav-item' : 'nav-item'}" %>
           <%= link_to "Profile", profile_path, class: "#{request.path.start_with?('/profile') ? 'active-nav-item' : 'nav-item'}" %>
-          <%= link_to "Work", work_path, class: "#{request.path.start_with?('/work') ? 'active-nav-item' : 'nav-item'}" %>
         </div>
         <div class="flex flex-1 justify-end">
           <%= button_to "Log out", session_path, method: :delete, class: "gray-button", data: { turbo_confirm: "Are you sure you want to log out?"} %>
