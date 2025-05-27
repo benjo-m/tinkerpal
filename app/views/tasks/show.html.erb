@@ -8,13 +8,14 @@
           <% if @task.offers.current_user_offers.last == nil || @task.offers.current_user_offers.last.declined? %>
             <%= link_to "Make an offer", new_task_offer_path(@task), class: "bg-blue-400 text-white px-2 py-1 rounded-md" %>
           <% else %>
-            <div>
-              <p class="inline-block">Offer sent,</p>
-              <%= link_to "View offer", task_offer_path(@task, @task.offers.current_user_offers.last), class: "gray-button" %>
-            </div>
+            <%= link_to "View offer", edit_task_offer_path(@task, @task.offers.current_user_offers.last), class: "gray-button" %>
           <% end %>
         <% elsif @task.completed %>
-          <p class="font-bold text-green-400">Completed</p>
+          <div class="text-green-400 flex gap-2 text-lg">
+            <i class="bi bi-check-circle-fill"></i>
+            <p class="font-bold">
+              Completed</p>
+          </div>
         <% end %>
       </div>
       <div class="mt-4">

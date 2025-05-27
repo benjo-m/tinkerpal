@@ -6,7 +6,7 @@
         <p class="mb-2"><strong>Status:</strong> <span class="<%= offer.declined? ? 'text-red-500 font-bold' : offer.accepted? || offer.completed? ? 'text-green-500 font-bold' : 'text-amber-500 font-bold' %>">
             <%= offer.status.capitalize %></span></p>
         <div class="flex gap-2 align-middle mt-2">
-          <%= link_to "View", edit_task_offer_path(offer.task, offer), data: { turbo_frame: "_top" }, class: "gray-button" if offer.pending? %>
+          <%= link_to "View", edit_task_offer_path(offer.task, offer), data: { turbo_frame: "_top" }, class: "gray-button" if !offer.completed? %>
           <%= button_to "Withdraw", [offer.task, offer], method: :delete, data: { turbo_confirm: "Are you sure you want to withdraw this offer?" }, class: "red-button" if !offer.declined? && !offer.completed? %>
         </div>
       </div>

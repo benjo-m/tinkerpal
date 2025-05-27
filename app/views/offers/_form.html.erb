@@ -27,8 +27,12 @@
 <%= form.hidden_field :user_id, value: Current.user.id %>
 <%= form.hidden_field :task_id, value: task.id %>
 <div class="flex gap-4 mt-4">
-  <%# Cancel links to /profile if editing and existing offer and to /tasks/:id if making a new offer %>
-  <%= link_to "Back", offer.id ? profile_path : task, class: "gray-button" %>
+  <% back_path = if request.referer&.include?("/profile")
+                 profile_path
+               else
+                 task
+               end %>
+  <%= link_to "Back", back_path, class: "gray-button" %>
   <%= form.submit class: "green-button" %>
 </div>
 <% end %>
