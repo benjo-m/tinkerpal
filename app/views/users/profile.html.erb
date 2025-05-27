@@ -52,10 +52,14 @@
       <%= link_to "Create task", new_task_path, class: "green-button" %>
     </div>
     <%= turbo_frame_tag "tasks" do %>
-      <% @tasks.each do |task| %>
-        <%= render "tasks/my_task_card", task: task %>
+      <% if @tasks.count > 0 %>
+        <% @tasks.each do |task| %>
+          <%= render "tasks/my_task_card", task: task %>
+        <% end %>
+        <%== pagy_nav(@pagy) %>
+      <% else %>
+        <p class="text-xl px-2 font-bold text-slate-300">You do not have any active tasks</p>
       <% end %>
-      <%== pagy_nav(@pagy) if @tasks.count > 0 %>
     <% end %>
   </div>
   <%# ------------------------------My Work----------------------------- %>
