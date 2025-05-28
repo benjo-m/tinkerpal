@@ -8,6 +8,7 @@
       </div>
     </div>
     <p><strong>Posted:</strong> <%= time_ago_in_words(task.created_at) %> ago</p>
+    <p><strong>Category:</strong> <%= task.task_category.name %> </p>
     <div class="flex gap-2 align-middle justify-end mt-2">
       <%= link_to "View details", task, data: { turbo_frame: "_top" }, class: "gray-button" %>
       <%= link_to "Edit", edit_task_path(task), data: { turbo_frame: "_top" }, class: "blue-button" if !task.completed %>

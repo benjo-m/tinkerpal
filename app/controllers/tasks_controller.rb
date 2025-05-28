@@ -67,8 +67,20 @@ class TasksController < ApplicationController
     def filtered_tasks
       city = City.select(:id).find_by(name: params[:city])
       category = TaskCategory.select(:id).find_by(name: params[:category])
+      sort_field = case params[:sort_by]
+      when "Oldest"
+        { created_at: :asc }
+      when "Newest"
+        { created_at: :desc }
+      when "Most offers"
+        { offers_count: :desc }
+      when "Fewest offers"
+        { offers_count: :asc }
+      else
+        { created_at: :desc }
+      end
 
-      tasks = Task.where(completed: false).order(created_at: params[:sort_by] == "oldest" ? :asc : :desc)
+      tasks = Task.where(completed: false).order(sort_field)
       tasks = tasks.where(city: city) if city
       tasks = tasks.where(task_category: category) if category
 

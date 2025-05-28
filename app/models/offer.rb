@@ -1,7 +1,7 @@
 class Offer < ApplicationRecord
   enum :status, [ :pending, :declined, :accepted, :completed ]
   validates :price, :time, :date, presence: true
-  belongs_to :task
+  belongs_to :task, counter_cache: true
   belongs_to :user
   validate :date_and_time_cannot_be_in_the_past
 
