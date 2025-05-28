@@ -46,6 +46,7 @@
         <% @tasks.each do |task| %>
           <%= render "tasks/task_card", task: task %>
         <% end %>
+        <%== pagy_nav(@pagy_tasks) %>
       <% else %>
         <p class="text-xl px-2 font-bold text-slate-300"><%= @user.username %> does not have any active tasks</p>
       <% end %>

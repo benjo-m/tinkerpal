@@ -12,7 +12,8 @@ class UsersController < ApplicationController
     @average_price = @user.offers.average("price")&.round(1)
     @average_rating = @user.reviews.average("rating")&.round(1)
     @reviews = @user.reviews
-    @pagy, @tasks = pagy(@tasks, limit: 20)
+    @pagy_reviews, @reviews = pagy(@reviews, limit: 10, page_param: :reviews_page)
+    @pagy_tasks, @tasks = pagy(@tasks, limit: 20, page_param: :tasks_page)
   end
 
   def new
@@ -39,7 +40,8 @@ class UsersController < ApplicationController
     @average_price = @user.offers.average("price")&.round(1)
     @average_rating = @user.reviews.average("rating")&.round(1)
     @reviews = @user.reviews
-    @pagy, @tasks = pagy(@tasks, limit: 20)
+    @pagy_reviews, @reviews = pagy(@reviews, limit: 10, page_param: :reviews_page)
+    @pagy_tasks, @tasks = pagy(@tasks, limit: 20, page_param: :tasks_page)
   end
 
   def user_active_tasks
@@ -60,10 +62,12 @@ class UsersController < ApplicationController
     @average_price = @user.offers.average("price")&.round(1)
     @average_rating = @user.reviews.average("rating")&.round(1)
     @reviews = @user.reviews
+    @pagy_reviews, @reviews = pagy(@reviews, limit: 10)
   end
 
   def my_offers
     @offers = Current.user.offers
+    @pagy, @offers = pagy(@offers, limit: 10)
   end
 
   def update

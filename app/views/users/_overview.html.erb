@@ -33,6 +33,8 @@
       <% reviews.each do |review| %>
         <%= render "review_card", review: review %>
       <% end %>
+      <br>
+      <%== pagy_nav(@pagy_reviews) %>
     <% else %>
       <p class="text-gray-400">No reviews</p>
     <% end %>

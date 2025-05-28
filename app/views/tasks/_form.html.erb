@@ -3,7 +3,7 @@
   <%= form_with(model: task, multipart: true) do |form| %>
     <div class="mt-6">
       <%= form.label :title, class: "block font-bold mb-2" %>
-      <%= form.text_field :title, placeholder: "The title of your task", class: "bg-gray-100 rounded-md p-2 w-fit" %>
+      <%= form.text_field :title, placeholder: "The title of your task", class: "bg-gray-100 rounded-md p-2" %>
       <p class="text-red-500"><%= task.errors.full_messages_for(:title).first %></p>
     </div>
     <div class="mt-4" >

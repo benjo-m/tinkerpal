@@ -29,7 +29,7 @@
     </div>
     <div class="mt-4">
       <p><strong>About me</strong></p>
-      <div class="bg-gray-100 px-1 py-2 rounded-md mt-1 min-h-50">
+      <div class="bg-gray-100 p-2 rounded-md mt-1 min-h-50">
         <% if @user.about_me.blank? %>
           <p class="text-gray-400">Tell others about yourself...</p>
         <% else %>
@@ -56,7 +56,7 @@
         <% @tasks.each do |task| %>
           <%= render "tasks/my_task_card", task: task %>
         <% end %>
-        <%== pagy_nav(@pagy) %>
+        <%== pagy_nav(@pagy_tasks) %>
       <% else %>
         <p class="text-xl px-2 font-bold text-slate-300">You do not have any active tasks</p>
       <% end %>
