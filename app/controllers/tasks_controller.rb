@@ -2,18 +2,10 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
   def index
-    filters = params.permit(:sort_by, :city)
-
-    @tasks = Task.where(completed: false).order(sort_field(filters[:sort_by]))
-
-    if filters[:city]
-      city = City.select(:id).find_by(name: filters[:city].capitalize)
-      @tasks = @tasks.where(city_id: city.id) if city
-    end
-
+    @tasks = filtered_tasks
     @cities = City.all
     @offers = Current.user.offers
-
+    @categories = TaskCategory.all
     @pagy_tasks, @tasks = pagy(@tasks, limit: 20, page_param: :tasks_page)
     @pagy_offers, @offers = pagy(@offers, limit: 10, page_param: :offers_page)
   end
@@ -72,14 +64,14 @@ class TasksController < ApplicationController
       params.expect(task: [ :title, :description, :city_id, images: [] ])
     end
 
-    def sort_field(sort_by)
-      case sort_by
-      when "newest"
-        { created_at: :desc }
-      when "oldest"
-        { created_at: :asc }
-      else
-        { created_at: :desc }
-      end
+    def filtered_tasks
+      city = City.select(:id).find_by(name: params[:city])
+      category = TaskCategory.select(:id).find_by(name: params[:category])
+
+      tasks = Task.where(completed: false).order(created_at: params[:sort_by] == "oldest" ? :asc : :desc)
+      tasks = tasks.where(city: city) if city
+      tasks = tasks.where(task_category: category) if category
+
+      tasks
     end
 end

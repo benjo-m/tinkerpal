@@ -5,7 +5,9 @@
     <h1 class="font-bold text-2xl border-slate-600 mb-4">Filters</h1>
     <%= form_with url: tasks_path, method: :get do |form| %>
       <%= form.label :city, "Location", class: "block font-bold" %>
-      <%= form.select :city, [["Any", "any"]] + @cities.map { |c| [c.name, c.name.downcase] }, { selected: params[:city] }, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
+      <%= form.select :city, [["Any", "any"]] + @cities.map { |c| c.name }, { selected: params[:city] }, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
+      <%= form.label :city, "Category", class: "block font-bold mt-4" %>
+      <%= form.select :category, [["Any", "any"]] + @categories.map { |c| c.name }, { selected: params[:category] }, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
       <%= form.label :sort_by, "Sort by", class: "block font-bold mt-4" %>
       <%= form.select :sort_by, [["Newest", "newest"], ["Oldest", "oldest"]], { selected: params[:sort_by] }, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
       <%= form.submit 'Filter tasks', name: "", class: "blue-button mt-4" %>
@@ -14,10 +16,16 @@
   <%# ----------Tasks--------- %>
   <div class="flex-3">
     <h1 class="font-bold text-2xl border-slate-600 mb-4">Tasks</h1>
-    <% @tasks.each do |task| %>
-      <%= render "task_card", task: task %>
+    <% if @tasks.count > 0 %>
+      <% @tasks.each do |task| %>
+        <%= render "task_card", task: task %>
+      <% end %>
+      <%== pagy_nav(@pagy_tasks) %>
+    <% else %>
+      <p class="font-bold text-slate-300 text-2xl">
+        No tasks matching your search criteria
+      </p>
     <% end %>
-    <%== pagy_nav(@pagy_tasks) %>
   </div>
   <%# ----------Sent offers--------- %>
   <div class="flex-2">
