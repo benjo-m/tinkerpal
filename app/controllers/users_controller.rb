@@ -56,20 +56,6 @@ class UsersController < ApplicationController
     @pagy, @tasks = pagy(@tasks, limit: 20)
   end
 
-  def work_overview
-    @user = User.find(params.expect(:user_id))
-    @tasks_completed = Task.where(assigned_to: @user, completed: true).count
-    @average_price = @user.offers.average("price")&.round(1)
-    @average_rating = @user.reviews.average("rating")&.round(1)
-    @reviews = @user.reviews
-    @pagy_reviews, @reviews = pagy(@reviews, limit: 10)
-  end
-
-  def my_offers
-    @offers = Current.user.offers
-    @pagy, @offers = pagy(@offers, limit: 10)
-  end
-
   def update
     @user = Current.user
     city = City.find_by(name: user_params[:city].capitalize)

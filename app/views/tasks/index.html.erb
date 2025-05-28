@@ -17,11 +17,23 @@
     <% @tasks.each do |task| %>
       <%= render "task_card", task: task %>
     <% end %>
-    <%== pagy_nav(@pagy) %>
+    <%== pagy_nav(@pagy_tasks) %>
   </div>
-  <%# ----------Third Col--------- %>
+  <%# ----------Sent offers--------- %>
   <div class="flex-2">
-    <h1 class="font-bold text-2xl border-slate-600 mb-4">Nesto trece</h1>
-    <p>treci div placeholder</p>
+    <h1 class="font-bold text-2xl border-slate-600 mb-4">Sent offers</h1>
+    <% if @offers.count > 0 %>
+      <% @offers.each do |offer| %>
+        <%= turbo_frame_tag offer do %>
+          <%= render "offers/offer_card", offer: offer %>
+        <% end %>
+      <% end %>
+      <br>
+      <%== pagy_nav(@pagy_offers) %>
+    <% else %>
+      <p class="font-bold text-slate-300">
+        Your sent offers will be displayed here. Currently, you don't have any sent offers.
+      </p>
+    <% end %>
   </div>
 </div>

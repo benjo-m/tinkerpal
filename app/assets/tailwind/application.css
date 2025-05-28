@@ -2,7 +2,7 @@
 @import "./components.css";
 
 .pagy {
-    @apply flex space-x-1 font-semibold text-sm text-gray-500 justify-center;
+    @apply flex space-x-1 font-semibold text-gray-500 justify-center;
 
     a:not(.gap) {
         @apply block rounded-lg px-3 py-1 bg-gray-200;

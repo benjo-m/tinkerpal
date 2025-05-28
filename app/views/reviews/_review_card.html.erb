@@ -1,0 +1,17 @@
+<div class="bg-gray-100 p-2 rounded-md mt-4">
+  <% if review.comment.blank? %>
+    <p class="mb-2 text-gray-400">No comment</p>
+  <% else %>
+    <p class="mb-2 italic">"<%= review.comment %>"</p>
+  <% end %>
+  <div class="mb-2">
+    <strong>Rating:</strong>
+    <% review.rating.times do %>
+      <i class="bi bi-star-fill text-yellow-500"></i>
+    <% end %>
+    <% (5 - review.rating).times do %>
+      <i class="bi bi-star text-yellow-500"></i>
+    <% end %>
+  </div>
+  <p class="font-bold">Task: <span class="underline font-normal"><%= link_to review.task.title, review.task %></span></p>
+</div>

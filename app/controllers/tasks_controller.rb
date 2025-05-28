@@ -12,8 +12,10 @@ class TasksController < ApplicationController
     end
 
     @cities = City.all
+    @offers = Current.user.offers
 
-    @pagy, @tasks = pagy(@tasks, limit: 20)
+    @pagy_tasks, @tasks = pagy(@tasks, limit: 20, page_param: :tasks_page)
+    @pagy_offers, @offers = pagy(@offers, limit: 10, page_param: :offers_page)
   end
 
   def show
