@@ -8,7 +8,7 @@
 
 .gray-button {
     @apply px-2 py-1 inline-block rounded-md text-white cursor-pointer;
-    background-color: #b3b8c9;
+    background-color: #c0c4d4;
 }
 
 .blue-button {

@@ -17,7 +17,8 @@
         }
 
         &.current {
-            @apply text-white bg-gray-400;
+            @apply text-white;
+            background-color: #c0c4d4;
         }
     }
 

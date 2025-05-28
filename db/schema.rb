@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_26_102647) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_28_173312) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -77,6 +77,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_26_102647) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "task_categories", force: :cascade do |t|
+    t.string "name"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -86,8 +90,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_26_102647) do
     t.integer "city_id", null: false
     t.boolean "completed", default: false
     t.integer "assigned_to"
+    t.integer "task_category_id", null: false
     t.index ["assigned_to"], name: "index_tasks_on_assigned_to"
     t.index ["city_id"], name: "index_tasks_on_city_id"
+    t.index ["task_category_id"], name: "index_tasks_on_task_category_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
@@ -109,6 +115,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_26_102647) do
   add_foreign_key "reviews", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "tasks", "cities"
+  add_foreign_key "tasks", "task_categories"
   add_foreign_key "tasks", "users"
   add_foreign_key "users", "cities"
 end

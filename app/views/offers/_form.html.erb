@@ -29,10 +29,10 @@
 <%= form.hidden_field :task_id, value: task.id %>
 <% if editable %>
   <div class="flex gap-4 mt-4">
-    <% back_path = if request.referer&.include?("/profile")
-                 profile_path
-               else
+    <% back_path = if request.referer&.include?("tasks/")
                  task
+               else
+                 tasks_path
                end %>
     <%= link_to "Back", back_path, class: "gray-button" %>
     <%= form.submit class: "green-button" %>
