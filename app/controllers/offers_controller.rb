@@ -29,7 +29,7 @@ class OffersController < ApplicationController
 
   def update
     @offer = Offer.find(params.expect(:id))
-    if @offer.user == Current.user && @offer.update(offer_params)
+    if @offer.user == Current.user && (@offer.pending? || @offer.accepted?) && @offer.update(offer_params)
       redirect_to profile_path
     else
       render :edit, status: :unprocessable_entity
