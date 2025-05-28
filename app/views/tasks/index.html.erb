@@ -1,29 +1,27 @@
 <% content_for :title, "TinkerPal - Tasks" %>
 <div class="flex justify-between gap-30">
   <%# ----------Filters--------- %>
-  <div class="flex flex-col flex-2 gap-4 min-w-fit">
-    <%# Select elementi su wrappani u div-ove jer ih ne mogu drukcije stajlati %>
+  <div class="flex-2">
+    <h1 class="font-bold text-2xl border-slate-600 mb-4">Filters</h1>
     <%= form_with url: tasks_path, method: :get do |form| %>
-      <div class="w-fit">
-        <%= form.label :city, "Location:" %><br>
-        <%= form.select :city, [["Any", "any"]] + @cities.map { |c| [c.name, c.name.downcase] }, { selected: params[:city] }, class: "bg-gray-100 px-1 py-2 rounded-md mt-1" %>
-      </div>
-      <div class="w-fit mt-4">
-        <%= form.label :sort_by, "Sort by:" %><br>
-        <%= form.select :sort_by, [["Newest", "newest"], ["Oldest", "oldest"]], { selected: params[:sort_by] }, class: "bg-gray-100 px-1 py-2 rounded-md mt-1" %>
-      </div>
-      <%= form.submit 'Filter', name: "", class: "bg-gray-200 px-2 py-1 rounded-md mt-4" %>
+      <%= form.label :city, "Location", class: "block font-bold" %>
+      <%= form.select :city, [["Any", "any"]] + @cities.map { |c| [c.name, c.name.downcase] }, { selected: params[:city] }, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
+      <%= form.label :sort_by, "Sort by", class: "block font-bold mt-4" %>
+      <%= form.select :sort_by, [["Newest", "newest"], ["Oldest", "oldest"]], { selected: params[:sort_by] }, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
+      <%= form.submit 'Filter tasks', name: "", class: "blue-button mt-4" %>
     <% end %>
   </div>
-  <%# ----------Task Cards--------- %>
-  <div id="tasks" class="mb-8 flex-3 min-w-fit">
+  <%# ----------Tasks--------- %>
+  <div class="flex-3">
+    <h1 class="font-bold text-2xl border-slate-600 mb-4">Tasks</h1>
     <% @tasks.each do |task| %>
       <%= render "task_card", task: task %>
     <% end %>
     <%== pagy_nav(@pagy) %>
   </div>
-  <%# ----------New Task Button--------- %>
+  <%# ----------Third Col--------- %>
   <div class="flex-2">
+    <h1 class="font-bold text-2xl border-slate-600 mb-4">Nesto trece</h1>
     <p>treci div placeholder</p>
   </div>
 </div>
