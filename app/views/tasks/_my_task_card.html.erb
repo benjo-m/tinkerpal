@@ -1,7 +1,7 @@
 <%= turbo_frame_tag task do %>
   <div class="mb-4 p-3 rounded-md border-2 border-gray-300">
     <div class="flex justify-between">
-      <p><strong>Title:</strong> <%= truncate(task.title, length: 40) %></p>
+      <p><strong>Title:</strong> <%= truncate(task.title, length: 30) %></p>
       <div class="flex gap-1">
         <i class="bi bi-geo-alt-fill"></i>
         <%= task.city.name %>

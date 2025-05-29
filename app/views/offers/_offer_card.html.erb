@@ -1,7 +1,7 @@
 <div class="bg-gray-100 p-2 mt-4 rounded-md">
   <p><strong>Status:</strong> <span class="<%= offer.declined? ? 'text-red-500 font-bold' : offer.accepted? || offer.completed? ? 'text-green-500 font-bold' : 'text-amber-500 font-bold' %>">
       <%= offer.status.capitalize %></span></p>
-  <strong>Task:</strong> <%= link_to offer.task.title, offer.task, data: {turbo_frame: "_top"}, class: "underline" %>
+  <strong>Task:</strong> <%= link_to truncate(offer.task.title, length: 30), offer.task, data: {turbo_frame: "_top"}, class: "underline" %>
   <div class="flex gap-2 align-middle mt-4">
     <%= link_to "View", edit_task_offer_path(offer.task, offer), data: { turbo_frame: "_top" }, class: "gray-button"%>
     <%= button_to "Withdraw", [offer.task, offer], method: :delete, data: { turbo_confirm: "Are you sure you want to withdraw this offer?" }, class: "red-button" if !offer.declined? && !offer.completed? %>
