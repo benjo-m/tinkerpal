@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   def index
     @tasks = filtered_tasks
     @cities = City.all
-    @offers = Current.user.offers
+    @offers = filtered_offers
     @categories = TaskCategory.all
     @pagy_tasks, @tasks = pagy(@tasks, limit: 20, page_param: :tasks_page)
     @pagy_offers, @offers = pagy(@offers, limit: 10, page_param: :offers_page)
@@ -85,5 +85,14 @@ class TasksController < ApplicationController
       tasks = tasks.where(task_category: category) if category
 
       tasks
+    end
+
+    def filtered_offers
+      if Offer.statuses.include?(params[:offer_status])
+        offers = Current.user.offers.where(status: params[:offer_status])
+      else
+        offers = Current.user.offers
+      end
+      offers.order(created_at: :desc)
     end
 end

@@ -10,38 +10,57 @@
       <%= form.select :category, ["Any"] + @categories.map { |c| c.name }, { selected: params[:category] }, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
       <%= form.label :sort_by, "Sort by", class: "block font-bold mt-4" %>
       <%= form.select :sort_by, ["Newest", "Oldest", "Most offers", "Fewest offers"], { selected: params[:sort_by] }, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
-      <%= form.submit 'Filter tasks', name: "", class: "blue-button mt-4" %>
+      <%= form.submit 'Filter tasks', name: "", data: {turbo_frame: "tasks"}, class: "blue-button mt-4" %>
     <% end %>
   </div>
   <%# ----------Tasks--------- %>
   <div class="flex-3">
     <h1 class="font-bold text-2xl border-slate-600 mb-4">Tasks</h1>
-    <% if @tasks.count > 0 %>
-      <% @tasks.each do |task| %>
-        <%= render "task_card", task: task %>
+    <%= turbo_frame_tag "tasks" do %>
+      <% if @tasks.count > 0 %>
+        <% @tasks.each do |task| %>
+          <%= render "task_card", task: task %>
+        <% end %>
+        <%== pagy_nav(@pagy_tasks) %>
+      <% else %>
+        <p class="font-bold text-slate-300 text-2xl">
+          No tasks matching your search criteria
+        </p>
       <% end %>
-      <%== pagy_nav(@pagy_tasks) %>
-    <% else %>
-      <p class="font-bold text-slate-300 text-2xl">
-        No tasks matching your search criteria
-      </p>
     <% end %>
   </div>
   <%# ----------Sent offers--------- %>
   <div class="flex-2">
     <h1 class="font-bold text-2xl border-slate-600 mb-4">Sent offers</h1>
-    <% if @offers.count > 0 %>
-      <% @offers.each do |offer| %>
-        <%= turbo_frame_tag offer do %>
-          <%= render "offers/offer_card", offer: offer %>
-        <% end %>
+    <div>
+      <%= form_with url: tasks_path, method: :get do |form| %>
+        <%= form.label :offer_status, "Location", class: "block font-bold mb-1" %>
+        <div class="flex gap-4 items-center">
+          <%= form.select :offer_status, ["Any"] + Offer.statuses.map { |key, _| [key.humanize, key] }, { selected: params[:offer_status] }, class: "bg-gray-100 px-2 py-2.5 rounded-md flex-2" %>
+          <%= form.submit "Filter offers", data: {turbo_frame: "offers"}, class: "blue-button" %>
+        </div>
       <% end %>
-      <br>
-      <%== pagy_nav(@pagy_offers) %>
-    <% else %>
-      <p class="font-bold text-slate-300">
-        Your sent offers will be displayed here. Currently, you don't have any sent offers.
-      </p>
+    </div>
+    <%= turbo_frame_tag "offers" do %>
+      <% if @offers.count > 0 %>
+        <div class="mt-6">
+          <% @offers.each do |offer| %>
+            <%= turbo_frame_tag offer do %>
+              <%= render "offers/offer_card", offer: offer %>
+            <% end %>
+          <% end %>
+          <br>
+          <%== pagy_nav(@pagy_offers) %>
+        </div>
+      <% else %>
+        <p class="font-bold text-slate-300 mt-2">
+          <% if params[:offer_status].blank? || params[:offer_status] == "Any" %>
+            You haven't sent any offers
+          <% else %>
+            You don't have any sent offers with status <%= params[:offer_status].humanize %>
+          <% end %>
+        </p>
+      <% end %>
     <% end %>
   </div>
 </div>
