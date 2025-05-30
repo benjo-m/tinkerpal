@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "tasks#index"
+  root "sessions#index"
 
   resources :tasks do
     resources :offers, only: [ :new, :create, :edit, :destroy ]

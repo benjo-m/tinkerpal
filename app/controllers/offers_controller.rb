@@ -24,7 +24,7 @@ class OffersController < ApplicationController
 
   def edit
     @offer = Offer.find(params.expect(:id))
-    redirect_to root_path if @offer.user != Current.user
+    redirect_to tasks_path if @offer.user != Current.user
   end
 
   def update

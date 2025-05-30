@@ -1,0 +1,105 @@
+<% content_for :title, "TinkerPal" %>
+<div class="bg-white min-h-screen flex flex-col">
+  <!-- Hero -->
+  <section class="py-16 px-6 text-center rounded-md bg-slate-100">
+    <h1 class="text-5xl font-bold mb-4">Get Tasks Done. Earn Helping Others.</h1>
+    <p class="text-xl text-gray-700 mb-8">TinkerPal connects people who need help with various kinds of work with skilled locals.</p>
+    <div class="flex justify-center space-x-4">
+      <%= link_to "Join now!", register_path, class: "bg-green-400 text-white font-bold px-6 py-3 rounded-lg" %>
+    </div>
+  </section>
+  <!-- Need help with something? -->
+  <section class="py-16 px-6 bg-slate-100 mt-16">
+    <h2 class="text-3xl font-bold text-center mb-12">Need help with something?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <div class="flex flex-col items-center text-center p-4">
+        <%= image_tag "post-task.png", width: 50 %>
+        <h3 class="text-xl font-semibold mb-2 mt-2">Post a task</h3>
+        <p class="text-gray-600">Describe what you need done and when.</p>
+      </div>
+      <div class="flex flex-col items-center text-center p-4">
+        <%= image_tag "offer-icon.png", width: 50 %>
+        <h3 class="text-xl font-semibold mb-2 mt-2">Receive offers</h3>
+        <p class="text-gray-600">Local tinkers will send you offers.</p>
+      </div>
+      <div class="flex flex-col items-center text-center p-4">
+        <%= image_tag "hire.png", width: 50 %>
+        <h3 class="text-xl font-semibold mb-2 mt-2">Hire with confidence</h3>
+        <p class="text-gray-600">Pick a trusted Tinker and get it done right.</p>
+      </div>
+    </div>
+  </section>
+  <!-- Ready to earn with your skills? -->
+  <section class="py-16 px-6 bg-slate-100 mt-16">
+    <h2 class="text-3xl font-bold text-center mb-12">Ready to earn with your skills?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <div class="flex flex-col items-center text-center p-4">
+        <%= image_tag "browse-tasks.png", width: 50 %>
+        <h3 class="text-xl font-semibold mb-2 mt-2">Browse tasks</h3>
+        <p class="text-gray-600">Find tasks nearby that match your skills.</p>
+      </div>
+      <div class="flex flex-col items-center text-center p-4">
+        <%= image_tag "handshake.png", width: 50 %>
+        <h3 class="text-xl font-semibold mb-2 mt-2">Send offers and negotiate</h3>
+        <p class="text-gray-600">Offer your help and negotiate terms.</p>
+      </div>
+      <div class="flex flex-col items-center text-center p-4">
+        <%= image_tag "payment.png", width: 50 %>
+        <h3 class="text-xl font-semibold mb-2 mt-2">Get paid</h3>
+        <p class="text-gray-600">Complete tasks and earn side cash.</p>
+      </div>
+    </div>
+  </section>
+  <!--Services Offered-->
+  <section class="py-16 px-6 bg-slate-100 mt-16">
+    <h2 class="text-3xl font-bold text-center mb-12">Services Offered</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div class="bg-white rounded-xl shadow p-4 transition flex flex-col items-center text-center">
+        <div class="mb-2">
+          <%= image_tag "task_categories/plumbing.png", width: 30 %>
+        </div>
+        <p class="font-semibold">Plumbing</p>
+      </div>
+      <div class="bg-white rounded-xl shadow p-4 transition flex flex-col items-center text-center">
+        <div class="mb-2">
+          <%= image_tag "task_categories/furniture.png", width: 30 %>
+        </div>
+        <p class="font-semibold">Furniture assembly</p>
+      </div>
+      <div class="bg-white rounded-xl shadow p-4 transition flex flex-col items-center text-center">
+        <div class="mb-2">
+          <%= image_tag "task_categories/electrical.png", width: 30 %>
+        </div>
+        <p class="font-semibold">Electrical</p>
+      </div>
+      <div class="bg-white rounded-xl shadow p-4 transition flex flex-col items-center text-center">
+        <div class="mb-2">
+          <%= image_tag "task_categories/cleaning.png", width: 30 %>
+        </div>
+        <p class="font-semibold">Cleaning</p>
+      </div>
+      <div class="bg-white rounded-xl shadow p-4 transition flex flex-col items-center text-center">
+        <div class="mb-2">
+          <%= image_tag "task_categories/yard.png", width: 30 %>
+        </div>
+        <p class="font-semibold">Yard work</p>
+      </div>
+      <div class="bg-white rounded-xl shadow p-4 transition flex flex-col items-center text-center">
+        <div class="mb-2">
+          <%= image_tag "task_categories/moving.png", width: 30 %>
+        </div>
+        <p class="font-semibold">Moving help</p>
+      </div>
+      <div class="bg-white rounded-xl shadow p-4 transition flex flex-col items-center text-center">
+        <div class="mb-2">
+          <%= image_tag "task_categories/mounting.png", width: 30 %>
+        </div>
+        <p class="font-semibold">Mounting</p>
+      </div>
+      <div class="bg-white rounded-xl shadow p-4  transition">
+        <div class="text-3xl mb-2">...</div>
+        <p class="font-semibold">And many more!</p>
+      </div>
+    </div>
+  </section>
+</div>

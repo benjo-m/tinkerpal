@@ -28,7 +28,7 @@ class TasksController < ApplicationController
 
   def edit
     if @task.user != Current.user
-      redirect_to root_path
+      redirect_to tasks_path
     end
   end
 
@@ -57,7 +57,7 @@ class TasksController < ApplicationController
   private
     def set_task
       @task = Task.find_by(id: params.expect(:id))
-      redirect_to root_path if @task.nil?
+      redirect_to tasks_path if @task.nil?
     end
 
     def task_params
