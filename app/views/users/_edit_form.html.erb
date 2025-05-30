@@ -8,7 +8,7 @@
     <div class="mt-4">
       <%= form.label :location, class: "block font-bold mb-1" %>
       <div class="bg-gray-100 rounded-md p-2">
-        <%= form.select :city, cities.map { |c| [c.name, c.name.downcase] }, { selected: user.city.name.downcase }, class: "w-full" %>
+        <%= form.select :city, cities.map { |c| c.name }, { selected: user.city.name }, class: "w-full" %>
       </div>
     </div>
     <div class="mt-4" >

@@ -1,23 +1,35 @@
 <% content_for :title, "TinkerPal - Log in" %>
 <%= tag.div(flash[:alert], class: "text-red-400") if flash[:alert] %>
-<div>
-  <%= form_with url: session_path do |form| %>
-    <div class="mt-2">
-      <%= form.label :username, class: "block" %>
-      <%= form.text_field :username, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your username", value: params[:username],  class: "bg-gray-100 rounded-md p-1"%><br>
-    </div>
-    <div class="mt-2">
-      <%= form.label :password, class: "block" %>
-      <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", class: "bg-gray-100 rounded-md p-1" %><br>
-    </div>
-    <div class="mt-6 bg-green-400 inline-block p-1 rounded-md cursor-pointer">
-      <%= form.submit "Sign in" %>
-    </div>
-  <% end %>
-  <%# <br>
-  <%= link_to "Forgot password?", new_password_path %>
-  <br>
-  <div class="bg-blue-400 p-1 mt-1 inline-block rounded-md">
-    <%= link_to "Create an account", register_path %>
+<div class="flex gap-30">
+  <div class="flex-3 text-center md:text-left">
+    <h1 class="font-extrabold text-4xl mb-4 text-slate-800">
+      Welcome back!
+    </h1>
+    <p class="text-slate-600 text-lg mb-16">
+      Jump back in and pick up where you left off.
+      <br>
+      Whether you're finding help or offering it - let's get things done!
+    </p>
+    <%= image_tag "login.svg", size: 600 %>
+  </div>
+  <div class="flex-2">
+    <h1 class="font-extrabold text-4xl mb-4 text-slate-800">
+      Log in
+    </h1>
+    <%= form_with url: session_path do |form| %>
+      <div>
+        <%= form.label :username, class: "block font-bold" %>
+        <%= form.text_field :username, required: true, autofocus: true, placeholder: "Enter your username", value: params[:username],  class: "bg-gray-100 rounded-md p-2 mt-1 w-full"%><br>
+      </div>
+      <div class="mt-4">
+        <%= form.label :password, class: "block font-bold" %>
+        <%= form.password_field :password, required: true, placeholder: "Enter your password", class: "bg-gray-100 rounded-md p-2 mt-1 w-full " %><br>
+      </div>
+      <%= form.submit "Log in", class: "mt-6 p-2 inline-block rounded-md text-white bg-green-400 cursor-pointer w-full font-bold" %>
+    <% end %>
+    <%#= link_to "Forgot password?", new_password_path %>
+    <p class="mt-4 text-center">Don't have a TinkerPal account?<br>
+      <%= link_to "Create one here!", register_path, class: "underline" %>
+    </p>
   </div>
 </div>

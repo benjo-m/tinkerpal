@@ -18,17 +18,18 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @cities = City.all
   end
 
   def create
-    @user = User.new(user_params)
-    respond_to do |format|
-      if @user.save
-        start_new_session_for @user
-        redirect_to tasks_path
-      else
-        render :new, status: :unprocessable_entity
-      end
+    city = City.find_by(name: user_params[:city])
+    @user = User.new(user_params.except(:city).merge(city: city))
+
+    if @user.save
+      start_new_session_for @user
+      redirect_to tasks_path
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -58,7 +59,7 @@ class UsersController < ApplicationController
 
   def update
     @user = Current.user
-    city = City.find_by(name: user_params[:city].capitalize)
+    city = City.find_by(name: user_params[:city])
 
     if @user.update(user_params.except(:city).merge(city: city))
       redirect_to profile_path
