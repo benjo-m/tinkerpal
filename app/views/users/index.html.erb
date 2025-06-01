@@ -3,12 +3,6 @@
   <%# ---------- Tinkers --------- %>
   <div class="flex-3">
     <h1 class="font-bold text-2xl border-slate-600 mb-4">Tinkers</h1>
-    <%= form_with url: users_path, method: :get do |form| %>
-      <div class="flex gap-4 items-center content-center mb-4">
-        <%= form.search_field :username, placeholder: "Search tinkers by username...", class: "flex-1 bg-gray-100 px-2 py-2.5 rounded-md" %>
-        <%= form.submit "Search", data: {turbo_frame: "tinkers"}, class: "px-4 py-2.5 rounded-md text-white bg-blue-400 cursor-pointer" %>
-      </div>
-    <% end %>
     <%= turbo_frame_tag "tinkers" do %>
       <% if @users.count > 0 %>
         <% @users.each do |user| %>
@@ -22,17 +16,35 @@
       <% end %>
     <% end %>
   </div>
-  <%# ----------Filters--------- %>
+  <%# ---------- Filters --------- %>
   <div class="flex-2">
-    <h1 class="font-bold text-2xl border-slate-600 mb-4">Filters</h1>
+    <h1 class="font-bold text-2xl border-slate-600 mb-4">Search tinkers</h1>
     <%= form_with url: users_path, method: :get do |form| %>
-      <%= form.label :city, "Location", class: "block font-bold" %>
-      <%= form.select :city, ["Any"] + @cities.map { |c| c.name }, { selected: params[:city] }, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
-      <%= form.label :city, "Skills", class: "block font-bold mt-4" %>
-      <%= form.select :category, ["Any"] + @skills.map { |c| c.name }, { selected: params[:category] }, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
-      <%= form.label :sort_by, "Sort by", class: "block font-bold mt-4" %>
-      <%= form.select :sort_by, ["Highest rating", "Lowest rating", "Most tasks completed", "Fewest tasks completed"], { selected: params[:sort_by] }, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
-      <%= form.submit 'Filter users', name: "", data: {turbo_frame: "tinkers"}, class: "blue-button mt-4" %>
+      <div class="mb-4">
+        <div>
+          <%= form.label :username, class: "block font-bold" %>
+          <%= form.search_field :username, placeholder: "Search tinkers by username...", class: "flex-1 bg-gray-100 px-2 py-2 rounded-md w-full mt-1 mb-4" %>
+        </div>
+        <div>
+          <%= form.label :city, class: "block font-bold" %>
+          <div class="w-full bg-gray-100 px-2 py-2 rounded-md mt-1 mb-4">
+            <%= form.select :city, ["Any"] + @cities.map { |c| c.name }, { selected: params[:city] }, class: "w-full" %>
+          </div>
+        </div>
+        <div>
+          <%= form.label :skills, class: "block font-bold" %>
+          <div class="w-full bg-gray-100 px-2 py-2 rounded-md mt-1 mb-4">
+            <%= form.select :skill, ["Any"] + @skills.map { |c| c.name }, { selected: params[:skill] }, class: "w-full" %>
+          </div>
+        </div>
+        <div>
+          <%= form.label :sort_by, class: "block font-bold" %>
+          <div class="w-full bg-gray-100 px-2 py-2 rounded-md mt-1 mb-4">
+            <%= form.select :sort_by, ["Highest rating", "Lowest rating", "Most tasks completed", "Fewest tasks completed", "Highest average price", "Lowest average price"], { selected: params[:sort_by] }, class: "w-full" %>
+          </div>
+        </div>
+        <%= form.submit "Search", data: {turbo_frame: "tinkers"}, class: "blue-button" %>
+      </div>
     <% end %>
   </div>
 </div>

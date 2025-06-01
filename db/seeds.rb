@@ -178,10 +178,38 @@ task_categories = [
   "Tech Setup"
 ]
 
+skills = [
+  "Home Repairs",
+  "Plumbing",
+  "Electrical",
+  "Mechanical",
+  "Carpentry",
+  "Painting",
+  "Roofing",
+  "Assembly",
+  "Mounting",
+  "Appliance Installation",
+  "Smart Home Setup",
+  "Cleaning",
+  "Hauling",
+  "Heavy Lifting",
+  "Packing",
+  "Yard Work",
+  "Construction",
+  "Demolition",
+  "Decoration",
+  "Errand Running",
+  "Tech Setup"
+]
+
 cities.each do |city|
   City.find_or_create_by!(name: city)
 end
 
 task_categories.each do |task_category|
   TaskCategory.find_or_create_by!(name: task_category)
+end
+
+skills.each do |skill|
+  Skill.find_or_create_by!(name: skill)
 end

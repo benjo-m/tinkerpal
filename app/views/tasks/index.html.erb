@@ -4,11 +4,11 @@
   <div class="flex-2">
     <h1 class="font-bold text-2xl border-slate-600 mb-4">Filters</h1>
     <%= form_with url: tasks_path, method: :get do |form| %>
-      <%= form.label :city, "Location", class: "block font-bold" %>
+      <%= form.label :city, class: "block font-bold" %>
       <%= form.select :city, ["Any"] + @cities.map { |c| c.name }, { selected: params[:city] }, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
-      <%= form.label :city, "Category", class: "block font-bold mt-4" %>
+      <%= form.label :category, class: "block font-bold mt-4" %>
       <%= form.select :category, ["Any"] + @categories.map { |c| c.name }, { selected: params[:category] }, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
-      <%= form.label :sort_by, "Sort by", class: "block font-bold mt-4" %>
+      <%= form.label :sort_by, class: "block font-bold mt-4" %>
       <%= form.select :sort_by, ["Newest", "Oldest", "Most offers", "Fewest offers"], { selected: params[:sort_by] }, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
       <%= form.submit 'Filter tasks', name: "", data: {turbo_frame: "tasks"}, class: "blue-button mt-4" %>
     <% end %>

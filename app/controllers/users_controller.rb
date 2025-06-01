@@ -4,8 +4,8 @@ class UsersController < ApplicationController
   def index
     @users = filtered_users
     @cities = City.all
-    @skills = TaskCategory.all
-    @pagy, @users = pagy(@users, limit: 20)
+    @skills = Skill.all
+    @pagy, @users = pagy_array(@users, limit: 20)
   end
 
   def show
@@ -76,25 +76,34 @@ class UsersController < ApplicationController
 
   def filtered_users
     username = params[:username]
-    city = City.select(:id).find_by(name: params[:city])
-    category = TaskCategory.select(:id).find_by(name: params[:category])
+    city_exists = City.exists?(name: params[:city])
+    skill_exists = Skill.exists?(name: params[:skill])
     sort_field = case params[:sort_by]
-    when "Oldest"
-      { created_at: :asc }
-    when "Newest"
-      { created_at: :desc }
-    when "Most offers"
-      { offers_count: :desc }
-    when "Fewest offers"
-      { offers_count: :asc }
-    else
-      { created_at: :desc }
+    when "Most tasks completed"
+      { reviews_count: :desc }
+    when "Fewest tasks completed"
+      { reviews_count: :asc }
+    when "Highest rating"
+      { average_rating: :desc }
+    when "Lowest rating"
+      { average_rating: :asc }
+    when "Highest average price"
+      { average_price: :desc }
+    when "Lowest average price"
+      { average_price: :asc }
     end
 
-    users = User.where("username LIKE ?", "#{username}%")
-    users = users.where(city: city) if city
-    # users = tasks.where(task_category: category) if category
+    users = User
+      .left_outer_joins(:reviews, :offers)
+      .select("users.*, COUNT(reviews.id) AS reviews_count, AVG(reviews.rating) AS average_rating, AVG(offers.price) as average_price")
+      .where.not(id: Current.user.id)
+      .where("username LIKE ?", "#{username}%")
+      .group("users.id")
 
-    users
+    users = users.joins(:city).where(city: { name: params[:city] }) if city_exists
+    users = users.joins(:skills).where(skills: { name: params[:skill] }) if skill_exists
+    users = users.order(sort_field)
+
+    users.to_a
   end
 end

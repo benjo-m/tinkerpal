@@ -7,4 +7,5 @@ class User < ApplicationRecord
   normalizes :email_address, with: ->(e) { e.strip.downcase }
   has_many :offers, dependent: :destroy
   has_many :reviews
+  has_and_belongs_to_many :skills
 end
