@@ -2,7 +2,10 @@ class UsersController < ApplicationController
   allow_unauthenticated_access only: [ :new, :create ]
 
   def index
-    @users = User.all
+    @users = filtered_users
+    @cities = City.all
+    @skills = TaskCategory.all
+    @pagy, @users = pagy(@users, limit: 20)
   end
 
   def show
@@ -69,5 +72,29 @@ class UsersController < ApplicationController
   private
   def user_params
     params.expect(user: [ :username, :email_address, :password, :city, :about_me ])
+  end
+
+  def filtered_users
+    username = params[:username]
+    city = City.select(:id).find_by(name: params[:city])
+    category = TaskCategory.select(:id).find_by(name: params[:category])
+    sort_field = case params[:sort_by]
+    when "Oldest"
+      { created_at: :asc }
+    when "Newest"
+      { created_at: :desc }
+    when "Most offers"
+      { offers_count: :desc }
+    when "Fewest offers"
+      { offers_count: :asc }
+    else
+      { created_at: :desc }
+    end
+
+    users = User.where("username LIKE ?", "#{username}%")
+    users = users.where(city: city) if city
+    # users = tasks.where(task_category: category) if category
+
+    users
   end
 end

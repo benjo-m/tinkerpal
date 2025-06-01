@@ -1,8 +1,38 @@
 <% content_for :title, "TinkerPal - Tinkers" %>
-<div>
-  <% @users.reject { |user| user == Current.user }.each do |user| %>
-    <div>
-      <%= link_to user.username, user, class: "underline" %>
-    </div>
-  <% end %>
+<div class="flex justify-between gap-30">
+  <%# ---------- Tinkers --------- %>
+  <div class="flex-3">
+    <h1 class="font-bold text-2xl border-slate-600 mb-4">Tinkers</h1>
+    <%= form_with url: users_path, method: :get do |form| %>
+      <div class="flex gap-4 items-center content-center mb-4">
+        <%= form.search_field :username, placeholder: "Search tinkers by username...", class: "flex-1 bg-gray-100 px-2 py-2.5 rounded-md" %>
+        <%= form.submit "Search", data: {turbo_frame: "tinkers"}, class: "px-4 py-2.5 rounded-md text-white bg-blue-400 cursor-pointer" %>
+      </div>
+    <% end %>
+    <%= turbo_frame_tag "tinkers" do %>
+      <% if @users.count > 0 %>
+        <% @users.each do |user| %>
+          <%= render "user_card", user: user %>
+        <% end %>
+        <%== pagy_nav(@pagy) %>
+      <% else %>
+        <p class="font-bold text-slate-300 text-2xl">
+          No tinkers matching your search criteria
+        </p>
+      <% end %>
+    <% end %>
+  </div>
+  <%# ----------Filters--------- %>
+  <div class="flex-2">
+    <h1 class="font-bold text-2xl border-slate-600 mb-4">Filters</h1>
+    <%= form_with url: users_path, method: :get do |form| %>
+      <%= form.label :city, "Location", class: "block font-bold" %>
+      <%= form.select :city, ["Any"] + @cities.map { |c| c.name }, { selected: params[:city] }, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
+      <%= form.label :city, "Skills", class: "block font-bold mt-4" %>
+      <%= form.select :category, ["Any"] + @skills.map { |c| c.name }, { selected: params[:category] }, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
+      <%= form.label :sort_by, "Sort by", class: "block font-bold mt-4" %>
+      <%= form.select :sort_by, ["Highest rating", "Lowest rating", "Most tasks completed", "Fewest tasks completed"], { selected: params[:sort_by] }, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
+      <%= form.submit 'Filter users', name: "", data: {turbo_frame: "tinkers"}, class: "blue-button mt-4" %>
+    <% end %>
+  </div>
 </div>
