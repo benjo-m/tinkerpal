@@ -16,6 +16,23 @@
       </div>
     </div>
     <div class="mt-4">
+      <p class="font-bold">Skills</p>
+      <div class="bg-gray-100 p-2 rounded-md mt-1">
+        <div class="flex flex-wrap gap-1">
+          <% if @user.skills.any? %>
+            <% @user.skills.each do |skill| %>
+              <div class="flex gap-1 bg-amber-100 border-1 border-amber-200 text-gray-800 font-semibold text-sm px-2 py-1 rounded-full">
+                <%= image_tag "task_categories/#{skill.name.downcase}.png", size: 16 if File.exist?(Rails.root.join("app/assets/images/task_categories/#{skill.name.downcase}.png")) %>
+                <%= skill.name %>
+              </div>
+            <% end %>
+          <% else %>
+            <span class="text-slate-400">No skills selected</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4">
       <p><strong>Member since</strong></p>
       <div class="bg-gray-100 p-2 rounded-md mt-1">
         <%= @user.created_at.strftime("%B %d, %Y") %>

@@ -40,6 +40,7 @@ class UsersController < ApplicationController
     @user = Current.user
     @tasks = @user.tasks.where(completed: false).order(created_at: :desc)
     @cities = City.all
+    @skills = Skill.all
     @tasks_completed = Task.where(assigned_to: @user, completed: true).count
     @average_price = @user.offers.average("price")&.round(1)
     @average_rating = @user.reviews.average("rating")&.round(1)
@@ -71,7 +72,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.expect(user: [ :username, :email_address, :password, :city, :about_me ])
+    params.expect(user: [ :username, :email_address, :password, :city, :about_me, skill_ids: [] ])
   end
 
   def filtered_users

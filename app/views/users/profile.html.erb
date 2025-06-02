@@ -16,6 +16,23 @@
       </div>
     </div>
     <div class="mt-4">
+      <p class="font-bold">Skills</p>
+      <div class="bg-gray-100 p-2 rounded-md mt-1">
+        <div class="flex flex-wrap gap-1">
+          <% if @user.skills.any? %>
+            <% @user.skills.each do |skill| %>
+              <div class="flex gap-1 bg-amber-100 border-1 border-amber-200 text-gray-800 font-semibold text-sm px-2 py-1 rounded-full">
+                <%= image_tag "task_categories/#{skill.name.downcase}.png", size: 16 if File.exist?(Rails.root.join("app/assets/images/task_categories/#{skill.name.downcase}.png")) %>
+                <%= skill.name %>
+              </div>
+            <% end %>
+          <% else %>
+            <span class="text-slate-400">No skills selected</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4">
       <p><strong>Email address</strong></p>
       <div class="bg-gray-100 p-2 rounded-md mt-1">
         <%= @user.email_address %>
@@ -40,7 +57,7 @@
     <button data-action="edit-profile#showEditForm" class="blue-button mt-4">Edit profile</button>
   </div>
   <%# ------------------------------Edit Profile Form------------------------------ %>
-  <%= render "edit_form", user: @user, cities: @cities %>
+  <%= render "edit_form", user: @user, cities: @cities, skills: @skills %>
   <%# ------------------------------My Tasks----------------------------- %>
   <div class="flex-3">
     <h1 class="font-bold text-2xl mb-4  border-slate-600">My tasks</h1>

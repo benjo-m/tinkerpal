@@ -1,4 +1,4 @@
-<div data-edit-profile-target="form" class="flex-2 gap-4 hidden">
+<div data-controller="skills-modal" data-edit-profile-target="form" class="flex-2 gap-4 hidden">
   <h1 class="font-bold text-2xl">Profile details</h1>
   <%= form_with(model: user, url: update_profile_path, method: "patch") do |form| %>
     <div class="mt-4">
@@ -11,7 +11,41 @@
         <%= form.select :city, cities.map { |c| c.name }, { selected: user.city.name }, class: "w-full" %>
       </div>
     </div>
-    <div class="mt-4" >
+    <div class="mt-4">
+      <p class="font-bold">Skills</p>
+      <div class="bg-gray-100 p-2 rounded-md mt-1">
+        <div data-skills-modal-target="skillsDiv" class="flex flex-wrap gap-1">
+          <% if @user.skills.any? %>
+            <% @user.skills.each do |skill| %>
+              <span class="bg-amber-100 border-1 border-amber-200 text-gray-800 font-semibold text-sm px-2 py-1 rounded-full">
+                <%= skill.name %>
+              </span>
+            <% end %>
+          <% else %>
+            <span class="text-slate-400">No skills selected</span>
+          <% end %>
+        </div>
+        <button type="button" data-skills-modal-target="editButton" data-action="skills-modal#show" class="px-2 py-1 inline-block rounded-md text-white bg-blue-400 cursor-pointer text-sm mt-4 font-semibold text-end">Edit skills</button>
+        <!--------------------- Skills modal BEGIN --------------------->
+        <div class="hidden fixed inset-0 z-50 bg-black opacity-40" data-skills-modal-target="bgDiv"></div>
+        <div data-skills-modal-target="modal" class="hidden fixed z-1000 p-6 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-auto bg-white rounded-md w-100">
+          <h1 class="text-2xl font-bold mb-4">Edit skills</h1>
+          <div data-skills-modal-target="checkboxesDiv" class="mb-4">
+            <%= form.collection_check_boxes :skill_ids, Skill.order(:name), :id, :name do |cb| %>
+              <div>
+                <%= cb.check_box(data: { action: "skills-modal#update" }) %>
+                <%= cb.label %>
+              </div>
+            <% end %>
+          </div>
+          <div class="flex justify-center">
+            <button type="button" data-skills-modal-target="doneBtn" data-action="skills-modal#close" class="green-button w-full">Done</button>
+          </div>
+        </div>
+        <!--------------------- Skills modal END --------------------->
+      </div>
+    </div>
+    <div class="mt-4">
       <%= form.label :email_address, class: "block font-bold mb-1" %>
       <%= form.text_field :email_address, class: "bg-gray-100 rounded-md p-2 w-full" %>
     </div>

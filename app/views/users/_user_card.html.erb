@@ -13,7 +13,7 @@
     <strong>Skills:</strong>
     <div class="flex gap-2">
       <% user.skills.each do |skill| %>
-        <p class="px-2 py-1 bg-amber-100 rounded-xl text-xs font-semibold border-1 border-amber-200 w-fit"><%= skill.name %></p>
+        <span class="bg-amber-100 border-1 border-amber-200 text-gray-800 font-semibold text-sm px-2 py-1 rounded-full"><%= skill.name %></span>
       <% end %>
     </div>
   </div>
