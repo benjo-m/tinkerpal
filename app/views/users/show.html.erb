@@ -22,7 +22,7 @@
           <% if @user.skills.any? %>
             <% @user.skills.each do |skill| %>
               <div class="flex gap-1 bg-amber-100 border-1 border-amber-200 text-gray-800 font-semibold text-sm px-2 py-1 rounded-full">
-                <%= image_tag "task_categories/#{skill.name.downcase}.png", size: 16 if File.exist?(Rails.root.join("app/assets/images/task_categories/#{skill.name.downcase}.png")) %>
+                <%= image_tag "task_categories/#{skill.name.downcase.gsub(" ", "_")}.png", size: 16 %>
                 <%= skill.name %>
               </div>
             <% end %>
