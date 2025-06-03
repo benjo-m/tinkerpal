@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access only: [ :new, :create ]
+  before_action :redirect_if_authenticated, only: [ :new, :create ]
 
   def index
     @users = filtered_users
@@ -106,5 +107,11 @@ class UsersController < ApplicationController
     users = users.order(sort_field)
 
     users.to_a
+  end
+
+  def redirect_if_authenticated
+    if authenticated?
+      redirect_to tasks_path
+    end
   end
 end
