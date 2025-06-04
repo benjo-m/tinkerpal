@@ -19,7 +19,7 @@
       <%= form.hidden_field :user_id, value: @task.assigned_to %>
       <div class="flex gap-2 mt-4">
         <%= link_to "Cancel", "", data: { controller: "review-modal", action: "review-modal#close" }, class: "bg-gray-300 px-2 py-1 inline-block rounded-md" %>
-        <%= form.submit "Done", class: "bg-green-400 inline-block px-2 py-1 rounded-md cursor-pointer" %>
+        <%= form.submit "Done", data: { turbo_frame: "task-action-buttons"}, class: "bg-green-400 inline-block px-2 py-1 rounded-md cursor-pointer" %>
       </div>
     <% end %>
   </div>

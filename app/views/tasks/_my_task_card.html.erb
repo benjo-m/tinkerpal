@@ -1,18 +1,25 @@
 <%= turbo_frame_tag task do %>
-  <div class="mb-4 p-3 rounded-md border shadow-xs border-gray-200">
-    <div class="flex justify-between">
-      <p><strong>Title:</strong> <%= truncate(task.title, length: 30) %></p>
-      <div class="flex gap-1">
-        <i class="bi bi-geo-alt-fill"></i>
-        <%= task.city.name %>
+  <%= link_to task, data: { turbo_frame: "_top" } do %>
+    <div class="px-2 pb-2 rounded-md border shadow-xs border-gray-200 bg-white space-y-3 mb-4 hover:bg-slate-50 cursor-pointer transition duration-200">
+      <div class="flex justify-between items-center border-b border-slate-300 px-1 py-1">
+        <h2 class="font-semibold text-slate-800">
+          <%= truncate(task.title, length: 40) %>
+        </h2>
+        <div class="flex items-center gap-1 text-slate-600 py-1 text-sm">
+          <i class="bi bi-geo-alt-fill"></i>
+          <span><%= task.city.name %></span>
+        </div>
+      </div>
+      <div class="text-sm text-slate-700">
+        <div class="flex items-center gap-2">
+          <strong>Category:</strong>
+          <span class="flex items-center gap-1 bg-amber-100 border border-amber-200 text-gray-800 font-medium text-xs px-2 py-1 rounded-full">
+            <%= image_tag "task_categories/#{task.task_category.name.downcase.gsub(" ", "_")}.png", size: 16 %>
+            <%= task.task_category.name %>
+          </span>
+        </div>
+        <p class="mt-2"><strong>Posted:</strong> <%= time_ago_in_words(task.created_at) %> ago</p>
       </div>
     </div>
-    <p><strong>Posted:</strong> <%= time_ago_in_words(task.created_at) %> ago</p>
-    <p><strong>Category:</strong> <%= task.task_category.name %> </p>
-    <div class="flex gap-2 align-middle justify-end mt-2">
-      <%= link_to "View details", task, data: { turbo_frame: "_top" }, class: "gray-button" %>
-      <%= link_to "Edit", edit_task_path(task), data: { turbo_frame: "_top" }, class: "blue-button" if !task.completed %>
-      <%= button_to "Delete", task, method: :delete, data: { turbo_confirm: "Are you sure you want to delete this task?" }, class: "red-button" if !task.completed %>
-    </div>
-  </div>
+  <% end %>
 <% end %>

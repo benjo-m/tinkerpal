@@ -23,7 +23,7 @@
     <%= form.hidden_field :city_id, value: Current.user.city_id %>
     <br>
     <div class="flex gap-4">
-      <%= link_to "Cancel", profile_path, class: "gray-button" %>
+      <%= link_to "Cancel", task, class: "gray-button" %>
       <%= form.submit class: "green-button" %>
     </div>
   <% end %>

@@ -1,2 +1,9 @@
 <%= turbo_stream.remove "review-modal" %>
 <%= turbo_stream.replace "offers", partial: "offers/offers_table", locals: { offers: @task.offers } %>
+<%= turbo_stream.replace "task-action-buttons" do %>
+  <div class="text-green-400 flex gap-2 text-lg">
+    <i class="bi bi-check-circle-fill"></i>
+    <p class="font-bold">
+      Completed</p>
+  </div>
+<% end %>
