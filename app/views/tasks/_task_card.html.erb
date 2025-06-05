@@ -1,6 +1,6 @@
-<%= link_to task, data: { turbo_frame: "_top" } do %>
-  <div class="px-2 pb-2 pt-1 rounded-md border shadow-xs border-gray-200 bg-white space-y-3 mb-4 hover:bg-slate-50 cursor-pointer transition duration-200">
-    <div class="flex justify-between items-center border-b border-gray-300 px-1 py-1">
+  <%= link_to task, data: { turbo_frame: "_top" } do %>
+  <div class="px-3 pt-1 pb-4 rounded-md border shadow-xs border-gray-200 mb-4 hover:bg-slate-50 cursor-pointer transition duration-200">
+    <div class="flex justify-between items-center py-1">
       <h2 class="font-semibold text-slate-800">
         <%= truncate(task.title, length: 40) %>
       </h2>
@@ -10,14 +10,13 @@
       </div>
     </div>
     <div class="text-sm text-slate-700">
+      <p class="mb-2">Posted <%= time_ago_in_words(task.created_at) %> ago</p>
       <div class="flex items-center gap-2">
-        <strong>Category:</strong>
         <span class="flex items-center gap-1 bg-amber-100 border border-amber-200 text-gray-800 font-medium text-xs px-2 py-1 rounded-full">
           <%= image_tag "task_categories/#{task.task_category.name.downcase.gsub(" ", "_")}.png", size: 16 %>
           <%= task.task_category.name %>
         </span>
       </div>
-      <p class="mt-2"><strong>Posted:</strong> <%= time_ago_in_words(task.created_at) %> ago</p>
     </div>
   </div>
 <% end %>

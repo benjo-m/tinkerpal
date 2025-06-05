@@ -1,7 +1,7 @@
 <%= turbo_frame_tag task do %>
   <%= link_to task, data: { turbo_frame: "_top" } do %>
-    <div class="px-2 pb-2 rounded-md border shadow-xs border-gray-200 bg-white space-y-3 mb-4 hover:bg-slate-50 cursor-pointer transition duration-200">
-      <div class="flex justify-between items-center border-b border-slate-300 px-1 py-1">
+    <div class="px-3 pt-1 pb-4 rounded-md border shadow-xs border-gray-200 mb-4 hover:bg-slate-50 cursor-pointer transition duration-200">
+      <div class="flex justify-between items-center py-1">
         <h2 class="font-semibold text-slate-800">
           <%= truncate(task.title, length: 40) %>
         </h2>
@@ -11,14 +11,19 @@
         </div>
       </div>
       <div class="text-sm text-slate-700">
-        <div class="flex items-center gap-2">
-          <strong>Category:</strong>
+        <div class="flex justify-between">
+          <p class="mb-2">Posted <%= time_ago_in_words(task.created_at) %> ago</p>
+        </div>
+        <div class="flex justify-between items-center gap-2">
           <span class="flex items-center gap-1 bg-amber-100 border border-amber-200 text-gray-800 font-medium text-xs px-2 py-1 rounded-full">
             <%= image_tag "task_categories/#{task.task_category.name.downcase.gsub(" ", "_")}.png", size: 16 %>
             <%= task.task_category.name %>
           </span>
+          <div class="flex gap-2">
+            <%= link_to "Edit", edit_task_path(task), data: {turbo_frame: "_top"}, class: "blue-button" %>
+            <%= button_to "Delete", task, method: :delete, data: { turbo_frame: "tasks", turbo_confirm: "Are you sure you want to delete this task?" }, class: "red-button" %>
+          </div>
         </div>
-        <p class="mt-2"><strong>Posted:</strong> <%= time_ago_in_words(task.created_at) %> ago</p>
       </div>
     </div>
   <% end %>
