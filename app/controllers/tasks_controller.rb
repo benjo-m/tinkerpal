@@ -58,7 +58,7 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.expect(task: [ :title, :description, :city_id, images: [] ])
+      params.expect(task: [ :title, :description, :city_id, :task_category_id, images: [] ])
     end
 
     def filtered_tasks
