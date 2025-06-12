@@ -16,23 +16,16 @@
       Register
     </h1>
     <%= form_with(model: @user) do |form| %>
-      <% if @user.errors.any? %>
-        <div style="color: red">
-          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-          <ul>
-            <% @user.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
       <div>
         <%= form.label :username, class: "block font-bold mt-4" %>
-        <%= form.text_field :username, required: true, autofocus: true, placeholder: "Enter your username", value: params[:username],  class: "bg-gray-100 rounded-md p-2 mt-1 w-full" %>
+        <%= form.text_field :username, autofocus: true, placeholder: "Enter your username", class: "bg-gray-100 rounded-md p-2 mt-1 w-full" %>
+        <p class="text-red-500"><%= @user.errors.full_messages_for(:username).first %></p>
         <%= form.label :email_address, class: "block font-bold mt-4" %>
-        <%= form.text_field :email_address, required: true, placeholder: "Enter your email address", value: params[:email_address],  class: "bg-gray-100 rounded-md p-2 mt-1 w-full" %>
+        <%= form.text_field :email_address, placeholder: "Enter your email address",  class: "bg-gray-100 rounded-md p-2 mt-1 w-full" %>
+        <p class="text-red-500"><%= @user.errors.full_messages_for(:email_address).first %></p>
         <%= form.label :password, class: "block font-bold mt-4" %>
-        <%= form.text_field :password, required: true, placeholder: "Enter your password", value: params[:password],  class: "bg-gray-100 rounded-md p-2 mt-1 w-full" %>
+        <%= form.text_field :password, placeholder: "Enter your password",  class: "bg-gray-100 rounded-md p-2 mt-1 w-full" %>
+        <p class="text-red-500"><%= @user.errors.full_messages_for(:password).first %></p>
         <%= form.label :city, class: "block font-bold mt-4" %>
         <%= form.select :city, @cities.map { |c| c.name }, {}, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
         <%= form.submit "Register", class: "mt-6 p-2 inline-block rounded-md text-white bg-green-400 cursor-pointer w-full font-bold" %>

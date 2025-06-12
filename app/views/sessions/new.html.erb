@@ -1,5 +1,4 @@
 <% content_for :title, "TinkerPal - Log in" %>
-<%= tag.div(flash[:alert], class: "text-red-400") if flash[:alert] %>
 <div class="flex gap-30">
   <div class="flex-3 text-center md:text-left">
     <h1 class="font-extrabold text-4xl mb-4 text-slate-800">
@@ -16,14 +15,15 @@
     <h1 class="font-extrabold text-4xl mb-4 text-slate-800">
       Log in
     </h1>
+    <%= tag.div(flash[:alert], class: "text-red-400 mb-4") if flash[:alert] %>
     <%= form_with url: session_path do |form| %>
       <div>
         <%= form.label :username, class: "block font-bold" %>
-        <%= form.text_field :username, required: true, autofocus: true, placeholder: "Enter your username", value: params[:username],  class: "bg-gray-100 rounded-md p-2 mt-1 w-full"%><br>
+        <%= form.text_field :username, autofocus: true, placeholder: "Enter your username", class: "bg-gray-100 rounded-md p-2 mt-1 w-full"%><br>
       </div>
       <div class="mt-4">
         <%= form.label :password, class: "block font-bold" %>
-        <%= form.password_field :password, required: true, placeholder: "Enter your password", class: "bg-gray-100 rounded-md p-2 mt-1 w-full " %><br>
+        <%= form.password_field :password, placeholder: "Enter your password", class: "bg-gray-100 rounded-md p-2 mt-1 w-full " %><br>
       </div>
       <%= form.submit "Log in", class: "mt-6 p-2 inline-block rounded-md text-white bg-green-400 cursor-pointer w-full font-bold" %>
     <% end %>

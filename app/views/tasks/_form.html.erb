@@ -26,6 +26,11 @@
     <%# ----------------Image Previews----------------- %>
     <div data-preview-target="previewContainer" class="bg-gray-100 p-2 flex-wrap gap-4 mt-4 rounded-md items-center hidden">
     </div>
+    <div class="flex flex-wrap gap-4">
+      <% task.images.each do |image| %>
+        <%= image_tag image, class: "w-64 h-64 mt-4" %>
+      <% end %>
+    </div>
     <%= form.hidden_field :city_id, value: Current.user.city_id %>
     <br>
     <div class="flex gap-4">

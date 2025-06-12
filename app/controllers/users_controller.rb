@@ -33,6 +33,8 @@ class UsersController < ApplicationController
       start_new_session_for @user
       redirect_to tasks_path
     else
+      # @cities se mora se reassinati zbog @cities.map u view...
+      @cities = City.all
       render :new, status: :unprocessable_entity
     end
   end
