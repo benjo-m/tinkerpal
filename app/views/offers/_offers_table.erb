@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "review-modal" %>
 <%= turbo_frame_tag "offers" do %>
-  <table class="w-full table-fixed border-collapse rounded-md overflow-hidden">
+  <table class="w-full table-fixed border-collapse rounded-md overflow-x-auto block">
     <thead>
       <tr class="bg-slate-300">
         <th class="py-2 px-4 text-center w-1/4">Username</th>
@@ -32,20 +32,20 @@
             <% end %>
           </td>
           <td class="py-2 px-4 text-center">
-            <div class="flex justify-center flex-wrap gap-2">
+            <div class="flex justify-center gap-2">
               <% if offer.pending? && offer.task.assignee.nil? %>
-                <%= button_to "Accept", task_accept_path(offer.task_id, offer), method: :patch, class: "bg-green-400 text-white px-2 py-1 rounded cursor-pointer" %>
-                <%= button_to "Decline", task_decline_path(offer.task_id, offer), method: :patch, class: "bg-red-400 text-white px-2 py-1 rounded cursor-pointer" %>
+                <%= button_to "Accept", task_accept_path(offer.task_id, offer), method: :patch, class: "bg-green-400 text-white px-2 py-1 rounded cursor-pointer font-semibold w-30" %>
+                <%= button_to "Decline", task_decline_path(offer.task_id, offer), method: :patch, class: "bg-red-400 text-white px-2 py-1 rounded cursor-pointer font-semibold w-30" %>
               <% elsif offer.accepted? %>
-                <%= link_to "Mark as done", task_review_path(offer.task), data: { turbo_frame: "review-modal" }, class: "bg-green-400 text-white px-2 py-1 rounded" %>
-                <%= button_to "Cancel", task_cancel_path(offer.task_id, offer), method: :patch, class: "bg-red-400 text-white px-2 py-1 rounded" %>
+                <%= link_to "Mark as done", task_review_path(offer.task), data: { turbo_frame: "review-modal" }, class: "bg-green-400 text-white px-2 py-1 font-semibold rounded w-30" %>
+                <%= button_to "Cancel", task_cancel_path(offer.task_id, offer), method: :patch, class: "bg-red-400 text-white px-2 py-1 font-semibold rounded w-30" %>
               <% elsif offer.declined? %>
                 <p class="text-red-500 font-bold">Offer declined</p>
               <% elsif offer.status == 'completed' %>
                 <p class="text-green-500 font-bold">Completed</p>
               <% else %>
-                <button class="bg-gray-200 text-white px-2 py-1 rounded">Accept</button>
-                <button class="bg-gray-200 text-white px-2 py-1 rounded">Decline</button>
+                <button class="bg-gray-200 text-white px-2 py-1 rounded w-30 font-semibold">Accept</button>
+                <button class="bg-gray-200 text-white px-2 py-1 rounded w-30 font-semibold">Decline</button>
               <% end %>
             </div>
           </td>

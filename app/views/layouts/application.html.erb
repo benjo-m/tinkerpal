@@ -18,18 +18,23 @@
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body class="xl:mr-48 xl:ml-48 bg-neutral-200 min-h-screen flex flex-col">
+  <body class="xl:mr-48 xl:ml-48 bg-neutral-200 min-h-screen">
     <nav class="flex justify-between items-center px-8 bg-white sticky top-0 z-50">
-      <div class="flex-1 border-b-2 py-1.5 border-slate-300">
+      <div class="<%= authenticated? ? 'hidden' : 'block' %> md:block flex-1 border-b-2 py-1.5 border-slate-300">
         <%= link_to "TinkerPal", authenticated? ? tasks_path : root_path, class: "font-bold text-3xl text-red-500" %>
       </div>
       <% if authenticated? %>
-        <div class="flex flex-2 justify-center gap-10 border-b-2 py-2 border-slate-300">
-          <%= link_to "Tinkers", users_path, class: "#{request.path.start_with?('/users') ? 'active-nav-item' : 'nav-item'}" %>
-          <%= link_to "Tasks", tasks_path, class: "#{request.path.start_with?('/tasks') || request.path == '/' ? 'active-nav-item' : 'nav-item'}" %>
-          <%= link_to "Profile", profile_path, class: "#{request.path.start_with?('/profile') ? 'active-nav-item' : 'nav-item'}" %>
+        <div class="w-full flex flex-2 justify-between md:justify-center border-b-2 py-2 border-slate-300">
+          <div class="flex gap-2 md:gap-10">
+            <%= link_to "Tinkers", users_path, class: "#{request.path.start_with?('/users') ? 'active-nav-item' : 'nav-item'}" %>
+            <%= link_to "Tasks", tasks_path, class: "#{request.path.start_with?('/tasks') || request.path == '/' ? 'active-nav-item' : 'nav-item'}" %>
+            <%= link_to "Profile", profile_path, class: "#{request.path.start_with?('/profile') ? 'active-nav-item' : 'nav-item'}" %>
+          </div>
+          <div class="md:hidden">
+            <%= button_to "Log out", session_path, method: :delete, class: "gray-button", data: { turbo_confirm: "Are you sure you want to log out?"} if authenticated? %>
+          </div>
         </div>
-        <div class="flex flex-1 justify-end border-b-2 py-2 border-slate-300">
+        <div class="hidden md:flex flex-1 justify-end border-b-2 py-2 border-slate-300">
           <%= button_to "Log out", session_path, method: :delete, class: "gray-button", data: { turbo_confirm: "Are you sure you want to log out?"} if authenticated? %>
         </div>
       <% end %>
@@ -45,7 +50,7 @@
       <% end %>
     </div>
   </nav>
-  <main class="px-8 py-8 flex-1 bg-white">
+  <main class="px-8 py-8 flex-1 bg-white min-h-screen">
     <%= yield %>
   </main>
   <footer class="py-3 bg-white text-gray-500 text-sm text-center">

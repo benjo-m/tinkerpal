@@ -1,4 +1,4 @@
-<div data-controller="skills-modal" data-edit-profile-target="form" class="flex-2 gap-4 hidden">
+<div data-controller="skills-modal" data-edit-profile-target="form" class="flex-2 gap-4 hidden mb-10">
   <h1 class="font-bold text-2xl">Profile details</h1>
   <%= form_with(model: user, url: update_profile_path, method: "patch") do |form| %>
     <div class="mt-4">
@@ -60,8 +60,8 @@
       <%= form.text_area :about_me, class: "bg-gray-100 rounded-md p-2 min-h-50 w-full" %>
     </div>
     <div class="flex gap-4 mt-4">
-      <button type="button" data-action="edit-profile#hideEditForm" class="gray-button">Cancel</button>
-      <%= form.submit "Confirm", class: "green-button" %>
+      <button type="button" data-action="edit-profile#hideEditForm" class="gray-button w-full">Cancel</button>
+      <%= form.submit "Confirm", class: "green-button w-full" %>
     </div>
   <% end %>
 </div>

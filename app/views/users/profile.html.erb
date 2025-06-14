@@ -1,7 +1,7 @@
 <% content_for :title, "TinkerPal - Profile" %>
-<div data-controller="edit-profile" class="flex justify-between gap-30">
+<div data-controller="edit-profile" class="flex flex-col md:flex md:flex-row md:justify-between md:gap-10 lg:gap-25">
   <%# ------------------------------Profile Details------------------------------ %>
-  <div data-edit-profile-target="details" class="flex-2">
+  <div data-edit-profile-target="details" class="flex-2 mb-10 order-1 md:order-1">
     <h1 class="font-bold text-2xl border-slate-600">Profile details</h1>
     <div class="mt-4">
       <p><strong>Username</strong></p>
@@ -54,12 +54,12 @@
         <% end %>
       </div>
     </div>
-    <button data-action="edit-profile#showEditForm" class="blue-button mt-4">Edit profile</button>
+    <button data-action="edit-profile#showEditForm" class="px-2 py-1.5 inline-block rounded-md text-white bg-blue-400 cursor-pointer font-semibold w-full mt-4 mt-4">Edit profile</button>
   </div>
   <%# ------------------------------Edit Profile Form------------------------------ %>
   <%= render "edit_form", user: @user, cities: @cities, skills: @skills %>
   <%# ------------------------------My Tasks----------------------------- %>
-  <div class="flex-3">
+  <div class="flex-3 mb-10 order-3 md:order-2">
     <h1 class="font-bold text-2xl mb-4  border-slate-600">My tasks</h1>
     <div class="flex mb-4 justify-between items-center">
       <div data-controller="tab" class="flex gap-2">
@@ -80,7 +80,7 @@
     <% end %>
   </div>
   <%# ------------------------------My Work----------------------------- %>
-  <div class="flex-2">
+  <div class="flex-2 mb-10 order-2 md:order-3">
     <h1 class="font-bold text-2xl border-slate-600 mb-4">My work</h1>
     <div>
       <div class="mt-4">
