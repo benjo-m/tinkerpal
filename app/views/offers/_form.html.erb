@@ -9,13 +9,13 @@
     <div>
       <%= form.label :date, class: "block font-bold mb-2" %>
       <div class="bg-gray-100 rounded-md p-2 w-fit">
-        <%= form.date_select :date, order: [:day, :month, :year], use_two_digit_numbers: true, start_year: Date.today.year, disabled: !editable  %>
+        <%= form.date_select :date, order: [:day, :month, :year], default: 1.day.from_now, use_two_digit_numbers: true, start_year: Date.today.year, disabled: !editable  %>
       </div>
     </div>
     <div>
       <%= form.label :time, class: "block font-bold mb-2" %>
       <div class="bg-gray-100 rounded-md p-2 w-fit">
-        <%= form.time_select :time, disabled: !editable  %>
+        <%= form.time_select :time, default: 2.hours.from_now, disabled: !editable  %>
       </div>
     </div>
   </div>
