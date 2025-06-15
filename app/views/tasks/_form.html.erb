@@ -24,18 +24,21 @@
       <small class="text-gray-500">Hold Command (Mac) or Ctrl (Windows) to select multiple images</small>
     </div>
     <%# ----------------Image Previews----------------- %>
-    <div data-preview-target="previewContainer" class="bg-gray-100 p-2 flex-wrap gap-4 mt-4 rounded-md items-center hidden">
-    </div>
-    <div class="flex flex-wrap gap-4">
+    <div data-preview-target="imagesContainer" class="flex bg-gray-100 p-2 flex-wrap gap-2 mt-4 rounded-md items-center">
       <% task.images.each do |image| %>
-        <%= image_tag image, class: "w-64 h-64 mt-4" %>
+        <div class="relative m-2">
+          <%= form.hidden_field :images, multiple: true, value: image.signed_id %>
+          <%= image_tag image, class: "w-64 h-64 m-2 rounded-md", id: image.signed_id %>
+          <button type="button" data-preview-target="deleteBtn" data-action="preview#removeAttachedImage" class="remove-img-button">Remove</button>
+        </div>
       <% end %>
     </div>
-    <%= form.hidden_field :city_id, value: Current.user.city_id %>
-    <br>
-    <div class="flex gap-4">
-      <%= link_to "Cancel", task, class: "gray-button text-center w-40" %>
-      <%= form.submit class: "green-button w-40" %>
-    </div>
-  <% end %>
+  </div>
+  <%= form.hidden_field :city_id, value: Current.user.city_id %>
+  <br>
+  <div class="flex gap-4">
+    <%= link_to "Cancel", task, class: "gray-button text-center w-40" %>
+    <%= form.submit class: "green-button w-40" %>
+  </div>
+<% end %>
 </div>

@@ -22,3 +22,7 @@
 .green-button {
     @apply px-2 py-1 inline-block rounded-md text-white bg-green-400 cursor-pointer font-semibold;
 }
+
+.remove-img-button {
+    @apply absolute top-3 right-3 hover:bg-red-600 bg-red-500 font-semibold text-white rounded-md w-fit h-fit p-1 text-xs flex items-center justify-center shadow cursor-pointer;
+}
