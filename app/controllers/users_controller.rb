@@ -64,12 +64,20 @@ class UsersController < ApplicationController
     @pagy, @tasks = pagy(@tasks, limit: 20)
   end
 
+  def edit
+    @user = Current.user
+    @cities = City.all
+  end
+
   def update
     @user = Current.user
     city = City.find_by(name: user_params[:city])
 
     if @user.update(user_params.except(:city).merge(city: city))
       redirect_to profile_path
+    else
+      @cities = City.all
+      render :edit, status: :unprocessable_entity
     end
   end
 

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   resources :passwords, param: :token
 
-  resources :users, except: [ :edit, :update, :destroy ] do
+  resources :users, except: [ :update, :destroy ] do
     get "work-overview", to: "users#work_overview"
     get "active-tasks", to: "users#user_active_tasks"
     get "finished-tasks", to: "users#user_finished_tasks"
@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get "register", to: "users#new", as: "register"
 
   get "profile", to: "users#profile"
+  get "edit_profile", to: "users#edit"
   patch "profile/update", to: "users#update", as: "update_profile"
   get "my-offers", to: "users#my_offers"
 

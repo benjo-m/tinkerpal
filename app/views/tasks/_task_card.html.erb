@@ -4,18 +4,23 @@
       <h2 class="font-semibold text-slate-800">
         <%= truncate(task.title, length: 40) %>
       </h2>
-      <div class="flex items-center gap-1 text-slate-600 py-1 text-sm">
+      <div class="flex items-center gap-1 text-slate-600 py-1 text-sm font-semibold">
         <i class="bi bi-geo-alt-fill"></i>
         <span><%= task.city.name %></span>
       </div>
     </div>
     <div class="text-sm text-slate-700">
       <p class="mb-2">Posted <%= time_ago_in_words(task.created_at) %> ago</p>
-      <div class="flex items-center gap-2">
-        <span class="flex items-center gap-1 bg-amber-100 border border-amber-200 text-gray-800 font-medium text-xs px-2 py-1 rounded-full">
-          <%= image_tag "task_categories/#{task.task_category.name.downcase.gsub(" ", "_")}.png", size: 16 %>
-          <%= task.task_category.name %>
-        </span>
+      <div class="flex justify-between">
+        <div class="flex items-center gap-2">
+          <span class="flex items-center gap-1 bg-amber-100 border border-amber-200 text-gray-800 font-medium text-xs px-2 py-1 rounded-full">
+            <%= image_tag "task_categories/#{task.task_category.name.downcase.gsub(" ", "_")}.png", size: 16 %>
+            <%= task.task_category.name %>
+          </span>
+        </div>
+        <% if task.offers.where(user: Current.user).any? %>
+          <p class="text-slate-700 font-semibold">Offer sent</p>
+        <% end %>
       </div>
     </div>
   </div>
