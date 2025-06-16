@@ -5,6 +5,7 @@ export default class extends Controller {
 
     connect() {
         this.files = []
+        this.imageCurrentlyUploading = 1
         addEventListener("direct-upload:progress", event => this.showUploadProgressDiv(event))
     }
 
@@ -79,8 +80,10 @@ export default class extends Controller {
         let imagesCountP = document.getElementById("images-count")
         let progressBar = document.getElementById("progress-bar")
         progressDiv.classList.remove("hidden")
-        imagesCountP.textContent = `Uploading ${this.files.length} images...`
+        imagesCountP.textContent = `Uploading images... (${this.imageCurrentlyUploading}/${this.files.length})`
         progressBar.classList.add("transition-[width]", "duration-400")
         progressBar.style.width = `${progress}%`
+        if (progress == 100)
+            this.imageCurrentlyUploading++
     }
 }
