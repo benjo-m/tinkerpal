@@ -74,15 +74,13 @@ export default class extends Controller {
     }
 
     showUploadProgressDiv(event) {
-        let imageId = event.detail.id
         let progress = event.detail.progress
         let progressDiv = document.getElementById("upload-progress-div")
-        let imgNum = document.getElementById("img-num")
+        let imagesCountP = document.getElementById("images-count")
         let progressBar = document.getElementById("progress-bar")
         progressDiv.classList.remove("hidden")
-        imgNum.textContent = `Uploading images... (${imageId}/${this.files.length})`
+        imagesCountP.textContent = `Uploading ${this.files.length} images...`
         progressBar.classList.add("transition-[width]", "duration-400")
         progressBar.style.width = `${progress}%`
-
     }
 }
