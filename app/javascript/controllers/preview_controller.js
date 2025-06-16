@@ -5,21 +5,8 @@ export default class extends Controller {
 
     connect() {
         this.files = []
-        this.inputTarget.addEventListener("direct-upload:start", event => {
-            console.log("upload started");
-        })
-
-        addEventListener("direct-upload:progress", event => {
-            let progress = event.detail.progress
-            console.log(progress);
-
-            let progressBar = document.getElementById("progress-bar")
-            progressBar.classList.remove("hidden")
-            progressBar.style.width = `${progress}%`
-        })
+        addEventListener("direct-upload:progress", event => this.showUploadProgressDiv(event))
     }
-
-
 
     handleFiles() {
         this.files = [...this.files, ...Array.from(this.inputTarget.files)];
@@ -84,5 +71,18 @@ export default class extends Controller {
         emptyMsg.textContent = "No images selected"
 
         this.imagesContainerTarget.appendChild(emptyMsg)
+    }
+
+    showUploadProgressDiv(event) {
+        let imageId = event.detail.id
+        let progress = event.detail.progress
+        let progressDiv = document.getElementById("upload-progress-div")
+        let imgNum = document.getElementById("img-num")
+        let progressBar = document.getElementById("progress-bar")
+        progressDiv.classList.remove("hidden")
+        imgNum.textContent = `Uploading images... (${imageId}/${this.files.length})`
+        progressBar.classList.add("transition-[width]", "duration-400")
+        progressBar.style.width = `${progress}%`
+
     }
 }

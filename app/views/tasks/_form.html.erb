@@ -28,7 +28,10 @@
         </label>
       </div>
       <%# ----------------Image Previews----------------- %>
-      <div id="progress-bar" class="bg-blue-400 p-1 rounded-full mt-1 hidden"></div>
+      <div id="upload-progress-div" class="mt-2 hidden">
+        <p id="img-num" class="text-center text-slate-400 font-semibold text-sm">Uploading images...</p>
+        <div id="progress-bar" class="bg-blue-400 p-1 rounded-full mt-1"></div>
+      </div>
       <div class="mt-4">
         <p class="font-bold">Images</p>
         <div data-preview-target="imagesContainer" class="flex bg-gray-100 p-2 flex-wrap gap-2 mt-4 rounded-md items-center">
