@@ -35,6 +35,9 @@ export default class extends Controller {
                 e.target.parentElement.remove()
             });
 
+            if (document.getElementById("empty-msg"))
+                document.getElementById("empty-msg").remove()
+
             this.imagesContainerTarget.appendChild(wrapper);
         });
     }
@@ -48,9 +51,24 @@ export default class extends Controller {
     removeImage(index) {
         this.files.splice(index, 1)
         this.updateInputFiles()
+
+        if (this.imagesContainerTarget.children.length == 1)
+            this.displayEmptyMessage
     }
 
     removeAttachedImage(e) {
         e.target.parentElement.remove()
+        if (this.imagesContainerTarget.children.length == 0)
+            this.displayEmptyMessage()
+    }
+
+    displayEmptyMessage() {
+        const emptyMsg = document.createElement("p")
+
+        emptyMsg.setAttribute("id", "empty-msg")
+        emptyMsg.classList.add("text-xl", "text-slate-400", "font-bold")
+        emptyMsg.textContent = "No images selected"
+
+        this.imagesContainerTarget.appendChild(emptyMsg)
     }
 }
