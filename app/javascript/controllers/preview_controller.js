@@ -5,7 +5,21 @@ export default class extends Controller {
 
     connect() {
         this.files = []
+        this.inputTarget.addEventListener("direct-upload:start", event => {
+            console.log("upload started");
+        })
+
+        addEventListener("direct-upload:progress", event => {
+            let progress = event.detail.progress
+            console.log(progress);
+
+            let progressBar = document.getElementById("progress-bar")
+            progressBar.classList.remove("hidden")
+            progressBar.style.width = `${progress}%`
+        })
     }
+
+
 
     handleFiles() {
         this.files = [...this.files, ...Array.from(this.inputTarget.files)];
