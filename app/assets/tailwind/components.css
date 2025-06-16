@@ -7,20 +7,20 @@
 }
 
 .gray-button {
-    @apply px-2 py-1 inline-block rounded-md text-white cursor-pointer font-semibold;
+    @apply px-2 py-1.5 inline-block rounded-md text-white cursor-pointer font-semibold;
     background-color: #c0c4d4;
 }
 
 .blue-button {
-    @apply px-2 py-1 inline-block rounded-md text-white bg-blue-400 cursor-pointer font-semibold;
+    @apply px-2 py-1.5 inline-block rounded-md text-white bg-blue-400 cursor-pointer font-semibold;
 }
 
 .red-button {
-    @apply px-2 py-1 inline-block rounded-md text-white bg-red-400 cursor-pointer font-semibold;
+    @apply px-2 py-1.5 inline-block rounded-md text-white bg-red-400 cursor-pointer font-semibold;
 }
 
 .green-button {
-    @apply px-2 py-1 inline-block rounded-md text-white bg-green-400 cursor-pointer font-semibold;
+    @apply px-2 py-1.5 inline-block rounded-md text-white bg-green-400 cursor-pointer font-semibold;
 }
 
 .remove-img-button {

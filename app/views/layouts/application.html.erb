@@ -31,11 +31,11 @@
             <%= link_to "Profile", profile_path, class: "#{request.path.start_with?('/profile') ? 'active-nav-item' : 'nav-item'}" %>
           </div>
           <div class="md:hidden">
-            <%= button_to "Log out", session_path, method: :delete, class: "gray-button", data: { turbo_confirm: "Are you sure you want to log out?"} if authenticated? %>
+            <%= button_to "Log out", session_path, method: :delete, class: "px-2 py-1 inline-block rounded-md text-white cursor-pointer font-semibold", style: "background-color: #c0c4d4", data: { turbo_confirm: "Are you sure you want to log out?"} if authenticated? %>
           </div>
         </div>
         <div class="hidden md:flex flex-1 justify-end border-b-2 py-2 border-slate-300">
-          <%= button_to "Log out", session_path, method: :delete, class: "gray-button", data: { turbo_confirm: "Are you sure you want to log out?"} if authenticated? %>
+          <%= button_to "Log out", session_path, method: :delete, class: "px-2 py-1 inline-block rounded-md text-white cursor-pointer font-semibold", style: "background-color: #c0c4d4", data: { turbo_confirm: "Are you sure you want to log out?"} if authenticated? %>
         </div>
       <% end %>
       <% if !authenticated? %>
