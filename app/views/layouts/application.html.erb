@@ -10,9 +10,9 @@
     <%= yield :head %>
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <!--<link rel="icon" href="/icon.svg" type="image/svg+xml">-->
+    <link rel="apple-touch-icon" href="/favicon.png">
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.12.1/font/bootstrap-icons.min.css" %>
@@ -31,11 +31,11 @@
             <%= link_to "Profile", profile_path, class: "#{request.path.start_with?('/profile') ? 'active-nav-item' : 'nav-item'}" %>
           </div>
           <div class="md:hidden">
-            <%= button_to "Log Out", session_path, method: :delete, class: "gray-button", data: { turbo_confirm: "Are you sure you want to log out?"} if authenticated? %>
+            <%= button_to "Log out", session_path, method: :delete, class: "gray-button", data: { turbo_confirm: "Are you sure you want to log out?"} if authenticated? %>
           </div>
         </div>
         <div class="hidden md:flex flex-1 justify-end border-b-2 py-2 border-slate-300">
-          <%= button_to "Log Out", session_path, method: :delete, class: "gray-button", data: { turbo_confirm: "Are you sure you want to log out?"} if authenticated? %>
+          <%= button_to "Log out", session_path, method: :delete, class: "gray-button", data: { turbo_confirm: "Are you sure you want to log out?"} if authenticated? %>
         </div>
       <% end %>
       <% if !authenticated? %>
@@ -53,8 +53,8 @@
   <main class="px-8 py-8 flex-1 bg-white min-h-screen">
     <%= yield %>
   </main>
-  <footer class="py-3 bg-white text-gray-500 text-sm text-center">
-    <p>&copy; <%= Date.today.year %> TinkerPal. All rights reserved.</p>
+  <footer class="p-3 bg-white text-gray-500 text-xs text-center">
+    <p>Icons made by sonnycandra, Freepik, surang, zero_wing, Afian Rochmah Afif, wanicon, monkik, Konkapp, Pause08, Flat Icons, small.smiles, Nikita Golubev, Smashicons, Vichanon Chaimsuk, inkubators, Prosymbols Premium from www.flaticon.com</p>
   </footer>
 </body>
 </html>
