@@ -55,7 +55,7 @@ export default class extends Controller {
         this.updateInputFiles()
 
         if (this.imagesContainerTarget.children.length == 1)
-            this.displayEmptyMessage
+            this.displayEmptyMessage()
     }
 
     removeAttachedImage(e) {
