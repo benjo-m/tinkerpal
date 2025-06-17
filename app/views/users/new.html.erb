@@ -24,7 +24,7 @@
         <%= form.text_field :email_address, placeholder: "Enter your email address",  class: "bg-gray-100 rounded-md p-2 mt-1 w-full" %>
         <p class="text-red-500"><%= @user.errors.full_messages_for(:email_address).first %></p>
         <%= form.label :password, class: "block font-bold mt-4" %>
-        <%= form.text_field :password, placeholder: "Enter your password",  class: "bg-gray-100 rounded-md p-2 mt-1 w-full" %>
+        <%= form.password_field :password, placeholder: "Enter your password",  class: "bg-gray-100 rounded-md p-2 mt-1 w-full" %>
         <p class="text-red-500"><%= @user.errors.full_messages_for(:password).first %></p>
         <%= form.label :city, class: "block font-bold mt-4" %>
         <%= form.select :city, @cities.map { |c| c.name }, {}, class: "w-full bg-gray-100 px-2 py-2.5 rounded-md mt-1" %>
