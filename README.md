@@ -1,8 +1,4 @@
-## Notice
-🚧 TinkerPal is still in development and not publicly available yet.
-
-
-# TinkerPal
+# TinkerPal - [tinkerpal.co](https://tinkerpal.co)
 
 **TinkerPal** is a community-driven web app designed to connect everyday people with local, reliable helpers for manual tasks.
 
