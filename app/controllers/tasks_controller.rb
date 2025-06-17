@@ -20,7 +20,7 @@ class TasksController < ApplicationController
   def create
     @task = Current.user.tasks.build(task_params)
     if @task.save
-      redirect_to profile_path
+      redirect_to @task
     else
       render :new, status: :unprocessable_entity
     end
