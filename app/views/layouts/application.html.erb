@@ -41,10 +41,10 @@
       <% if !authenticated? %>
         <div class="flex gap-2 border-b-2 py-2 border-slate-300">
           <div class="flex flex-1 justify-end">
-            <%= link_to "Log in", login_path, class: "blue-button" %>
+            <%= link_to "Log in", login_path, class: "px-2 py-1 inline-block rounded-md text-white bg-blue-400 cursor-pointer font-semibold" %>
           </div>
           <div class="flex flex-1 justify-end">
-            <%= link_to "Register", register_path, class: "green-button" %>
+            <%= link_to "Register", register_path, class: "px-2 py-1 inline-block rounded-md text-white bg-green-400 cursor-pointer font-semibold" %>
           </div>
         </div>
       <% end %>

@@ -27,18 +27,19 @@
           <%= form.file_field :images, multiple: true, direct_upload: true, accept: "image/png,image/gif,image/jpeg", class: "hidden", data: { preview_target: "input", action: "change->preview#handleFiles" } %>
         </label>
       </div>
-      <%# ----------------Image Previews----------------- %>
+      <%# ----------------Upload progress----------------- %>
       <div id="upload-progress-div" class="mt-2 hidden">
         <p id="images-count" class="text-center text-slate-400 font-semibold text-sm">Uploading images...</p>
         <div id="progress-bar" class="bg-blue-400 p-1 rounded-full mt-1"></div>
       </div>
+      <%# ----------------Images----------------- %>
       <div class="mt-4">
         <p class="font-bold">Images</p>
         <div data-preview-target="imagesContainer" class="flex bg-gray-100 p-2 flex-wrap gap-2 mt-4 rounded-md items-center">
           <% task.images.each do |image| %>
             <div class="relative m-2">
               <%= form.hidden_field :images, multiple: true, value: image.signed_id %>
-              <%= image_tag image, class: "w-64 h-64 m-2 rounded-md", id: image.signed_id %>
+              <%= image_tag image.variant(resize_to_limit: [500, 500]), class: "w-64 h-64 m-2 rounded-md", id: image.signed_id %>
               <button type="button" data-preview-target="deleteBtn" data-action="preview#removeAttachedImage" class="remove-img-button">Remove</button>
             </div>
           <% end %>
