@@ -2,19 +2,19 @@
 <%= form_with model: [task, offer] do |form| %>
   <div class="mt-6">
     <%= form.label :price, class: "block font-bold mb-2" %>
-    <%= form.number_field :price, step: :any, placeholder: "Price", class: "bg-gray-100 rounded-md p-2 w-39", disabled: !editable %>
+    <%= form.number_field :price, step: :any, placeholder: "Price", class: "bg-gray-100 rounded-md p-2 w-full md:w-89", disabled: !editable %>
     <p class="text-red-500"><%= offer.errors.full_messages_for(:price).first %></p>
   </div>
   <div class="flex gap-4 mt-4">
-    <div>
+    <div class="w-full md:w-fit">
       <%= form.label :date, class: "block font-bold mb-2" %>
-      <div class="bg-gray-100 rounded-md p-2 w-fit">
+      <div class="bg-gray-100 rounded-md">
         <%= form.date_select :date, order: [:day, :month, :year], default: 1.day.from_now, use_two_digit_numbers: true, start_year: Date.today.year, disabled: !editable  %>
       </div>
     </div>
-    <div>
+    <div class="w-full md:w-fit">
       <%= form.label :time, class: "block font-bold mb-2" %>
-      <div class="bg-gray-100 rounded-md p-2 w-fit">
+      <div class="bg-gray-100 rounded-md">
         <%= form.time_select :time, default: 2.hours.from_now, disabled: !editable  %>
       </div>
     </div>

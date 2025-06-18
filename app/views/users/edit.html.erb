@@ -8,10 +8,8 @@
         <p class="text-red-500 text-sm"><%= @user.errors.full_messages_for(:username).first %></p>
       </div>
       <div class="mt-4">
-        <%= form.label :location, class: "block font-bold mb-1" %>
-        <div class="bg-gray-100 rounded-md p-2">
-          <%= form.select :city, @cities.map { |c| c.name }, { selected: @user.city.name }, class: "w-full" %>
-        </div>
+        <%= form.label :location, class: "block font-bold" %>
+        <%= form.select :city, @cities.map { |c| c.name }, { selected: @user.city.name }, class: "w-full" %>
       </div>
       <div class="mt-4">
         <p class="font-bold">Skills</p>

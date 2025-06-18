@@ -8,4 +8,22 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
- 
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background-color: rgb(243, 244, 246);
+    padding: 0.5rem 2rem 0.5rem 0.5rem;
+    border-radius: 0.375rem;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23333' viewBox='0 0 16 16'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem 1rem;
+
+
+    margin-top: 0.25rem;
+    box-sizing: border-box;
+    border: none;
+
+}
