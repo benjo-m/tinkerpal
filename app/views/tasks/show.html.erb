@@ -8,7 +8,7 @@
           <%= turbo_frame_tag "task-action-buttons" do %>
             <div class="flex gap-2">
               <%= link_to "Edit", edit_task_path(@task), data: { turbo_frame: "_top" }, class: "blue-button w-20 text-center" %>
-              <%= button_to "Delete", @task, method: :delete, data: { turbo_confirm: "Are you sure you want to delete this task?" }, class: "red-button w-20" %>
+              <%= button_to "Delete", @task, method: :delete, data: { turbo_frame: "_top", turbo_confirm: "Are you sure you want to delete this task?" }, class: "red-button w-20" %>
             </div>
           <% end %>
         <% elsif @task.user != Current.user && !@task.completed %>
