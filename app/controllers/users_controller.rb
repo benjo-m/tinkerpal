@@ -53,13 +53,13 @@ class UsersController < ApplicationController
   end
 
   def user_active_tasks
-    @user = User.find(params.expect(:user_id))
+    @user = User.friendly.find(params.expect(:user_id))
     @tasks = @user.tasks.where(completed: false).order(created_at: :desc)
     @pagy, @tasks = pagy(@tasks, limit: 20)
   end
 
   def user_finished_tasks
-    @user = User.find(params.expect(:user_id))
+    @user = User.friendly.find(params.expect(:user_id))
     @tasks = @user.tasks.where(completed: true).order(created_at: :desc)
     @pagy, @tasks = pagy(@tasks, limit: 20)
   end
