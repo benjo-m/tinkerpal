@@ -1,5 +1,11 @@
 # TinkerPal - [tinkerpal.co](https://tinkerpal.co)
 
+## Built While Learning Rails
+
+I've been interested in Ruby and Ruby on Rails for a while, so I decided to give it a go and build this project to see what it’s all about.
+
+## What is TinkerPal?
+
 **TinkerPal** is a community-driven web app designed to connect everyday people with local, reliable helpers for manual tasks.
 
 Whether you need help assembling furniture, fixing a leaky pipe, moving a couch, or hanging a shelf — TinkerPal makes it easy to **find trustworthy, nearby people who can get the job done**.
@@ -29,7 +35,3 @@ Whether you're a student, a freelancer, or someone looking to hustle on the side
 - Want someone to mow your lawn or shovel snow?
 
 Just post a task, and someone from the TinkerPal might pick it up!
-
-## Built While Learning Rails
-
-I've been interested in Ruby and Ruby on Rails for a while, so I decided to give it a go and build this project to see what it’s all about.
