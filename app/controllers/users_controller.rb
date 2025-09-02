@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params.expect(:id))
+    @user = User.friendly.find(params.expect(:id))
     @tasks = @user.tasks.where(completed: false).order(created_at: :desc)
     @tasks_completed = Task.where(assigned_to: @user, completed: true).count
     @average_price = @user.offers.average("price")&.round(1)

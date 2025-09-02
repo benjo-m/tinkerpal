@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   resources :passwords, param: :token
 
-  resources :users, except: [ :update, :destroy ] do
+  resources :users, path: "tinkers", except: [ :update, :destroy ] do
     get "work-overview", to: "users#work_overview"
     get "active-tasks", to: "users#user_active_tasks"
     get "finished-tasks", to: "users#user_finished_tasks"

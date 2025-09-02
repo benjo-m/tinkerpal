@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  extend FriendlyId
+  friendly_id :username, use: :slugged
   has_secure_password
   validates :username, presence: true, uniqueness: true, length: { maximum: 50 }
   validates :password, length: { in: 6..100 }
