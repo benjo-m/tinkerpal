@@ -20,11 +20,11 @@
   </head>
   <body class="xl:mr-48 xl:ml-48 bg-neutral-200 min-h-screen">
     <nav class="flex justify-between items-center px-8 bg-white sticky top-0 z-50">
-      <div class="<%= authenticated? ? 'hidden' : 'block' %> md:block flex-1 border-b-2 py-1.5 border-slate-300">
+      <div class="<%= authenticated? ? 'hidden' : 'block' %> md:block flex-1 py-1.5">
         <%= link_to "TinkerPal", authenticated? ? tasks_path : root_path, class: "font-bold text-3xl text-red-500" %>
       </div>
       <% if authenticated? %>
-        <div class="w-full flex flex-2 justify-between md:justify-center border-b-2 py-2 border-slate-300">
+        <div class="w-full flex flex-2 justify-between md:justify-center py-2">
           <div class="flex gap-2 md:gap-10">
             <%= link_to "Tinkers", users_path, class: "#{request.path.start_with?('/tinkers') ? 'active-nav-item' : 'nav-item'}" %>
             <%= link_to "Tasks", tasks_path, class: "#{request.path.start_with?('/tasks') || request.path == '/' ? 'active-nav-item' : 'nav-item'}" %>
@@ -34,12 +34,12 @@
             <%= button_to "Log out", session_path, method: :delete, class: "px-2 py-1 inline-block rounded-md text-white cursor-pointer font-semibold", style: "background-color: #c0c4d4", data: { turbo_confirm: "Are you sure you want to log out?"} if authenticated? %>
           </div>
         </div>
-        <div class="hidden md:flex flex-1 justify-end border-b-2 py-2 border-slate-300">
+        <div class="hidden md:flex flex-1 justify-end py-2">
           <%= button_to "Log out", session_path, method: :delete, class: "px-2 py-1 inline-block rounded-md text-white cursor-pointer font-semibold", style: "background-color: #c0c4d4", data: { turbo_confirm: "Are you sure you want to log out?"} if authenticated? %>
         </div>
       <% end %>
       <% if !authenticated? %>
-        <div class="flex gap-2 border-b-2 py-2 border-slate-300">
+        <div class="flex gap-2 py-2">
           <div class="flex flex-1 justify-end">
             <%= link_to "Log in", login_path, class: "px-2 py-1 inline-block rounded-md text-white bg-blue-400 cursor-pointer font-semibold" %>
           </div>
