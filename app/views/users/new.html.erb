@@ -20,9 +20,6 @@
         <%= form.label :username, class: "block font-bold mt-4" %>
         <%= form.text_field :username, autofocus: true, placeholder: "Enter your username", class: "bg-gray-100 rounded-md p-2 mt-1 w-full" %>
         <p class="text-red-500"><%= @user.errors.full_messages_for(:username).first %></p>
-        <%= form.label :email_address, class: "block font-bold mt-4" %>
-        <%= form.text_field :email_address, placeholder: "Enter your email address",  class: "bg-gray-100 rounded-md p-2 mt-1 w-full" %>
-        <p class="text-red-500"><%= @user.errors.full_messages_for(:email_address).first %></p>
         <%= form.label :password, class: "block font-bold mt-4" %>
         <%= form.password_field :password, placeholder: "Enter your password",  class: "bg-gray-100 rounded-md p-2 mt-1 w-full" %>
         <p class="text-red-500"><%= @user.errors.full_messages_for(:password).first %></p>

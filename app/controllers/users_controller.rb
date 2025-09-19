@@ -33,7 +33,7 @@ class UsersController < ApplicationController
       start_new_session_for @user
       redirect_to tasks_path
     else
-      # @cities se mora se reassinati zbog @cities.map u view...
+      # @cities se mora se reassignati zbog @cities.map u view...
       @cities = City.all
       render :new, status: :unprocessable_entity
     end
@@ -83,7 +83,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.expect(user: [ :username, :email_address, :password, :city, :about_me, skill_ids: [] ])
+    params.expect(user: [ :username, :password, :city, :about_me, skill_ids: [] ])
   end
 
   def filtered_users

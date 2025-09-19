@@ -46,11 +46,6 @@
         </div>
       </div>
       <div class="mt-4">
-        <%= form.label :email_address, class: "block font-bold mb-1" %>
-        <%= form.text_field :email_address, class: "bg-gray-100 rounded-md p-2 w-full" %>
-        <p class="text-red-500 text-sm"><%= @user.errors.full_messages_for(:email_address).first %></p>
-      </div>
-      <div class="mt-4">
         <p><strong>Member since</strong></p>
         <div class="bg-gray-100 p-2 rounded-md mt-1 text-gray-400">
           <%= @user.created_at.strftime("%B %d, %Y") %>
